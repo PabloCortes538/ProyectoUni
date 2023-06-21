@@ -17,10 +17,11 @@ export const getUsuarioById = async (req, res) => {
         res.status(404)
         res.send("No Exite")
     }
+    res.json(result.recordset[0])
     }catch(error){
         res.send(error.menssage)
     }
-    res.json(result.recordset[0])
+    
 }
 //Crear un nuevo Usuario
 export const newUsuario = async (req, res) => {

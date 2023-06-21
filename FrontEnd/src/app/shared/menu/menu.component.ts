@@ -32,4 +32,8 @@ export class MenuComponent implements OnInit {
 
     this.router.navigate(['/inicio', {idUsuario:this.idUsuario,codigoDecano:this.rol}])
   }
+
+  addCarrera(){
+    this.router.navigate(['/add-carrera'])
+  }
 }

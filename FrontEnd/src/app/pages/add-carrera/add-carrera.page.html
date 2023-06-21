@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Carreras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-card *ngFor="let item of carreras">
+      <ion-card-header>
+        <ion-card-title>{{item.nombreMalla}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+  <ion-fab slot="fixed" horizontal="center" vertical="bottom">
+    <ion-fab-button>
+      <ion-icon name="add" (click)="newCarrera()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
