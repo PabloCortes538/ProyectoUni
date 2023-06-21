@@ -1,0 +1,31 @@
+@api = http://localhost:4000/estudiantes
+
+###Consulta de estudiante
+GET {{api}}/3
+
+###Consulta de decano
+GET {{api}}/decano/1
+
+###Crear un nuevo Estudiante
+POST {{api}}
+Content-Type: application/json
+
+{
+    "nombre":"Sharon",
+    "apellido":"Cortes",
+    "CI":9172908,
+    "idMalla":1,
+    "idUsuario":8
+}
+###Crear un nuevo Decano
+POST {{api}}/decano
+Content-Type: application/json
+
+{
+    "nombre":"Fabian",
+    "apellido":"Cortes",
+    "CI":9172909,    
+    "idUsuario":8
+}
+###Consultar carreras
+GET {{api}}/carreras

@@ -1,0 +1,30 @@
+<ion-app>
+  <ion-content>
+    <ion-toolbar>
+      <ion-title>{{item.nombreMateria}}</ion-title>
+    </ion-toolbar>
+    <ion-card>
+      <ion-card-subtitle>
+        <h4>Codigo: {{item.codigo}}</h4>
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <h4>Horas Teoricas: {{item.horasTeoricas}}</h4>
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <h4>Horas Practicas: {{item.horasPracticas}}</h4>
+      </ion-card-subtitle>
+      <ion-card-subtitle>
+        <h4>Creditos: {{item.creditos}}</h4>
+      </ion-card-subtitle>
+    </ion-card>
+    <ion-card color="danger">
+      <ion-card-header>
+        <ion-card-title>Requisitos</ion-card-title>
+        <ion-card-subtitle><h4>Requisito{{item.requisito}}</h4></ion-card-subtitle>
+        <ion-card-subtitle><h4>Costo: {{item.costo}}</h4></ion-card-subtitle>
+      </ion-card-header>
+      
+    </ion-card>
+
+  </ion-content>
+</ion-app>

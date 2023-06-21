@@ -1,0 +1,40 @@
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-button class="BotonLogin" id="open-modal" expand="block">Login</ion-button>
+
+  <ion-button class="BotonRegistro" id="open-modal-registro" expand="block">Registro</ion-button>
+  <app-registro></app-registro>
+
+  <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>LOGIN</ion-title>          
+        </ion-toolbar> 
+          <form [formGroup] = "formularioLogin">
+            <br>
+            <ion-item>
+              <ion-input label="Usuario" label-placement="floating" fill="outline" formControlName = "usuario"></ion-input>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-input label="Password" label-placement="floating" fill="outline" type="password" formControlName = "password"></ion-input>
+            </ion-item>
+            <br>          
+            <ion-button class="btnIngresar" (click)="ingresar()"  color="tertiary">Ingresar</ion-button>       
+          </form>  
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+  <!-- <ion-card>
+    <ion-card-content>
+      <ion-input label="Usuario" label-placement="floating" fill="outline"></ion-input>
+      <br>
+      <ion-input label="Password" label-placement="floating" fill="outline"></ion-input>
+    </ion-card-content>
+  </ion-card> -->
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-modal #modal trigger="open-modal-registro">
+  <ng-template>
+    <ion-content>
+      <ion-toolbar>
+        <ion-title>Registro</ion-title>
+      </ion-toolbar>
+      <form [formGroup]="formularioLogin">
+        <br>
+        <ion-item>
+          <ion-input label="Usuario" label-placement="floating" fill="outline" formControlName="usuario"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input label="Password" label-placement="floating" fill="outline" type="password"
+            formControlName="password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input label="Email" label-placement="floating" fill="outline" type="email"
+            formControlName="email"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input label="Codigo" label-placement="floating" fill="outline"
+            formControlName="codigoDecano"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button class="btnIngresar" (click)="registrarse()" color="tertiary">REGISTRAR</ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
