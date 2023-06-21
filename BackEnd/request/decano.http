@@ -1,0 +1,18 @@
+@api = http://localhost:4000/decano
+
+###Creacion de Nueva Carrera
+POST {{api}}/newCarrera
+Content-Type: application/json
+
+{
+    "nombreMalla":"Medicina",
+    "idDecano":1
+}
+###Creacion de Nueva semestre   
+POST {{api}}/newSemestre
+Content-Type: application/json
+
+{
+    "nombreMalla":"Medicina",
+    "nombreSemestre":"PrimerSemestre"
+}

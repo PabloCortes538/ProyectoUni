@@ -17,10 +17,12 @@ import { EstudianteComponent } from 'src/app/components/estudiante/estudiante.co
 export class InicioPage implements OnInit, AfterViewInit {
   isOpen: boolean = false;
   idUser: number = 0;
+  idDecano?: number;
   estu?: string;
   idMalla: number = 0;
   rol!: string;
   admin:boolean = false;
+
 
 
   constructor(private fb: FormBuilder, private _estudianteService: EstudianteService, private rutaActiva: ActivatedRoute, private loadingCtrl: LoadingController) {
@@ -70,6 +72,8 @@ export class InicioPage implements OnInit, AfterViewInit {
         console.log(resp)
         this.estu = resp.nombre
         this.idMalla = 0
+        this.idDecano = resp.idDecano
+        
         
       }
     }))

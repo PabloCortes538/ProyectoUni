@@ -7,11 +7,12 @@ import { RegistroComponent } from '../components/registro/registro.component';
 import { MenuComponent } from './menu/menu.component';
 import { EstudianteComponent } from '../components/estudiante/estudiante.component';
 import { MateriaComponent } from '../components/materia/materia.component';
+import { NewCarreraComponent } from '../components/new-carrera/new-carrera.component';
 
 
 
 @NgModule({
-  declarations: [RegistroComponent,MenuComponent,EstudianteComponent,MateriaComponent],
+  declarations: [RegistroComponent,MenuComponent,EstudianteComponent,MateriaComponent,NewCarreraComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -28,7 +29,8 @@ import { MateriaComponent } from '../components/materia/materia.component';
     ReactiveFormsModule,
     MenuComponent,
     EstudianteComponent,
-    MateriaComponent
+    MateriaComponent,
+    NewCarreraComponent
   ]
 })
 export class SharedModule { }

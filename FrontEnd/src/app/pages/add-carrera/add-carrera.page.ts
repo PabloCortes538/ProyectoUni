@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { NewCarreraComponent } from 'src/app/components/new-carrera/new-carrera.component';
 import { ICarrera } from 'src/app/interface/icarrera';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
@@ -10,10 +14,15 @@ import { SemestresService } from 'src/app/services/semestres.service';
 })
 export class AddCarreraPage implements OnInit {
   carreras!:ICarrera[];
-  constructor(private _estudianteServices:EstudianteService) { }
+  idDecano?:number;
+  
+  constructor(private _estudianteServices:EstudianteService,private  modalController: ModalController,private rutaActiva: ActivatedRoute) { }
 
   ngOnInit() {
+    this.idDecano=this.rutaActiva.snapshot.params["idDecano"]
+    
     this.getCarreras()
+
   }
 
   getCarreras(){
@@ -22,8 +31,15 @@ export class AddCarreraPage implements OnInit {
       this.carreras = JSON.parse(listString);
     })
   }
-  newCarrera(){
+  
+  async presentModal() {
+    const materia = await this.modalController.create({
+      component: NewCarreraComponent,
+      componentProps:{"idDecano":this.idDecano}
+      
+    });
     
+    return await materia.present();
   }
 
 }

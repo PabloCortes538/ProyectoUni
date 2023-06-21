@@ -1,5 +1,5 @@
 export interface ICarrera {
-    idMalla:number,
+    idMalla?:number,
     nombreMalla:string,
-    idDecano:number
+    idDecano?:number
 }

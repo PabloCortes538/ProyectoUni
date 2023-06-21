@@ -8,6 +8,9 @@ export const queries = {
     //CONSULTAS DECANO
     getDecanoById:"SELECT * FROM decano WHERE idUsuario = @id",
     newDecano:"INSERT INTO decano(nombre,apellido,CI,idUsuario) VALUES (@nombre,@apellido,@CI,@idUsuario)",
+    newCarrera:"INSERT INTO malla(nombreMalla,idDecano) VALUES (@nombreMalla,@idDecano)",
+    getCarrera:"SELECT idMalla FROM malla WHERE nombreMalla=@nombreMalla",
+    newSemestre:"INSERT INTO semestre(nombreSemestre,idMalla) VALUES (@nombreSemestre,@idMalla)",
     ///CONSULTAR CARRERAS DISPONIBLES
     getCarreras:"SELECT * FROM malla",
     //CONSULTAR SEMESTRE DE MALLA

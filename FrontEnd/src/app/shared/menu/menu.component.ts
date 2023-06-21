@@ -10,6 +10,7 @@ import { IEstudiante } from 'src/app/interface/iestudiante';
 export class MenuComponent implements OnInit {
   @Input() idMalla!: number;
   @Input() idUsuario!: number;
+  @Input() idDecano?:number;
   
   @Input() rol!:string;
   Admin:string="Admin"
@@ -27,13 +28,13 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/malla', this.idMalla])
 
   }
-  inicio() {
-    
+  inicio() {   
 
-    this.router.navigate(['/inicio', {idUsuario:this.idUsuario,codigoDecano:this.rol}])
+    this.router.navigate(['/inicio', {idUsuario:this.idUsuario,rol:this.rol}])
   }
 
   addCarrera(){
-    this.router.navigate(['/add-carrera'])
+    this.router.navigate(['/add-carrera',this.idDecano])
+    
   }
 }
