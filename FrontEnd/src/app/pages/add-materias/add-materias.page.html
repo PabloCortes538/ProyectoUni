@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{semestre.nombreSemestre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  
+    <ion-list>
+      <!-- <ion-card *ngFor="let items of materias">
+      <ion-card-header class="padre">
+        <ion-card-title class="titulo">{{items.nombreMateria}}</ion-card-title>
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-card-header>
+    </ion-card> -->
+      <ion-grid [fixed]="true">
+        <ion-row *ngFor="let items of materias">
+          <ion-card>
+            <ion-col>
+              <ion-card-title>{{items.nombreMateria}}</ion-card-title>
+            </ion-col>
+            <ion-col>
+              <ion-icon class="delete" name="trash-outline" size="large" (click)="deleteM(items)"></ion-icon>
+            </ion-col>
+            <ion-col>
+              <ion-icon class="edit" name="create-outline" size="large" (click)="modalEdit(items)"></ion-icon>
+            </ion-col>
+          </ion-card>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  
+  <ion-fab slot="fixed" horizontal="center" vertical="bottom">
+    <ion-fab-button expand="block" (click)="setOpen(true)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Nueva Materia</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form [formGroup]="formMateria">
+          <ion-list>
+            <ion-input label="Nombre Materia" label-placement="floating" fill="outline"
+              formControlName="nombreMateria"></ion-input>
+            <br>
+            <ion-input label="Horas Teoricas" label-placement="floating" fill="outline"
+              formControlName="horasTeoricas"></ion-input>
+            <br>
+            <ion-input label="Horas Practicas" label-placement="floating" fill="outline"
+              formControlName="horasPracticas"></ion-input>
+            <br>
+            <ion-input label="Creditos" label-placement="floating" fill="outline"
+              formControlName="creditos"></ion-input>
+            <br>
+            <ion-input label="Codigo" label-placement="floating" fill="outline" formControlName="codigo"></ion-input>
+            <br>
+            <ion-input label="Costo" label-placement="floating" fill="outline" formControlName="costo"></ion-input>
+            <br>
+            <ion-input label="Requisito" label-placement="floating" fill="outline"
+              formControlName="requisito"></ion-input>
+          </ion-list>
+          <ion-button (click)="newMateria()" (click)="setOpen(false)">Crear</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

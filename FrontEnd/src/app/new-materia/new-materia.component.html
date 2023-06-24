@@ -1,0 +1,17 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="cerrar()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{item.nombreMalla}}</ion-title>
+  </ion-toolbar> 
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-card *ngFor="let items of semestre" (click)="materias(items)">
+      <ion-card-header>
+        <ion-card-title>{{items.nombreSemestre}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </ion-list>
+</ion-content>

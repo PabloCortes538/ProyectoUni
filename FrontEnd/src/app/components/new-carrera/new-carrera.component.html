@@ -1,7 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="cerrar()"></ion-back-button>
+    </ion-buttons>
     <ion-title>Nueva Carrera</ion-title>
   </ion-toolbar>
+
   <form [formGroup]="formCrearCarrera">
     <br>
     <ion-input label="Nombre Carrera" label-placement="floating" fill="outline" formControlName="nombreMalla"></ion-input>

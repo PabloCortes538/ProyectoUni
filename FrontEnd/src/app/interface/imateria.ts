@@ -1,11 +1,11 @@
 export interface IMateria {
-    idMateria:number,
+    idMateria?:number,
     nombreMateria:string,
-    idSemestre:number,
+    idSemestre?:number,
     codigo:string,
     horasTeoricas:number,
     horasPracticas:number,
     creditos:number,
-    requisito:string,
+    requisito?:string,
     costo:number
 }

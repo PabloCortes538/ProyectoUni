@@ -11,6 +11,9 @@ export const queries = {
     newCarrera:"INSERT INTO malla(nombreMalla,idDecano) VALUES (@nombreMalla,@idDecano)",
     getCarrera:"SELECT idMalla FROM malla WHERE nombreMalla=@nombreMalla",
     newSemestre:"INSERT INTO semestre(nombreSemestre,idMalla) VALUES (@nombreSemestre,@idMalla)",
+    newMateria:"INSERT INTO materia(nombreMateria,idSemestre,codigo,horasTeoricas,horasPracticas,creditos,requisito,costo) VALUES (@nombreMateria,@idSemestre,@codigo,@horasTeoricas,@horasPracticas,@creditos,@requisito,@costo)",
+    deleteMateria:"DELETE FROM [UniversidadDB].[dbo].[materia] WHERE idMateria = @id",
+    updateMateria:"UPDATE materia SET nombreMateria=@nombreMateria,codigo=@codigo,horasTeoricas=@horasTeoricas,horasPracticas=@horasPracticas,creditos=@creditos,requisito=@requisito,costo=@costo WHERE idMateria=@idMateria",
     ///CONSULTAR CARRERAS DISPONIBLES
     getCarreras:"SELECT * FROM malla",
     //CONSULTAR SEMESTRE DE MALLA

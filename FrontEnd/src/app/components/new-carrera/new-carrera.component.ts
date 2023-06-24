@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
+import { InfiniteScrollCustomEvent, LoadingController, ModalController } from '@ionic/angular';
 import { ICarrera } from 'src/app/interface/icarrera';
 import { DecanoService } from 'src/app/services/decano.service';
 
@@ -17,7 +17,10 @@ export class NewCarreraComponent implements OnInit {
                           "Septimo Semestre", "Octavo Semestre", "Noveno Semestre",
                           "Decimo Semestre", "UnDecimo Semestre","DuoDecimoSemestre"
                         ]
-  constructor(public fb: FormBuilder,private _decanoService:DecanoService,private loadingCtrl:LoadingController) {
+  constructor(public fb: FormBuilder,
+    private _decanoService:DecanoService,
+    private loadingCtrl:LoadingController,
+    private modalCtrl:ModalController) {
     this.formCrearCarrera = this.fb.group({
       'nombreMalla': new FormControl("", Validators.required),
       'numSemestres': new FormControl("", Validators.required),
@@ -49,7 +52,11 @@ export class NewCarreraComponent implements OnInit {
         console.log(resp)
       })
     }
+    this.cerrar();
+    location.reload();
     
-    
+  }
+  cerrar(){
+    this.modalCtrl.dismiss();
   }
 }

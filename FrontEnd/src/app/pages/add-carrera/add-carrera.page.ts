@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { NewCarreraComponent } from 'src/app/components/new-carrera/new-carrera.component';
+
 import { ICarrera } from 'src/app/interface/icarrera';
+import { NewMateriaComponent } from 'src/app/new-materia/new-materia.component';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
 
@@ -29,17 +31,24 @@ export class AddCarreraPage implements OnInit {
     this._estudianteServices.getCarreras().subscribe((resp)=>{
       let listString = JSON.stringify(resp)
       this.carreras = JSON.parse(listString);
+      
     })
   }
   
   async presentModal() {
-    const materia = await this.modalController.create({
+    const carrera = await this.modalController.create({
       component: NewCarreraComponent,
       componentProps:{"idDecano":this.idDecano}
       
     });
     
-    return await materia.present();
+    return await carrera.present();
   }
-
+  async semestres(item:ICarrera){
+    const materias = await this.modalController.create({
+      component: NewMateriaComponent,
+      componentProps:{"item":item}
+    })
+    return await materias.present();
+  }
 }

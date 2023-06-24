@@ -1,0 +1,24 @@
+<ion-content class="ion-padding">
+  <form [formGroup]="formMateria">
+    <ion-list>
+      <ion-input label="Nombre Materia" label-placement="floating" fill="outline"
+        formControlName="nombreMateria"></ion-input>
+      <br>
+      <ion-input label="Horas Teoricas" label-placement="floating" fill="outline"
+        formControlName="horasTeoricas"></ion-input>
+      <br>
+      <ion-input label="Horas Practicas" label-placement="floating" fill="outline"
+        formControlName="horasPracticas"></ion-input>
+      <br>
+      <ion-input label="Creditos" label-placement="floating" fill="outline" formControlName="creditos"></ion-input>
+      <br>
+      <ion-input label="Codigo" label-placement="floating" fill="outline" formControlName="codigo"></ion-input>
+      <br>
+      <ion-input label="Costo" label-placement="floating" fill="outline" formControlName="costo"></ion-input>
+      <br>
+      <ion-input label="Requisito" label-placement="floating" fill="outline" formControlName="requisito"></ion-input>
+    </ion-list>
+    <ion-button (click)="setOpen(false)" (click)="update()">Modificar</ion-button>
+    <ion-button (click)="setOpen(false)" >Cerrar</ion-button>
+  </form>
+</ion-content>

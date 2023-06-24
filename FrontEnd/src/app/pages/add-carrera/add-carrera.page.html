@@ -1,12 +1,15 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>Carreras</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-card *ngFor="let item of carreras">
+    <ion-card *ngFor="let item of carreras" (click)="semestres(item)">
       <ion-card-header>
         <ion-card-title>{{item.nombreMalla}}</ion-card-title>
       </ion-card-header>

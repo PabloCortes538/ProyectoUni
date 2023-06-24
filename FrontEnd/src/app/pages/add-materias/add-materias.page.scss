@@ -1,0 +1,26 @@
+ion-card-title {
+    display: inline-block;
+}
+
+.acciones {
+    position: relative;
+    right: -20px;
+
+}
+
+.padre {
+    display: inline-block;
+    width: 100%;
+}
+.delete{
+    cursor: pointer;
+}
+.edit{
+    cursor: pointer;
+}
+.delete:hover{
+  color:red
+}
+.edit:hover{
+    color:green
+}

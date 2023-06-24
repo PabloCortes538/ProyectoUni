@@ -16,3 +16,19 @@ Content-Type: application/json
     "nombreMalla":"Medicina",
     "nombreSemestre":"PrimerSemestre"
 }
+###Creacion de Nueva Materia  
+POST {{api}}/newMateria
+Content-Type: application/json
+
+{
+    "nombreMateria":"Algebra II",
+    "idSemestre":3,
+    "codigo":"10P-H",
+    "horasTeoricas":100,
+    "horasPracticas":100,
+    "creditos":200,
+    "requisito":"Algebra I",
+    "costo":100
+}
+####Borrar una materia
+DELETE {{api}}/materia/5

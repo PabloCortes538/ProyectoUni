@@ -19,13 +19,66 @@ export const newSemestre = async (req, res) => {
         const pool = await getConnection()
         const result = await pool.request()
             .input("nombreMalla", sql.VarChar, nombreMalla)
-            .query(queries.getCarrera)          
+            .query(queries.getCarrera)
         const resultado = await pool.request()
             .input("nombreSemestre", sql.VarChar, nombreSemestre)
             .input("idMalla", sql.Int, result.recordset[0].idMalla)
-            .query(queries.newSemestre)        
+            .query(queries.newSemestre)
         res.send("Nueva Carrera Creada")
     } catch (error) {
         res.send(error.message)
+    }
+}
+export const newMateria = async (req, res) => {
+    const { idSemestre,nombreMateria, horasTeoricas, horasPracticas, creditos, codigo, costo, requisito } = req.body
+    
+    try {
+        const pool = await getConnection()
+        await pool.request()        
+        .input("nombreMateria",sql.VarChar,nombreMateria)
+        .input("idSemestre",sql.Int,idSemestre)
+        .input("codigo",sql.VarChar,codigo)
+        .input("horasTeoricas",sql.Int,horasTeoricas)
+        .input("horasPracticas",sql.Int,horasPracticas)
+        .input("creditos",sql.Int,creditos)
+        .input("requisito",sql.VarChar,requisito)
+        .input("costo",sql.Int,costo)        
+        .query(queries.newMateria)       
+        res.status(200)
+    } catch (error) {
+        res.send(error)
+    }
+}
+export const deleteMateriaById = async (req,res)=>{
+    const{id}= req.params
+    
+        const pool = await getConnection()
+        await pool
+        .request()
+        .input("id",sql.Int,id)
+        .query(queries.deleteMateria)
+
+        res.sendStatus(204)    
+}
+export const updateMateriaById = async (req,res)=>{
+    const{nombreMateria,codigo,horasTeoricas,horasPracticas,creditos,requisito,costo}=req.body
+    const{id}=req.params
+    try {
+        const pool = await getConnection()
+        await pool
+        .request()        
+        .input("idMateria",sql.Int,id)
+        .input("nombreMateria",sql.VarChar,nombreMateria)
+        .input("codigo",sql.VarChar,codigo)
+        .input("horasTeoricas",sql.Int,horasTeoricas)
+        .input("horasPracticas",sql.Int,horasPracticas)
+        .input("creditos",sql.Int,creditos)
+        .input("requisito",sql.VarChar,requisito)
+        .input("costo",sql.Int,costo)
+        .query(queries.updateMateria)
+        res.sendStatus(204)
+    } catch (error) {
+        res.send(error)
+        
     }
 }
