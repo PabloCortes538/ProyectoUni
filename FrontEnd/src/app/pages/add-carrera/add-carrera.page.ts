@@ -5,7 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { NewCarreraComponent } from 'src/app/components/new-carrera/new-carrera.component';
 
 import { ICarrera } from 'src/app/interface/icarrera';
-import { NewMateriaComponent } from 'src/app/new-materia/new-materia.component';
+import { NewMateriaComponent } from 'src/app/components/new-materia/new-materia.component';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
 

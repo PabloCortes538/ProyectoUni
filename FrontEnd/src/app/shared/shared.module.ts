@@ -8,7 +8,7 @@ import { MenuComponent } from './menu/menu.component';
 import { EstudianteComponent } from '../components/estudiante/estudiante.component';
 import { MateriaComponent } from '../components/materia/materia.component';
 import { NewCarreraComponent } from '../components/new-carrera/new-carrera.component';
-import { NewMateriaComponent } from '../new-materia/new-materia.component';
+import { NewMateriaComponent } from '../components/new-materia/new-materia.component';
 import { EditMateriaComponent } from '../components/edit-materia/edit-materia.component';
 
 
