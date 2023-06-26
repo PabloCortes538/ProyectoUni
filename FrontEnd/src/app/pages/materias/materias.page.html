@@ -9,7 +9,10 @@
 
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let item of listMaterias" class="materia"(click)="presentModal(item)" >    
-    <ion-card-header>      
+    <ion-card-header *ngIf="item.requisito=='disponible'">      
+      <ion-card-title>{{item.nombreMateria}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-header *ngIf="item.status==null">      
       <ion-card-title>{{item.nombreMateria}}</ion-card-title>
     </ion-card-header>
   </ion-card>  

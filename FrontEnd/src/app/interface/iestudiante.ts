@@ -1,6 +1,7 @@
 
 
 export interface IEstudiante {
+    idEstudiante?:number,
     nombre:string,
     apellido:string,
     CI:number,

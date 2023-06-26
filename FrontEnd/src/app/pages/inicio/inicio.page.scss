@@ -1,0 +1,19 @@
+ion-badge {
+  position: absolute;
+  width: 25px;
+  margin-left: 19px;
+  margin-bottom: 25px;
+  z-index: 1;
+  background-color: red;
+  border-radius: 100%;
+}
+.icon {
+  position: absolute;
+  margin-right: 50%;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.contenedor {
+  margin-right: 20%;
+  height: 45px;
+}

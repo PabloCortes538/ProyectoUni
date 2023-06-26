@@ -1,13 +1,11 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 
 import { EstudianteService } from 'src/app/services/estudiante.service';
 
-import { ActivatedRoute, Params } from '@angular/router';
-import { IonModal, LoadingController, ModalController } from '@ionic/angular';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IEstudiante } from 'src/app/interface/iestudiante';
-import { EstudianteComponent } from 'src/app/components/estudiante/estudiante.component';
-
+import { ActivatedRoute } from '@angular/router';
+import { LoadingController, ModalController } from '@ionic/angular';
+import { FormBuilder } from '@angular/forms';
+import { AsginarMateriaComponent } from 'src/app/components/asginar-materia/asginar-materia.component';
 
 @Component({
   selector: 'app-inicio',
@@ -21,72 +19,71 @@ export class InicioPage implements OnInit, AfterViewInit {
   estu?: string;
   idMalla: number = 0;
   rol!: string;
-  admin:boolean = false;
+  admin: boolean = false;
+  cantidadAsignacion?: number;
 
-
-
-  constructor(private fb: FormBuilder, private _estudianteService: EstudianteService, private rutaActiva: ActivatedRoute, private loadingCtrl: LoadingController) {
-
-
-  }
-  ngAfterViewInit(): void {
-
-  }
+  constructor(
+    private fb: FormBuilder,
+    private _estudianteService: EstudianteService,
+    private rutaActiva: ActivatedRoute,
+    private loadingCtrl: LoadingController,
+    private modalController: ModalController
+  ) {}
+  ngAfterViewInit(): void {}
 
   ngOnInit() {
-
-
-
-
+    this._estudianteService.MateriasAsginadas.subscribe((resp) => {
+      this.cantidadAsignacion = resp.length;
+    });
   }
   ionViewWillEnter() {
-    this.idUser = this.rutaActiva.snapshot.params['idUsuario']
-    this.rol = this.rutaActiva.snapshot.params['rol']
-    
-    if (this.rol == "Admin") {
-      this.admin=true
-      this.getDecano(this.idUser)
+    this.idUser = this.rutaActiva.snapshot.params['idUsuario'];
+    this.rol = this.rutaActiva.snapshot.params['rol'];
+
+    if (this.rol == 'Admin') {
+      this.admin = true;
+      this.getDecano(this.idUser);
     } else {
-      this.getEstudiante(this.idUser)
+      this.getEstudiante(this.idUser);
     }
   }
   getEstudiante(id: number) {
-    this._estudianteService.getEstudianteById(id).subscribe((resp => {
+    this._estudianteService.getEstudianteById(id).subscribe((resp) => {
       if (resp == null) {
-        this.isOpen = true
+        this.isOpen = true;
       } else {
-        console.log(resp)
-        this.estu = resp.nombre
-        this.idMalla = resp.idMalla
-
+        console.log(resp);
+        this.estu = resp.nombre;
+        this.idMalla = resp.idMalla;
       }
-    }))
-
+    });
   }
   getDecano(id: number) {
-    this._estudianteService.getDecanoById(id).subscribe((resp => {
-      
+    this._estudianteService.getDecanoById(id).subscribe((resp) => {
       if (resp == null) {
-        this.isOpen = true
+        this.isOpen = true;
       } else {
-        console.log(resp)
-        this.estu = resp.nombre
-        this.idMalla = 0
-        this.idDecano = resp.idDecano
-        
-        
+        console.log(resp);
+        this.estu = resp.nombre;
+        this.idMalla = 0;
+        this.idDecano = resp.idDecano;
       }
-    }))
-
+    });
   }
 
   abrirModal(): boolean {
     if (this.isOpen) {
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
+  async abrirAsignacion() {
+    const materia = await this.modalController.create({
+      component: AsginarMateriaComponent,
+      cssClass: 'contenido',
+    });
 
-
+    return await materia.present();
+  }
 }

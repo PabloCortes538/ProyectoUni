@@ -20,11 +20,11 @@
     <ion-card color="danger">
       <ion-card-header>
         <ion-card-title>Requisitos</ion-card-title>
-        <ion-card-subtitle><h4>Requisito{{item.requisito}}</h4></ion-card-subtitle>
+        <ion-card-subtitle><h4>Requisito: {{item.requisito}}</h4></ion-card-subtitle>
         <ion-card-subtitle><h4>Costo: {{item.costo}}</h4></ion-card-subtitle>
       </ion-card-header>
-      
-    </ion-card>
+      <ion-button (click)="asignar(item)">Agregar</ion-button>     
+    </ion-card>    
 
   </ion-content>
 </ion-app>

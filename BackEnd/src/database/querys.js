@@ -5,6 +5,9 @@ export const queries = {
     ///CONSULTAS ESTUDIANTE
     getEstudianteById:"SELECT * FROM estudiante WHERE idUsuario = @id",
     newEstudiante:"INSERT INTO estudiante(nombre,apellido,CI,idMalla,idUsuario) VALUES (@nombre,@apellido,@CI,@idMalla,@idUsuario)",
+    addMateria:"INSERT INTO estudianteMateria(idEstudiante,idMateria,status) VALUES (@idEstudiante,@idMateria,@status)",
+    getEstudianteMaterias:"SELECT idMateria,status FROM estudiante E,estudianteMateria EM WHERE EM.idEstudiante=@idEstudiante and E.idEstudiante=@idEstudiante",
+    getMateriasEst:"SELECT idMateria,nombreMateria,codigo,horasTeoricas,horasPracticas,creditos,requisito,costo FROM materia WHERE idMateria=@idMateria",
     //CONSULTAS DECANO
     getDecanoById:"SELECT * FROM decano WHERE idUsuario = @id",
     newDecano:"INSERT INTO decano(nombre,apellido,CI,idUsuario) VALUES (@nombre,@apellido,@CI,@idUsuario)",

@@ -29,3 +29,16 @@ Content-Type: application/json
 }
 ###Consultar carreras
 GET {{api}}/carreras
+
+###Consultar materias de estudiante
+GET {{api}}/materia/1
+
+###Asignar Materia
+POST {{api}}/materia
+Content-Type: application/json
+
+{
+    "idMateria":1,
+    "idEstudiante":7,
+    "status":"cursando"
+}

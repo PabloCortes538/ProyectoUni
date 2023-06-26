@@ -1,5 +1,10 @@
 <ion-app>
-  <app-menu [idMalla]="idMalla" [idUsuario]="idUser" [rol]="rol" [idDecano]="idDecano"></app-menu>
+  <app-menu
+    [idMalla]="idMalla"
+    [idUsuario]="idUser"
+    [rol]="rol"
+    [idDecano]="idDecano"
+  ></app-menu>
 
   <div class="ion-page" id="main-content">
     <ion-header [translucent]="true">
@@ -8,23 +13,34 @@
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>inicio</ion-title>
+        <div slot="end" class="contenedor">
+          <ion-icon
+            size="large"
+            name="book-outline"
+            (click)="abrirAsignacion()"
+            class="icon" 
+          ></ion-icon>
+          <ion-badge>{{cantidadAsignacion}}</ion-badge>
+        </div>
       </ion-toolbar>
     </ion-header>
-    <app-estudiante [modal]="abrirModal()" [idUser]="idUser" [rol]="rol"></app-estudiante>
+    <app-estudiante
+      [modal]="abrirModal()"
+      [idUser]="idUser"
+      [rol]="rol"
+    ></app-estudiante>
     <ion-content class="ion-padding">
       <ion-card color="primary">
         <ion-card-header>
           <ion-card-title>{{estu}}</ion-card-title>
           <ion-card-subtitle></ion-card-subtitle>
         </ion-card-header>
-      
+
         <ion-card-content>
-          Here's a small text description for the card content. Nothing more, nothing less.
+          Here's a small text description for the card content. Nothing more,
+          nothing less.
         </ion-card-content>
       </ion-card>
     </ion-content>
   </div>
-
-
-
 </ion-app>

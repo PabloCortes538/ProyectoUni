@@ -1,0 +1,14 @@
+
+<ion-toolbar>
+  <ion-title>Asignacion</ion-title>
+</ion-toolbar>
+<ion-content>
+  <ion-list *ngFor="let materia of listMaterias">
+    <ion-item>
+      <ion-label>
+        {{materia.nombreMateria}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button (click)="asignar()"> Asignar</ion-button>
+</ion-content>

@@ -7,5 +7,6 @@ export interface IMateria {
     horasPracticas:number,
     creditos:number,
     requisito?:string,
-    costo:number
+    costo:number,
+    status?:string
 }
