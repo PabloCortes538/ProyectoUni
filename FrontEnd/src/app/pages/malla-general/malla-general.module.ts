@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { MallaGeneralPageRoutingModule } from './malla-general-routing.module';
 
 import { MallaGeneralPage } from './malla-general.page';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MallaGeneralPageRoutingModule
+    MallaGeneralPageRoutingModule,
+    SharedModule
   ],
   declarations: [MallaGeneralPage]
 })

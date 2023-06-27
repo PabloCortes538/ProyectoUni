@@ -50,7 +50,7 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'malla-general',
+    path: 'malla-general/:idMalla',
     loadChildren: () =>
       import('./pages/malla-general/malla-general.module').then(
         (m) => m.MallaGeneralPageModule

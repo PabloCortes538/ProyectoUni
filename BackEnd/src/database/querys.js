@@ -11,11 +11,10 @@ export const queries = {
     //CONSULTAS DECANO
     getDecanoById:"SELECT * FROM decano WHERE idUsuario = @id",
     newDecano:"INSERT INTO decano(nombre,apellido,CI,idUsuario) VALUES (@nombre,@apellido,@CI,@idUsuario)",
-    newCarrera:"INSERT INTO malla(nombreMalla,idDecano) VALUES (@nombreMalla,@idDecano)",
-    getCarrera:"SELECT idMalla FROM malla WHERE nombreMalla=@nombreMalla",
+    newCarrera:"INSERT INTO malla(nombreMalla,idDecano) VALUES (@nombreMalla,@idDecano)",    
     newSemestre:"INSERT INTO semestre(nombreSemestre,idMalla) VALUES (@nombreSemestre,@idMalla)",
     newMateria:"INSERT INTO materia(nombreMateria,idSemestre,codigo,horasTeoricas,horasPracticas,creditos,requisito,costo) VALUES (@nombreMateria,@idSemestre,@codigo,@horasTeoricas,@horasPracticas,@creditos,@requisito,@costo)",
-    deleteMateria:"DELETE FROM [UniversidadDB].[dbo].[materia] WHERE idMateria = @id",
+    deleteMateria:"DELETE FROM materia WHERE idMateria = @id",
     updateMateria:"UPDATE materia SET nombreMateria=@nombreMateria,codigo=@codigo,horasTeoricas=@horasTeoricas,horasPracticas=@horasPracticas,creditos=@creditos,requisito=@requisito,costo=@costo WHERE idMateria=@idMateria",
     ///CONSULTAR CARRERAS DISPONIBLES
     getCarreras:"SELECT * FROM malla",

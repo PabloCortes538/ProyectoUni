@@ -14,17 +14,14 @@ export const newCarrera = async (req, res) => {
     }
 }
 export const newSemestre = async (req, res) => {
-    const { nombreMalla, nombreSemestre } = req.body
+    const { idMalla, nombreSemestre } = req.body
     try {
-        const pool = await getConnection()
-        const result = await pool.request()
-            .input("nombreMalla", sql.VarChar, nombreMalla)
-            .query(queries.getCarrera)
+        const pool = await getConnection()        
         const resultado = await pool.request()
             .input("nombreSemestre", sql.VarChar, nombreSemestre)
-            .input("idMalla", sql.Int, result.recordset[0].idMalla)
+            .input("idMalla", sql.Int, idMalla)
             .query(queries.newSemestre)
-        res.send("Nueva Carrera Creada")
+        res.json(resultado.recordset)
     } catch (error) {
         res.send(error.message)
     }
@@ -44,21 +41,24 @@ export const newMateria = async (req, res) => {
         .input("requisito",sql.VarChar,requisito)
         .input("costo",sql.Int,costo)        
         .query(queries.newMateria)       
-        res.status(200)
+        res.json(nombreMateria)
     } catch (error) {
         res.send(error)
     }
 }
 export const deleteMateriaById = async (req,res)=>{
     const{id}= req.params
-    
+    try {
         const pool = await getConnection()
         await pool
         .request()
         .input("id",sql.Int,id)
         .query(queries.deleteMateria)
-
-        res.sendStatus(204)    
+        res.sendStatus(204) 
+    } catch (error) {
+        res.send(error)
+    }
+           
 }
 export const updateMateriaById = async (req,res)=>{
     const{nombreMateria,codigo,horasTeoricas,horasPracticas,creditos,requisito,costo}=req.body

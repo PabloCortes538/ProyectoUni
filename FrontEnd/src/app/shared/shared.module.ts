@@ -11,6 +11,9 @@ import { NewCarreraComponent } from '../components/new-carrera/new-carrera.compo
 import { NewMateriaComponent } from '../components/new-materia/new-materia.component';
 import { EditMateriaComponent } from '../components/edit-materia/edit-materia.component';
 import { AsginarMateriaComponent } from '../components/asginar-materia/asginar-materia.component';
+import { MateriaGeneralComponent } from '../components/materia-general/materia-general.component';
+import { NewSemestreComponent } from '../components/new-semestre/new-semestre.component';
+
 
 
 @NgModule({
@@ -21,8 +24,11 @@ import { AsginarMateriaComponent } from '../components/asginar-materia/asginar-m
     MateriaComponent,
     NewCarreraComponent,
     NewMateriaComponent,
+    NewSemestreComponent,
     EditMateriaComponent,
-    AsginarMateriaComponent
+    AsginarMateriaComponent,
+    MateriaGeneralComponent,
+
     
   ],
   imports: [
@@ -31,6 +37,7 @@ import { AsginarMateriaComponent } from '../components/asginar-materia/asginar-m
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    
   ],
   exports: [
     CommonModule,
@@ -44,8 +51,11 @@ import { AsginarMateriaComponent } from '../components/asginar-materia/asginar-m
     MateriaComponent,
     NewCarreraComponent,
     NewMateriaComponent,
+    NewSemestreComponent,
     EditMateriaComponent,
-    AsginarMateriaComponent
+    AsginarMateriaComponent,
+    MateriaGeneralComponent,
+    
     
   ],
 })

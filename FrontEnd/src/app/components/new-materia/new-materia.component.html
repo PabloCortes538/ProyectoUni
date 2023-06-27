@@ -14,4 +14,9 @@
       </ion-card-header>
     </ion-card>
   </ion-list>
+  <ion-fab slot="fixed" horizontal="center" vertical="bottom">
+    <ion-fab-button (click)="addSemestre(item.nombreMalla)">
+      <ion-icon name="add" ></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

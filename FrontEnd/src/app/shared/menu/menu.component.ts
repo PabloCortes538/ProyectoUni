@@ -28,6 +28,9 @@ export class MenuComponent implements OnInit {
     this.router.navigate(['/malla', this.idMalla])
 
   }
+  mallaGeneral(){
+    this.router.navigate(['/malla-general',this.idMalla])
+  }
   inicio() {   
 
     this.router.navigate(['/inicio', {idUsuario:this.idUsuario,rol:this.rol}])

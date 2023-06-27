@@ -11,6 +11,7 @@ import { IMateria } from '../interface/imateria';
 export class SemestresService {
   private myAppUrl: string = environment.apiUrl;
   private myApiUrl: string = '/malla';
+  
   constructor(private http:HttpClient) { }
 
   getSemestres(id:number):Observable<ISemestre>{

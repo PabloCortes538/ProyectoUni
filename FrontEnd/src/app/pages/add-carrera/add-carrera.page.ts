@@ -8,6 +8,7 @@ import { ICarrera } from 'src/app/interface/icarrera';
 import { NewMateriaComponent } from 'src/app/components/new-materia/new-materia.component';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
+import { DecanoService } from 'src/app/services/decano.service';
 
 @Component({
   selector: 'app-add-carrera',
@@ -15,40 +16,49 @@ import { SemestresService } from 'src/app/services/semestres.service';
   styleUrls: ['./add-carrera.page.scss'],
 })
 export class AddCarreraPage implements OnInit {
-  carreras!:ICarrera[];
-  idDecano?:number;
-  
-  constructor(private _estudianteServices:EstudianteService,private  modalController: ModalController,private rutaActiva: ActivatedRoute) { }
+  carreras!: ICarrera[];
+  idDecano?: number;
+
+  constructor(
+    private _estudianteServices: EstudianteService,
+    private _decanoServices: DecanoService,
+    private modalController: ModalController,
+    private rutaActiva: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.idDecano=this.rutaActiva.snapshot.params["idDecano"]
-    
-    this.getCarreras()
+    this.idDecano = this.rutaActiva.snapshot.params['idDecano'];
+    this.getCarreras();
 
+    this._decanoServices.newCarreraG.subscribe((resp) => {
+      if (resp != null&&this.carreras!=null) {
+        resp.unshift(...this.carreras);
+        this.carreras = resp;
+      }
+    });
   }
 
-  getCarreras(){
-    this._estudianteServices.getCarreras().subscribe((resp)=>{
-      let listString = JSON.stringify(resp)
+  getCarreras() {
+    this._estudianteServices.getCarreras().subscribe((resp) => {
+      let listString = JSON.stringify(resp);
       this.carreras = JSON.parse(listString);
-      
-    })
+    });
   }
-  
+
   async presentModal() {
     const carrera = await this.modalController.create({
       component: NewCarreraComponent,
-      componentProps:{"idDecano":this.idDecano}
-      
+      componentProps: { idDecano: this.idDecano },
+      cssClass: 'contenido',
     });
-    
+
     return await carrera.present();
   }
-  async semestres(item:ICarrera){
+  async semestres(item: ICarrera) {
     const materias = await this.modalController.create({
       component: NewMateriaComponent,
-      componentProps:{"item":item}
-    })
+      componentProps: { item: item },
+    });
     return await materias.present();
   }
 }
