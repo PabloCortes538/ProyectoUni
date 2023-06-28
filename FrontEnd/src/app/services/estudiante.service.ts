@@ -64,6 +64,10 @@ export class EstudianteService {
     this.cartMaterias.push(materia);
     this._materias.next(this.cartMaterias);
   }
+  deleteMateria(index:number){
+    this.cartMaterias.splice(index,1);
+    this._materias.next(this.cartMaterias);
+  }
 
   //Asignar Materias
   addMateria(asginacion: any): Observable<any> {

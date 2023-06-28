@@ -1,23 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
     <ion-title>mallaGeneral</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" scrollX="true" scrollY="true"
-[fullscreen]="true"
-[scrollEvents]="true"> 
-  
+<ion-content
+  [fullscreen]="true"
+  scrollX="true"
+  scrollY="true"
+  [fullscreen]="true"
+  [scrollEvents]="true"
+>
   <ion-grid>
     <ion-segment [scrollable]="true">
-    <ion-col *ngFor="let semestre of semestres;let i=index">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{semestre.nombreSemestre}}</ion-card-title>
-        </ion-card-header>        
-        <app-materia-general [idSemestre]="semestre.idSemestre" [idMalla]="semestre.idMalla"></app-materia-general>
-      </ion-card>
-    </ion-col>
-  </ion-segment>
+      <ion-col *ngFor="let semestre of semestres;let i=index">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{semestre.nombreSemestre}}</ion-card-title>
+          </ion-card-header>
+          <app-materia-general
+            [idSemestre]="semestre.idSemestre"
+            [idMalla]="semestre.idMalla"
+          ></app-materia-general>
+        </ion-card>
+      </ion-col>
+    </ion-segment>
   </ion-grid>
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
 import { IEstudiante } from 'src/app/interface/iestudiante';
 
 @Component({
@@ -10,34 +11,34 @@ import { IEstudiante } from 'src/app/interface/iestudiante';
 export class MenuComponent implements OnInit {
   @Input() idMalla!: number;
   @Input() idUsuario!: number;
-  @Input() idDecano?:number;
-  
-  @Input() rol!:string;
-  Admin:string="Admin"
-  usuario:string="usuario"
-  
+  @Input() idDecano?: number;
 
-  constructor(private router: Router) { }
+  @Input() rol!: string;
+  Admin: string = 'Admin';
+  usuario: string = 'usuario';
 
-  ngOnInit() {
-    
-  }
+  constructor(private router: Router, private menu: MenuController) {}
+
+  ngOnInit() {}
 
   malla() {
-    
-    this.router.navigate(['/malla', this.idMalla])
-
+    this.router.navigate(['/malla', this.idMalla]);
+    this.menu.close();
   }
-  mallaGeneral(){
-    this.router.navigate(['/malla-general',this.idMalla])
+  mallaGeneral() {
+    this.router.navigate(['/malla-general', this.idMalla]);
+    this.menu.close();
   }
-  inicio() {   
-
-    this.router.navigate(['/inicio', {idUsuario:this.idUsuario,rol:this.rol}])
+  inicio() {
+    this.router.navigate([
+      '/inicio',
+      { idUsuario: this.idUsuario, rol: this.rol },
+    ]);
+    this.menu.close();
   }
 
-  addCarrera(){
-    this.router.navigate(['/add-carrera',this.idDecano])
-    
+  addCarrera() {
+    this.router.navigate(['/add-carrera', this.idDecano]);
+    this.menu.close();
   }
 }

@@ -12,14 +12,18 @@ export class AsginarMateriaComponent implements OnInit {
   listMaterias: IMateria[] = [];
   materia!: IMateria;
   estudiante!: IEstudiante;
+  posicion?: number;
   constructor(private _estudianteService: EstudianteService) {}
 
   ngOnInit() {
-    this._estudianteService.MateriasAsginadas.subscribe((resp) => {
-      this.listMaterias = resp;
-    });
+    this.getMaterias();
     this._estudianteService.estudiante?.subscribe((resp) => {
       this.estudiante = resp;
+    });
+  }
+  getMaterias() {
+    this._estudianteService.MateriasAsginadas.subscribe((resp) => {
+      this.listMaterias = resp;
     });
   }
   asignar() {
@@ -27,14 +31,17 @@ export class AsginarMateriaComponent implements OnInit {
       this.materia = e;
       this.materia.status = 'cursando';
       const asig = {
-        idMateria:e.idMateria,
-        idEstudiante:this.estudiante.idEstudiante,
-        status:e.status
-      }
-      console.log(asig)
+        idMateria: e.idMateria,
+        idEstudiante: this.estudiante.idEstudiante,
+        status: e.status,
+      };
+      console.log(asig);
       this._estudianteService.addMateria(asig).subscribe((resp) => {
         console.log(resp);
       });
     });
+  }
+  delete(index: number) {
+    this._estudianteService.deleteMateria(index);
   }
 }

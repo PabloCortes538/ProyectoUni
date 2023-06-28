@@ -4,6 +4,7 @@ import { IMateria } from 'src/app/interface/imateria';
 import { MateriasPage } from 'src/app/pages/materias/materias.page';
 import { EstudianteComponent } from '../estudiante/estudiante.component';
 import { EstudianteService } from 'src/app/services/estudiante.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-materia',
@@ -14,7 +15,8 @@ export class MateriaComponent implements OnInit {
   @Input() item!: IMateria;
   idEstudiante!: number;
   materias?: IMateria[];
-  constructor(private _estudianteService: EstudianteService) {}
+  statusColor=['#5bf57d']
+  constructor(private _estudianteService: EstudianteService,private modalCtrl:ModalController) {}
 
   ngOnInit() {
     this._estudianteService.estudiante?.subscribe((resp) => {
@@ -55,6 +57,9 @@ export class MateriaComponent implements OnInit {
 
       //se crea un alerta que tiene que aprobar la materia para poder tomar esta materia
     }
+  }
+  cerrar() {
+    this.modalCtrl.dismiss();
   }
 
   //pregunta si una materia tiene requisitos busca en las materias aprobadas,
