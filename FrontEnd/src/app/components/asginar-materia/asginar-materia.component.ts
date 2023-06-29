@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { IEstudiante } from 'src/app/interface/iestudiante';
 import { IMateria } from 'src/app/interface/imateria';
 import { EstudianteService } from 'src/app/services/estudiante.service';
@@ -13,7 +14,7 @@ export class AsginarMateriaComponent implements OnInit {
   materia!: IMateria;
   estudiante!: IEstudiante;
   posicion?: number;
-  constructor(private _estudianteService: EstudianteService) {}
+  constructor(private _estudianteService: EstudianteService,private modalCtrl:ModalController) {}
 
   ngOnInit() {
     this.getMaterias();
@@ -38,7 +39,10 @@ export class AsginarMateriaComponent implements OnInit {
       console.log(asig);
       this._estudianteService.addMateria(asig).subscribe((resp) => {
         console.log(resp);
+        
       });
+      this._estudianteService.enviado();
+      this.modalCtrl.dismiss()
     });
   }
   delete(index: number) {

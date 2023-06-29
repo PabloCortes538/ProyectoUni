@@ -16,6 +16,7 @@ export class InicioPage implements OnInit, AfterViewInit {
   isOpen: boolean = false;
   idUser: number = 0;
   idDecano?: number;
+  idEstudiante?:number;
   estu?: string;
   idMalla: number = 0;
   rol!: string;
@@ -37,8 +38,11 @@ export class InicioPage implements OnInit, AfterViewInit {
     });
   }
   ionViewWillEnter() {
+    const user = JSON.parse(localStorage.getItem('usuario')!)    
     this.idUser = this.rutaActiva.snapshot.params['idUsuario'];
     this.rol = this.rutaActiva.snapshot.params['rol'];
+    this.idUser = user.idUsuario
+    this.rol = user.rol
 
     if (this.rol == 'Admin') {
       this.admin = true;
@@ -47,14 +51,15 @@ export class InicioPage implements OnInit, AfterViewInit {
       this.getEstudiante(this.idUser);
     }
   }
-  getEstudiante(id: number) {
-    this._estudianteService.getEstudianteById(id).subscribe((resp) => {
+  getEstudiante(id: number) {    
+    this._estudianteService.getEstudianteById(id).subscribe((resp) => {            
       if (resp == null) {
         this.isOpen = true;
       } else {
         console.log(resp);
         this.estu = resp.nombre;
         this.idMalla = resp.idMalla;
+        this.idEstudiante = resp.idEstudiante
       }
     });
   }

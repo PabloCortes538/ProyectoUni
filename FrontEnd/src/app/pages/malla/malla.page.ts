@@ -22,13 +22,15 @@ export class MallaPage implements OnInit {
 
   ngOnInit() {
     this.idMalla = this.rutaActiva.snapshot.params['idMalla'];
-    this.getSemestre(this.idMalla);
+    if(this.idMalla!=null){
+      this.getSemestre(this.idMalla);
+    }
+    
   }
   getSemestre(id: number) {
     this._semestreService.getSemestres(id).subscribe((resp) => {
       let listString = JSON.stringify(resp);
-      this.semestres = JSON.parse(listString);
-      console.log(this.semestres);
+      this.semestres = JSON.parse(listString);      
     });
   }
   materia(item: ISemestre) {

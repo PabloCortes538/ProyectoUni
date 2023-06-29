@@ -12,6 +12,7 @@ export class MenuComponent implements OnInit {
   @Input() idMalla!: number;
   @Input() idUsuario!: number;
   @Input() idDecano?: number;
+  @Input() idEstudiante?:number;
 
   @Input() rol!: string;
   Admin: string = 'Admin';
@@ -27,6 +28,10 @@ export class MenuComponent implements OnInit {
   }
   mallaGeneral() {
     this.router.navigate(['/malla-general', this.idMalla]);
+    this.menu.close();
+  }
+  mallaEstudiante() {
+    this.router.navigate(['/malla-estudiante', {idMalla:this.idMalla,idEstudiante:this.idEstudiante}]);
     this.menu.close();
   }
   inicio() {

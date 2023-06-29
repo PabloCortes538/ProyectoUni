@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { IngresadoGuard } from './guards/ingresado.guard';
+import { NoIngresadoGuard } from './guards/no-ingresado.guard';
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () =>
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
+      canActivate:[NoIngresadoGuard]
+      
   },
   {
     path: '',
@@ -16,6 +20,7 @@ const routes: Routes = [
     path: 'inicio',
     loadChildren: () =>
       import('./pages/inicio/inicio.module').then((m) => m.InicioPageModule),
+      canActivate:[IngresadoGuard]
   },
   {
     path: 'inicio/:idUsuario',
@@ -56,6 +61,11 @@ const routes: Routes = [
         (m) => m.MallaGeneralPageModule
       ),
   },
+  {
+    path: 'malla-estudiante',
+    loadChildren: () => import('./pages/malla-estudiante/malla-estudiante.module').then( m => m.MallaEstudiantePageModule)
+  },
+
 ];
 
 @NgModule({

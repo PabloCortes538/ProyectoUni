@@ -13,6 +13,7 @@ import { EditMateriaComponent } from '../components/edit-materia/edit-materia.co
 import { AsginarMateriaComponent } from '../components/asginar-materia/asginar-materia.component';
 import { MateriaGeneralComponent } from '../components/materia-general/materia-general.component';
 import { NewSemestreComponent } from '../components/new-semestre/new-semestre.component';
+import { MateriaEstudianteComponent } from '../components/materia-estudiante/materia-estudiante.component';
 
 
 
@@ -28,7 +29,7 @@ import { NewSemestreComponent } from '../components/new-semestre/new-semestre.co
     EditMateriaComponent,
     AsginarMateriaComponent,
     MateriaGeneralComponent,
-
+    MateriaEstudianteComponent
     
   ],
   imports: [
@@ -55,6 +56,7 @@ import { NewSemestreComponent } from '../components/new-semestre/new-semestre.co
     EditMateriaComponent,
     AsginarMateriaComponent,
     MateriaGeneralComponent,
+    MateriaEstudianteComponent
     
     
   ],
