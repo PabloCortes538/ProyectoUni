@@ -4,16 +4,17 @@
     [idUsuario]="idUser"
     [rol]="rol"
     [idDecano]="idDecano"
+    [idEstudiante]="idEstudiante"
   ></app-menu>
 
   <div class="ion-page" id="main-content">
     <ion-header [translucent]="true">
-      <ion-toolbar color="primary">
+      <ion-toolbar color="toolbar-malla">
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>inicio</ion-title>
-        <div slot="end" class="contenedor">
+        <div slot="end" class="contenedor" *ngIf="cantidadAsignacion!=0">
           <ion-icon
             size="large"
             name="book-outline"

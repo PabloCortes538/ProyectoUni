@@ -1,0 +1,9 @@
+<ion-grid>
+  <ion-col *ngFor="let materia of materias" scrollable="true">
+    <ion-card [color]="materiaConsulta(materia)" (click)="notas(materia.idMateria,materia.status)">
+      <ion-card-header >
+        <ion-card-title>{{materia.nombreMateria}}</ion-card-title>
+      </ion-card-header>              
+    </ion-card>
+  </ion-col>
+</ion-grid>

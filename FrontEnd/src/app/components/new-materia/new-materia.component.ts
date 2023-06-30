@@ -4,7 +4,6 @@ import { ModalController } from '@ionic/angular';
 import { ICarrera } from 'src/app/interface/icarrera';
 import { ISemestre } from 'src/app/interface/isemestre';
 import { SemestresService } from 'src/app/services/semestres.service';
-import { NewSemestreComponent } from '../new-semestre/new-semestre.component';
 import { DecanoService } from 'src/app/services/decano.service';
 
 @Component({
@@ -48,19 +47,18 @@ export class NewMateriaComponent implements OnInit {
     this._semestreService.getSemestres(this.idMalla).subscribe((resp) => {
       let listString = JSON.stringify(resp);
       this.semestre = JSON.parse(listString);
-      
     });
   }
   addSemestre(nombreMalla: string) {
     if (this.semestre.length != 11) {
       const ob = {
-        "nombreSemestre": this.Semestres[this.semestre.length],
-        "idMalla": this.idMalla,
+        nombreSemestre: this.Semestres[this.semestre.length],
+        idMalla: this.idMalla,
       };
-      
+
       if (ob != null) {
         this._decanoService.newSemestre(ob).subscribe((resp) => {
-          this.getSemestres();          
+          this.getSemestres();
         });
       }
     }

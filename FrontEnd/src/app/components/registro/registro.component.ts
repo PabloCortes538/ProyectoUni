@@ -55,6 +55,7 @@ export class RegistroComponent implements OnInit {
           this._usuarioService.autenticacion(user).subscribe((resp) => {
             loading.dismiss();
             console.log("Registrado");
+            localStorage.setItem('usuario',JSON.stringify(resp))
             localStorage.setItem('ingresado', 'true');            
             this.router.navigate(['/inicio', resp])
             event?.target.complete()

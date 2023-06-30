@@ -1,13 +1,18 @@
-
 <ion-toolbar>
   <ion-title>Asignacion</ion-title>
 </ion-toolbar>
 <ion-content>
-  <ion-list *ngFor="let materia of listMaterias">
+  <ion-list *ngFor="let materia of listMaterias; let indexOfelement = index">
     <ion-item>
       <ion-label>
-        {{materia.nombreMateria}}
+        {{ materia.nombreMateria }}
       </ion-label>
+      <ion-icon
+        class="delete"
+        name="trash-outline"
+        slot="end"
+        (click)="delete(indexOfelement)"
+      ></ion-icon>
     </ion-item>
   </ion-list>
   <ion-button (click)="asignar()"> Asignar</ion-button>

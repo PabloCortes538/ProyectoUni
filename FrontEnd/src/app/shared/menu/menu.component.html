@@ -1,6 +1,6 @@
 <ion-menu contentId="main-content">
   <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color="toolbar-malla">
 
       <ion-title>Menu</ion-title>
   
@@ -25,6 +25,12 @@
 
     </ion-item>
   
+    <ion-item class="menu_boton" (click)="mallaEstudiante()">
+
+      <ion-icon class="icono_libre" slot="end" size="medium" name="library-outline"></ion-icon>
+      <h2 class="menu">Materias</h2>
+
+    </ion-item>
   </ion-content>
   <ion-content class="ion-padding" *ngIf="rol==Admin" >
     <ion-item class="menu_home" (click)="inicio()">

@@ -45,16 +45,15 @@ export class LoginPage implements OnInit {
     this._usuarioService.autenticacion(user).subscribe(
       (resp) => {
         let listString = JSON.stringify(resp)
-        var usuario = JSON.parse(listString);
+        var usuario = JSON.parse(listString);      
+        
         if (usuario.usuario == f.usuario && usuario.password == f.password) {
-          loading.dismiss();
-          console.log("Ingresado");
+          loading.dismiss();        
+          localStorage.setItem('usuario',JSON.stringify(usuario))  
           localStorage.setItem('ingresado', 'true');
           this.router.navigate(['/inicio', usuario])
-
           event?.target.complete()
           this.modal?.dismiss();
-
         }
       },
       (error) => {

@@ -14,48 +14,48 @@ import { SemestresService } from 'src/app/services/semestres.service';
 export class MateriasPage implements OnInit {
   isOpen: boolean = false;
   semestre!: ISemestre;
-  listMaterias!:IMateria[];
-  
-  constructor(private rutaActiva: ActivatedRoute,private _semestreService:SemestresService,private  modalController: ModalController) {
+  listMaterias!: IMateria[];
 
-  }
- 
+  constructor(
+    private rutaActiva: ActivatedRoute,
+    private _semestreService: SemestresService,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
     this.semestre = {
-      idSemestre: parseInt(this.rutaActiva.snapshot.paramMap.get('idSemestre')!),
+      idSemestre: parseInt(
+        this.rutaActiva.snapshot.paramMap.get('idSemestre')!
+      ),
       nombreSemestre: this.rutaActiva.snapshot.paramMap.get('nombreSemestre')!,
-      idMalla: parseInt(this.rutaActiva.snapshot.paramMap.get('idMalla')!)
-    }
-    this.getMaterias(this.semestre.idSemestre,this.semestre.idMalla)
-    console.log(this.semestre)
-    }
-  getMaterias(id:number,idMalla:number){
-    this._semestreService.getMaterias(id,idMalla).subscribe((resp)=>{
-      let listString = JSON.stringify(resp)
-      this.listMaterias = JSON.parse(listString);
-      console.log(this.listMaterias)
-      
-    })
+      idMalla: parseInt(this.rutaActiva.snapshot.paramMap.get('idMalla')!),
+    };
+    this.getMaterias(this.semestre.idSemestre, this.semestre.idMalla);
+    console.log(this.semestre);
   }
-  abrir(){
-    this.isOpen=true
+  getMaterias(id: number, idMalla: number) {
+    this._semestreService.getMaterias(id, idMalla).subscribe((resp) => {
+      let listString = JSON.stringify(resp);
+      this.listMaterias = JSON.parse(listString);
+      console.log(this.listMaterias);
+    });
+  }
+  abrir() {
+    this.isOpen = true;
   }
   abrirModal(): boolean {
     if (this.isOpen) {
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
-  async presentModal(item:IMateria) {
+  async presentModal(item: IMateria) {
     const materia = await this.modalController.create({
       component: MateriaComponent,
-      componentProps : {"item":item}
-      ,cssClass:'contenido'
-
+      componentProps: { item: item },
+      cssClass: 'contenido',
     });
     return await materia.present();
   }
-
 }

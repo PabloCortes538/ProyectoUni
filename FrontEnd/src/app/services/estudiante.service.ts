@@ -30,6 +30,10 @@ export class EstudianteService {
     return this.http.get<IEstudiante>(`${this.myAppUrl}${this.myApiUrl}/${id}`);
   }
   get estudiante() {
+    const user = JSON.parse(localStorage.getItem('usuario')!);
+    this.getEstudianteById(user.idUsuario).subscribe((resp) => {
+      this._usuario = new BehaviorSubject<IEstudiante>(resp);
+    });
     return this._usuario?.asObservable();
   }
   //Preguntar si se encuentra el decano registrado
@@ -64,6 +68,14 @@ export class EstudianteService {
     this.cartMaterias.push(materia);
     this._materias.next(this.cartMaterias);
   }
+  deleteMateria(index: number) {
+    this.cartMaterias.splice(index, 1);
+    this._materias.next(this.cartMaterias);
+  }
+  enviado(){
+    this.cartMaterias = []
+    this._materias.next(this.cartMaterias)
+  }
 
   //Asignar Materias
   addMateria(asginacion: any): Observable<any> {
@@ -73,7 +85,25 @@ export class EstudianteService {
     );
   }
   //Materias del estudiante
-  getEstudianteMaterias(id: number): Observable<IMateria> {
-    return this.http.get<IMateria>(`${this.myAppUrl}${this.myApiUrl}/materia/${id}`);
+  getEstudianteMaterias(idEstudiante: number): Observable<IMateria> {
+    return this.http.get<IMateria>(
+      `${this.myAppUrl}${this.myApiUrl}/materia/${idEstudiante}`
+    );
+  }
+  //Notas Materia
+  getNotasMateria(idMateria:number,idEstudiante:number):Observable<any[]>{
+    let nota = {
+      "idMateria":idMateria,
+      "idEstudiante":idEstudiante
+    }
+    return this.http.post<any[]>(`${this.myAppUrl}${this.myApiUrl}/notas`,nota);
+  }
+  //nueva nota
+  newNotaMateria(nota:any):Observable<any>{
+    return this.http.post<any[]>(`${this.myAppUrl}${this.myApiUrl}/nota`,nota);
+  }
+  //borrar nota
+  deleteNota(idNota:number):Observable<any>{
+    return this.http.delete<any>(`${this.myAppUrl}${this.myApiUrl}/nota/${idNota}`);
   }
 }
