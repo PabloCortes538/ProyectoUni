@@ -42,3 +42,26 @@ Content-Type: application/json
     "idEstudiante":7,
     "status":"cursando"
 }
+###nueva nota
+POST {{api}}/nota
+Content-Type: application/json
+
+{
+    "nota":20,
+    "idMateria":1,
+    "idEstudiante":1,
+    "nombreNota":"Prueba"
+    
+}
+
+###consulta de notas
+POST {{api}}/notas
+Content-Type: application/json
+
+{
+    "idMateria":1,
+    "idEstudiante":1
+}
+
+###delete nota
+DELETE {{api}}/nota/3

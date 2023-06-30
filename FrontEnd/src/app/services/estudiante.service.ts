@@ -90,4 +90,20 @@ export class EstudianteService {
       `${this.myAppUrl}${this.myApiUrl}/materia/${idEstudiante}`
     );
   }
+  //Notas Materia
+  getNotasMateria(idMateria:number,idEstudiante:number):Observable<any[]>{
+    let nota = {
+      "idMateria":idMateria,
+      "idEstudiante":idEstudiante
+    }
+    return this.http.post<any[]>(`${this.myAppUrl}${this.myApiUrl}/notas`,nota);
+  }
+  //nueva nota
+  newNotaMateria(nota:any):Observable<any>{
+    return this.http.post<any[]>(`${this.myAppUrl}${this.myApiUrl}/nota`,nota);
+  }
+  //borrar nota
+  deleteNota(idNota:number):Observable<any>{
+    return this.http.delete<any>(`${this.myAppUrl}${this.myApiUrl}/nota/${idNota}`);
+  }
 }

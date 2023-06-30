@@ -12,10 +12,8 @@ import { NewMateriaComponent } from '../components/new-materia/new-materia.compo
 import { EditMateriaComponent } from '../components/edit-materia/edit-materia.component';
 import { AsginarMateriaComponent } from '../components/asginar-materia/asginar-materia.component';
 import { MateriaGeneralComponent } from '../components/materia-general/materia-general.component';
-import { NewSemestreComponent } from '../components/new-semestre/new-semestre.component';
 import { MateriaEstudianteComponent } from '../components/materia-estudiante/materia-estudiante.component';
-
-
+import { NotasEstudianteComponent } from '../components/notas-estudiante/notas-estudiante.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +23,11 @@ import { MateriaEstudianteComponent } from '../components/materia-estudiante/mat
     MateriaComponent,
     NewCarreraComponent,
     NewMateriaComponent,
-    NewSemestreComponent,
     EditMateriaComponent,
     AsginarMateriaComponent,
     MateriaGeneralComponent,
-    MateriaEstudianteComponent
-    
+    MateriaEstudianteComponent,
+    NotasEstudianteComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +35,6 @@ import { MateriaEstudianteComponent } from '../components/materia-estudiante/mat
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    
   ],
   exports: [
     CommonModule,
@@ -52,13 +48,11 @@ import { MateriaEstudianteComponent } from '../components/materia-estudiante/mat
     MateriaComponent,
     NewCarreraComponent,
     NewMateriaComponent,
-    NewSemestreComponent,
     EditMateriaComponent,
     AsginarMateriaComponent,
     MateriaGeneralComponent,
-    MateriaEstudianteComponent
-    
-    
+    MateriaEstudianteComponent,
+    NotasEstudianteComponent,
   ],
 })
 export class SharedModule {}

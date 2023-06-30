@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar  color="toolbar-malla">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>mallaGeneral</ion-title>
+    <ion-title>Malla General</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,11 +13,12 @@
   scrollY="true"
   [fullscreen]="true"
   [scrollEvents]="true"
+  color="cuerpo-malla"
 >
   <ion-grid>
     <ion-segment [scrollable]="true">
       <ion-col *ngFor="let semestre of semestres;let i=index">
-        <ion-card>
+        <ion-card color="contenedor-materias">
           <ion-card-header>
             <ion-card-title>{{semestre.nombreSemestre}}</ion-card-title>
           </ion-card-header>

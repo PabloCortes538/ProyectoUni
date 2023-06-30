@@ -1,3 +1,4 @@
+import { query } from "mssql";
 import { getConnection, queries, sql } from "../database";
 //Consulta estudiante por id
 export const getEstudianteById = async (req, res) => {
@@ -124,3 +125,59 @@ export const getMateriasEstudiante = async (req, res) => {
     res.send(error);
   }
 };
+
+export const newNota = async (req, res) => {
+  const { nota, idMateria, idEstudiante, nombreNota } = req.body;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("nota", sql.Int, nota)
+      .input("nombreNota",sql.VarChar,nombreNota)
+      .query(queries.newNota);
+
+    await pool
+      .request()
+      .input("idNota", sql.Int, result.recordset[0].idNota)
+      .input("idMateria", sql.Int, idMateria)
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .query(queries.addAñadirNota);
+    res.json({nombreNota,nota,idMateria,idEstudiante});
+  } catch (error) {
+    res.send(error);
+  }
+};
+
+export const getNotas = async (req, res) => {
+  const { idEstudiante, idMateria } = req.body;
+  let nota = [];
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .input("idMateria", sql.Int, idMateria)
+      .query(queries.getNotasMateriaById);      
+    for (let i = 0; result.recordset.length > i; i++) {      
+      const notas = await pool
+        .request()
+        .input("idNota", sql.Int, result.recordset[i].idNota)
+        .query(queries.getNota);
+        nota.push(notas.recordset)
+    }
+    res.json(nota)
+    
+  } catch (error) {}
+};
+export const deleteNota= async(req,res)=>{
+  const{idNota}=req.params
+  try {
+    const pool = await getConnection();
+    await pool.request()
+    .input("idNota",sql.Int,idNota)
+    .query(queries.deleteNota);
+    res.sendStatus(204) 
+  } catch (error) {
+    res.send(error)
+  }
+}

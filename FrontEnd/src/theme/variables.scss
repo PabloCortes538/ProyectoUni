@@ -89,6 +89,27 @@
   --ion-color-cursando-contrast-rgb: 0, 0, 0;
   --ion-color-cursando-shade: #e08f00;
   --ion-color-cursando-tint: #ffab1a;
+  /** toolbar-malla **/
+  --ion-color-toolbar-malla: #ffeb3b;
+  --ion-color-toolbar-malla-rgb: 255, 235, 59;
+  --ion-color-toolbar-malla-contrast: #000000;
+  --ion-color-toolbar-malla-contrast-rgb: 0, 0, 0;
+  --ion-color-toolbar-malla-shade: #e0cf34;
+  --ion-color-toolbar-malla-tint: #ffed4f;
+  /**  contenedor-materias**/
+  --ion-color-contenedor-materias: #fff59d;
+  --ion-color-contenedor-materias-rgb: 255, 245, 157;
+  --ion-color-contenedor-materias-contrast: #000000;
+  --ion-color-contenedor-materias-contrast-rgb: 0, 0, 0;
+  --ion-color-contenedor-materias-shade: #e0d88a;
+  --ion-color-contenedor-materias-tint: #fff6a7;
+  /** cuerpo-malla **/
+  --ion-color-cuerpo-malla: #ffcc80;
+  --ion-color-cuerpo-malla-rgb: 255, 204, 128;
+  --ion-color-cuerpo-malla-contrast: #000000;
+  --ion-color-cuerpo-malla-contrast-rgb: 0, 0, 0;
+  --ion-color-cuerpo-malla-shade: #e0b471;
+  --ion-color-cuerpo-malla-tint: #ffd18d;
 }
 .ion-color-disponible {
   --ion-color-base: var(--ion-color-disponible);
@@ -99,12 +120,36 @@
   --ion-color-tint: var(--ion-color-disponible-tint);
 }
 .ion-color-cursando {
-	--ion-color-base: var(--ion-color-cursando);
-	--ion-color-base-rgb: var(--ion-color-cursando-rgb);
-	--ion-color-contrast: var(--ion-color-cursando-contrast);
-	--ion-color-contrast-rgb: var(--ion-color-cursando-contrast-rgb);
-	--ion-color-shade: var(--ion-color-cursando-shade);
-	--ion-color-tint: var(--ion-color-cursando-tint);
+  --ion-color-base: var(--ion-color-cursando);
+  --ion-color-base-rgb: var(--ion-color-cursando-rgb);
+  --ion-color-contrast: var(--ion-color-cursando-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-cursando-contrast-rgb);
+  --ion-color-shade: var(--ion-color-cursando-shade);
+  --ion-color-tint: var(--ion-color-cursando-tint);
+}
+.ion-color-toolbar-malla {
+  --ion-color-base: var(--ion-color-toolbar-malla);
+  --ion-color-base-rgb: var(--ion-color-toolbar-malla-rgb);
+  --ion-color-contrast: var(--ion-color-toolbar-malla-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-toolbar-malla-contrast-rgb);
+  --ion-color-shade: var(--ion-color-toolbar-malla-shade);
+  --ion-color-tint: var(--ion-color-toolbar-malla-tint);
+}
+.ion-color-cuerpo-malla {
+  --ion-color-base: var(--ion-color-cuerpo-malla);
+  --ion-color-base-rgb: var(--ion-color-cuerpo-malla-rgb);
+  --ion-color-contrast: var(--ion-color-cuerpo-malla-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-cuerpo-malla-contrast-rgb);
+  --ion-color-shade: var(--ion-color-cuerpo-malla-shade);
+  --ion-color-tint: var(--ion-color-cuerpo-malla-tint);
+}
+.ion-color-contenedor-materias {
+  --ion-color-base: var(--ion-color-contenedor-materias);
+  --ion-color-base-rgb: var(--ion-color-contenedor-materias-rgb);
+  --ion-color-contrast: var(--ion-color-contenedor-materias-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-contenedor-materias-contrast-rgb);
+  --ion-color-shade: var(--ion-color-contenedor-materias-shade);
+  --ion-color-tint: var(--ion-color-contenedor-materias-tint);
 }
 @media (prefers-color-scheme: dark) {
   /*

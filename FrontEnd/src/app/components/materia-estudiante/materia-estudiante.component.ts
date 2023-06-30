@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { IEstudiante } from 'src/app/interface/iestudiante';
 import { IMateria } from 'src/app/interface/imateria';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
+import { NotasEstudianteComponent } from '../notas-estudiante/notas-estudiante.component';
 
 @Component({
   selector: 'app-materia-estudiante',
@@ -16,12 +18,13 @@ export class MateriaEstudianteComponent implements OnInit {
   @Input() idEstudiante!: number;
   colorDisponibel = 'primary';
   colorReprobado = 'reprobado';
-  colorCursando = 'cursando';
+  colorCursando = 'toolbar-malla';
   colorAprobado = 'aprobado';
   materiasEstudiante: IMateria[] = [];
   constructor(
     private _semestreService: SemestresService,
-    private _estudianteService: EstudianteService
+    private _estudianteService: EstudianteService,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -68,6 +71,19 @@ export class MateriaEstudianteComponent implements OnInit {
 
       default:
         return 'light';
+    }
+  }
+  async notas(idMateria?: number, status?: string) {
+    if (status == 'cursando') {
+      const modal = await this.modalCtrl.create({
+        component: NotasEstudianteComponent,
+        cssClass: 'contenido',
+        componentProps: {
+          idMateria: idMateria,
+          idEstudiante: this.idEstudiante,
+        },
+      });
+      await modal.present();
     }
   }
 }
