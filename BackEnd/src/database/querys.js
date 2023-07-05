@@ -7,9 +7,9 @@ export const queries = {
   ///CONSULTAS ESTUDIANTE
   getEstudianteById: "SELECT * FROM estudiante WHERE idUsuario = @id",
   newEstudiante:
-    "INSERT INTO estudiante(nombre,apellido,CI,idMalla,idUsuario) VALUES (@nombre,@apellido,@CI,@idMalla,@idUsuario)",
+    "INSERT INTO estudiante(nombre,apellido,CI,idMalla,idUsuario)OUTPUT INSERTED.idEstudiante VALUES (@nombre,@apellido,@CI,@idMalla,@idUsuario)",
   addMateria:
-    "INSERT INTO estudianteMateria(idEstudiante,idMateria,status) VALUES (@idEstudiante,@idMateria,@status)",
+  " IF EXISTS(select * from estudianteMateria E WHERE E.idEstudiante=@idEstudiante AND E.idMateria=@idMateria)update estudianteMateria set status=@status WHERE (idEstudiante=@idEstudiante And idMateria=@idMateria) else insert into estudianteMateria(idEstudiante,idMateria,status) Values (@idEstudiante,@idMateria,@status)", 
   getEstudianteMaterias:
     "SELECT idMateria,status FROM estudiante E,estudianteMateria EM WHERE EM.idEstudiante=@idEstudiante and E.idEstudiante=@idEstudiante",
   getMateriasEst:
@@ -23,6 +23,8 @@ export const queries = {
   getNota: "SELECT * FROM nota WHERE idNota=@idNota",
   deleteNota:
     "DELETE FROM materiaNota WHERE idNota=@idNota DELETE FROM nota WHERE idNota = @idNota",
+  updateStatus:
+    "UPDATE estudianteMateria SET status=@status WHERE idEstudiante=@idEstudiante AND idMateria=@idMateria",
   //CONSULTAS DECANO
   getDecanoById: "SELECT * FROM decano WHERE idUsuario = @id",
   newDecano:

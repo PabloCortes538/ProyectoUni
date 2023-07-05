@@ -44,6 +44,7 @@ export class MateriaComponent implements OnInit {
           let listString = JSON.stringify(resp);
           this.materias = JSON.parse(listString);
           let banderaCursando: boolean = false;
+          let banderaAprobado:boolean = false;
           this.materias?.forEach((e) => {
             if (item.codigo == e.codigo) {
               if (e.status == 'cursando') {
@@ -51,10 +52,18 @@ export class MateriaComponent implements OnInit {
                 this.alert(this.mensaje);
                 banderaCursando = true;
               }
+              if (e.status == 'aprobado') {                
+                banderaAprobado = true;
+              }
             }
+            
           });
-          if(!banderaCursando){
+          if (!banderaCursando&&!banderaAprobado) {
             this._estudianteService.addNewMateria(item);
+          }
+          if(banderaAprobado){
+            this.mensaje = 'Aprobaste esta materia';
+            this.alert(this.mensaje);
           }
         });
     } else {
@@ -67,8 +76,8 @@ export class MateriaComponent implements OnInit {
           this.materias?.forEach((e) => {
             if (item.requisito == e.codigo) {
               switch (e.status) {
-                case 'aprobado':
-                  this._estudianteService.addNewMateria(item);
+                case 'aprobado':                  
+                  this._estudianteService.addNewMateria(item);                  
                   break;
                 case 'reprobado':
                   this.mensaje =
@@ -88,11 +97,30 @@ export class MateriaComponent implements OnInit {
                   break;
                 default:
                   this.mensaje = 'No cumples con los requisitos';
+                  this.alert(this.mensaje);
                   break;
               }
-            } else {
-              this.mensaje = 'No cumples con los requisitos';
-              this.alert(this.mensaje);
+            }
+            if(item.nombreMateria==e.nombreMateria){
+              switch (e.status) {
+                
+                case 'reprobado':
+                  this.mensaje =
+                    'No puedes tomar la materia porque no cumples los requisitos';
+                  this.alert(this.mensaje);
+
+                  break;
+                case 'cursando':
+                  this.mensaje =
+                    'No puedes tomar la materia por que estas cursando otra materia ';
+                  this.alert(this.mensaje);
+
+                  break;
+                case null:
+                  this.alert('Error');
+
+                  break;                
+              }
             }
           });
         });

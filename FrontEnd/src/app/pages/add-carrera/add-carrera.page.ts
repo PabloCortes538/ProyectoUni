@@ -30,10 +30,11 @@ export class AddCarreraPage implements OnInit {
     this.idDecano = this.rutaActiva.snapshot.params['idDecano'];
     this.getCarreras();
 
-    this._decanoServices.newCarreraG.subscribe((resp) => {
+    this._decanoServices.newCarreraG.subscribe((resp) => {      
       if (resp != null&&this.carreras!=null) {
-        resp.unshift(...this.carreras);
-        this.carreras = resp;
+        console.log(resp)
+        resp.unshift(...this.carreras);        
+        this.carreras = resp;        
       }
     });
   }

@@ -65,3 +65,12 @@ Content-Type: application/json
 
 ###delete nota
 DELETE {{api}}/nota/3
+###put Update STATUS
+PUT {{api}}/nota
+Content-Type: application/json
+
+{
+    "idMateria":2,
+    "idEstudiante":2,
+    "status":"reprobado"
+}

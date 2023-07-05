@@ -61,12 +61,14 @@ export class EstudianteService {
     return this.http.get<ICarrera>(`${this.myAppUrl}${this.myApiUrl}/carreras`);
   }
   get MateriasAsginadas() {
+    
     return this._materias.asObservable();
   }
   //añadir una nueva materia a carrito de asignacion
   addNewMateria(materia: IMateria) {
-    this.cartMaterias.push(materia);
-    this._materias.next(this.cartMaterias);
+    this.cartMaterias.push(materia);  
+    let servicesLimpio = Array.from(new Set(this.cartMaterias))  
+    this._materias.next(servicesLimpio);
   }
   deleteMateria(index: number) {
     this.cartMaterias.splice(index, 1);
@@ -81,6 +83,12 @@ export class EstudianteService {
   addMateria(asginacion: any): Observable<any> {
     return this.http.post<any>(
       `${this.myAppUrl}${this.myApiUrl}/materia`,
+      asginacion
+    );
+  }
+  updateMateria(asginacion: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.myAppUrl}${this.myApiUrl}/materias`,
       asginacion
     );
   }
@@ -105,5 +113,8 @@ export class EstudianteService {
   //borrar nota
   deleteNota(idNota:number):Observable<any>{
     return this.http.delete<any>(`${this.myAppUrl}${this.myApiUrl}/nota/${idNota}`);
+  }
+  finalizarMateria(status:any):Observable<any>{
+    return this.http.put<any>(`${this.myAppUrl}${this.myApiUrl}/nota`,status);
   }
 }

@@ -16,6 +16,7 @@ export class MallaEstudiantePage implements OnInit {
   idMalla!: number;
   idEstudiante!: number;
   materias: IMateria[] = [];
+  
   constructor(
     private _semestreService: SemestresService,
     private rutaActiva: ActivatedRoute,
@@ -26,11 +27,12 @@ export class MallaEstudiantePage implements OnInit {
     this.idMalla = this.rutaActiva.snapshot.params['idMalla'];
     this.idEstudiante = this.rutaActiva.snapshot.params['idEstudiante'];
     this.getSemestre(this.idMalla);
+    
   }
   getSemestre(idMalla: number) {
     this._semestreService.getSemestres(idMalla).subscribe((resp) => {
       let listString = JSON.stringify(resp);
-      this.semestres = JSON.parse(listString);      
+      this.semestres = JSON.parse(listString);            
     });
   }
   getMaterias(idEstudiantes: number) {
@@ -39,6 +41,7 @@ export class MallaEstudiantePage implements OnInit {
       .subscribe((resp) => {
         let listString = JSON.stringify(resp);
         this.materias = JSON.parse(listString);
+        
       });
   }
 }

@@ -17,9 +17,9 @@ export class MateriaEstudianteComponent implements OnInit {
   @Input() idSemestre!: number;
   @Input() idEstudiante!: number;
   colorDisponibel = 'primary';
-  colorReprobado = 'reprobado';
+  colorReprobado = 'danger';
   colorCursando = 'toolbar-malla';
-  colorAprobado = 'aprobado';
+  colorAprobado = 'disponible';
   materiasEstudiante: IMateria[] = [];
   constructor(
     private _semestreService: SemestresService,
@@ -53,7 +53,7 @@ export class MateriaEstudianteComponent implements OnInit {
       });
   }
   materiaConsulta(materia: IMateria): string {
-    if (materia.requisito == '' && materia.status == null) {
+    if (materia.requisito == '' && materia.status == null || materia.requisito==null && materia.status == null ) {
       return this.colorDisponibel;
     }
     switch (materia.status) {
@@ -81,6 +81,7 @@ export class MateriaEstudianteComponent implements OnInit {
         componentProps: {
           idMateria: idMateria,
           idEstudiante: this.idEstudiante,
+          materias:this.materias
         },
       });
       await modal.present();

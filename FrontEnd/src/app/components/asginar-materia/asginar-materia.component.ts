@@ -24,10 +24,11 @@ export class AsginarMateriaComponent implements OnInit {
   }
   getMaterias() {
     this._estudianteService.MateriasAsginadas.subscribe((resp) => {
-      this.listMaterias = resp;
+      this.listMaterias = resp;      
     });
   }
   asignar() {
+    
     this.listMaterias.forEach((e) => {
       this.materia = e;
       this.materia.status = 'cursando';

@@ -38,6 +38,11 @@ export class MateriasPage implements OnInit {
       let listString = JSON.stringify(resp);
       this.listMaterias = JSON.parse(listString);
       console.log(this.listMaterias);
+      this.listMaterias.forEach((e,i)=>{
+        if(e.requisito!=""){
+          e.status="no-Disponible"
+        }
+      })
     });
   }
   abrir() {

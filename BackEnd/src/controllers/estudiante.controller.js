@@ -31,7 +31,7 @@ export const newEstudiante = async (req, res) => {
   }
   try {
     const pool = await getConnection();
-    await pool
+    const result = await pool
       .request()
       .input("nombre", sql.VarChar, nombre)
       .input("apellido", sql.VarChar, apellido)
@@ -39,8 +39,8 @@ export const newEstudiante = async (req, res) => {
       .input("idMalla", sql.Int, idMalla)
       .input("idUsuario", sql.Int, idUsuario)
       .query(queries.newEstudiante);
-
-    res.json({ nombre, apellido, CI, idMalla, idUsuario });
+     const idEstudiante = result.recordset[0].idEstudiante;
+    res.json({ nombre, apellido, CI, idMalla, idUsuario, idEstudiante});
   } catch (error) {
     res.send(error.menssage);
   }
@@ -177,6 +177,21 @@ export const deleteNota= async(req,res)=>{
     .input("idNota",sql.Int,idNota)
     .query(queries.deleteNota);
     res.sendStatus(204) 
+  } catch (error) {
+    res.send(error)
+  }
+}
+export const updateStatus = async(req,res)=>{
+  const{idMateria,idEstudiante,status}=req.body
+  try {
+    const pool = await getConnection()
+    await pool.request()
+    .input("idMateria",sql.Int,idMateria)
+    .input("idEstudiante",sql.Int,idEstudiante)
+    .input("status",sql.VarChar,status)
+    .query(queries.updateStatus)
+
+    res.json(status) 
   } catch (error) {
     res.send(error)
   }

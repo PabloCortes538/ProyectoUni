@@ -10,6 +10,7 @@ import {
   newDecano,
   newEstudiante,
   newNota,
+  updateStatus,
 } from "../controllers/estudiante.controller";
 const router = Router();
 //Ruta para crear un nuevo usuario
@@ -32,5 +33,7 @@ router.get("/estudiantes/decano/:id", getDecanoById);
 router.get("/estudiantes/materia/:idEstudiante", getMateriasEstudiante);
 // Ruta elimina una nota
 router.delete("/estudiantes/nota/:idNota",deleteNota)
+//Ruta para modificar el status de la materia (aprobado,reprobado)
+router.put("/estudiantes/nota",updateStatus)
 
 export default router;

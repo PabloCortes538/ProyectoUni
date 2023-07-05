@@ -5,7 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
+import { IMateria } from 'src/app/interface/imateria';
 import { EstudianteService } from 'src/app/services/estudiante.service';
+import { SemestresService } from 'src/app/services/semestres.service';
 
 @Component({
   selector: 'app-notas-estudiante',
@@ -15,12 +18,16 @@ import { EstudianteService } from 'src/app/services/estudiante.service';
 export class NotasEstudianteComponent implements OnInit {
   @Input() idMateria?: number;
   @Input() idEstudiante?: number;
+  materiasTE!: IMateria[];
   formularioNota!: FormGroup;
   notas: any = [];
   promedio: number = 0;
+  materiasEstudiante: IMateria[] = [];
   constructor(
     private _estudianteService: EstudianteService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private modalCtrl: ModalController,
+    private _semestreService: SemestresService
   ) {
     this.formularioNota = this.fb.group({
       nombreNota: new FormControl('', Validators.required),
@@ -30,6 +37,9 @@ export class NotasEstudianteComponent implements OnInit {
 
   ngOnInit() {
     this.cargarDatos();
+    this._semestreService.materias.subscribe((resp) => {
+      this.materiasTE = [...resp];
+    });
   }
   cargarDatos() {
     this.notas = [];
@@ -58,15 +68,60 @@ export class NotasEstudianteComponent implements OnInit {
       nombreNota: f.nombreNota,
       nota: f.nota,
     };
-    if (f.nombreNota == '' && f.nota == null) {
-      this._estudianteService.newNotaMateria(nota).subscribe((resp) => {
-        this.cargarDatos();
-      });
-    }
+
+    this._estudianteService.newNotaMateria(nota).subscribe((resp) => {
+      console.log(resp);
+      this.cargarDatos();
+      this.formularioNota.reset();
+    });
   }
   borrar(idNota: number) {
     this._estudianteService.deleteNota(idNota).subscribe((resp) => {
       this.cargarDatos();
     });
+  }
+  final() {
+    let status = {
+      idMateria: this.idMateria,
+      idEstudiante: this.idEstudiante,
+      status: '',
+    };
+    if (this.promedio >= 50) {
+      status.status = 'aprobado';
+      this._estudianteService.finalizarMateria(status).subscribe((resp) => {
+        this.getMaterias(this.idEstudiante!);
+        this.modalCtrl.dismiss();
+        
+      });
+    } else {
+      status.status = 'reprobado';
+      this._estudianteService.finalizarMateria(status).subscribe((resp) => {
+        this.modalCtrl.dismiss();
+      });
+    }
+  }
+  getMaterias(idEstudiantes: number) {
+    this._estudianteService
+      .getEstudianteMaterias(idEstudiantes)
+      .subscribe((resp) => {
+        let listString = JSON.stringify(resp);
+        this.materiasEstudiante = JSON.parse(listString);
+        this.materiasEstudiante.forEach((e) => {
+          this.materiasTE.forEach((re) => {
+            console.log(re.nombreMateria)
+            if (re.requisito == e.codigo && this.idMateria == e.idMateria) {
+              const asig = {
+                idMateria: re.idMateria,
+                idEstudiante: this.idEstudiante,
+                status: 'disponible',
+              };
+              console.log(re.nombreMateria)
+              this._estudianteService.addMateria(asig).subscribe((resp) => {
+                location.reload();
+              });
+            }
+          });
+        });
+      });
   }
 }
