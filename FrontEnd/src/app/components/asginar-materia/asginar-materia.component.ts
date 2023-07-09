@@ -14,7 +14,10 @@ export class AsginarMateriaComponent implements OnInit {
   materia!: IMateria;
   estudiante!: IEstudiante;
   posicion?: number;
-  constructor(private _estudianteService: EstudianteService,private modalCtrl:ModalController) {}
+  constructor(
+    private _estudianteService: EstudianteService,
+    private modalCtrl: ModalController
+  ) {}
 
   ngOnInit() {
     this.getMaterias();
@@ -24,27 +27,25 @@ export class AsginarMateriaComponent implements OnInit {
   }
   getMaterias() {
     this._estudianteService.MateriasAsginadas.subscribe((resp) => {
-      this.listMaterias = resp;      
+      this.listMaterias = resp;
     });
   }
   asignar() {
-    
     this.listMaterias.forEach((e) => {
       this.materia = e;
+
       this.materia.status = 'cursando';
       const asig = {
         idMateria: e.idMateria,
         idEstudiante: this.estudiante.idEstudiante,
         status: e.status,
       };
-      console.log(asig);
-      this._estudianteService.addMateria(asig).subscribe((resp) => {
-        console.log(resp);
-        
-      });
+
+      this._estudianteService.addMateria(asig).subscribe((resp) => {});
+
       this._estudianteService.enviado();
-      this.modalCtrl.dismiss()
-      
+      this.modalCtrl.dismiss();
+      location.reload();
     });
   }
   delete(index: number) {

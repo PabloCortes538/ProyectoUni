@@ -49,6 +49,7 @@ export class NewCarreraComponent implements OnInit {
       loading.dismiss();
       event?.target.complete();
       this.cerrar();
+      location.reload();
     });
   }
   cerrar() {

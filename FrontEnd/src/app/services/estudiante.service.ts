@@ -19,6 +19,7 @@ export class EstudianteService {
   >([]);
   private usuario?: IEstudiante;
   private _usuario?: BehaviorSubject<IEstudiante>;
+
   constructor(private http: HttpClient) {}
   //Preguntar si se encuentra el Estudiante registrado
   getEstudianteById(id: number): Observable<IEstudiante> {
@@ -155,5 +156,5 @@ export class EstudianteService {
       `${this.myAppUrl}${this.myApiUrl}/updateEstudiante`,
       estudiante
     );
-  }  
+  }
 }

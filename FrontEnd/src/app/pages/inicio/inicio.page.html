@@ -13,7 +13,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>inicio</ion-title>
+        <ion-title>INICIO</ion-title>
         <div slot="end" class="contenedor" *ngIf="cantidadAsignacion!=0">
           <ion-icon
             size="large"
@@ -25,10 +25,11 @@
         </div>
         <div slot="end" class="contenedor">
           <ion-icon
-            name="person-circle-outline"
+            name="person-circle-sharp"
             class="icon"
             size="large"
             (click)="perfil()"
+            
           ></ion-icon>
         </div>
       </ion-toolbar>
@@ -38,19 +39,56 @@
       [idUser]="idUser"
       [rol]="rol"
     ></app-estudiante>
-    <ion-content class="ion-padding">
-      <ion-card color="primary">
-        <ion-card-header>
-          <ion-card-title>{{estu}}</ion-card-title>
-          <ion-card-subtitle></ion-card-subtitle>
-        </ion-card-header>
-
+    <ion-content
+      [fullscreen]="true"
+      scrollX="true"
+      scrollY="true"
+      [fullscreen]="true"
+      [scrollEvents]="true"
+      
+    >
+      <ion-card color="secondary" class="card">
         <ion-card-content>
-          <ion-title>MATERIAS DISPONIBLES</ion-title>
-          <app-materia-disponible [idUsuario]="idUser"></app-materia-disponible>
+          <ion-card-subtitle
+            >APROBADO <ion-chip class="colorAprobado"></ion-chip
+          ></ion-card-subtitle>
+          <ion-card-subtitle
+            >REPROBADO<ion-chip class="colorReprobado"></ion-chip
+          ></ion-card-subtitle>
+          <ion-card-subtitle
+            >DISPONIBLE<ion-chip class="colorDisponible"></ion-chip
+          ></ion-card-subtitle>
+          <ion-card-subtitle
+            >CURSANDO<ion-chip class="colorCursando"></ion-chip
+          ></ion-card-subtitle>
+          <ion-card-subtitle
+            >REQUISITOS<ion-chip class="colorRequisitos"></ion-chip
+          ></ion-card-subtitle>
         </ion-card-content>
-        
       </ion-card>
+      <ion-segment [scrollable]="true">
+        <ion-row>
+          <ion-col>
+            <ion-card color="primary">
+              <ion-card-content>
+                <ion-card-title>MATERIAS DISPONIBLES</ion-card-title>
+                <app-materia-disponible
+                  [idUsuario]="idUser" 
+                  [rol]="rol"
+                ></app-materia-disponible>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card color="cuerpo-malla">
+              <ion-card-content>
+                <ion-card-title>MATERIAS CURSANDO</ion-card-title>
+                <app-materia-cursando [rol]="rol"></app-materia-cursando>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-segment>
     </ion-content>
   </div>
 </ion-app>
