@@ -23,6 +23,14 @@
           ></ion-icon>
           <ion-badge>{{cantidadAsignacion}}</ion-badge>
         </div>
+        <div slot="end" class="contenedor">
+          <ion-icon
+            name="person-circle-outline"
+            class="icon"
+            size="large"
+            (click)="perfil()"
+          ></ion-icon>
+        </div>
       </ion-toolbar>
     </ion-header>
     <app-estudiante
@@ -38,9 +46,10 @@
         </ion-card-header>
 
         <ion-card-content>
-          Here's a small text description for the card content. Nothing more,
-          nothing less.
+          <ion-title>MATERIAS DISPONIBLES</ion-title>
+          <app-materia-disponible [idUsuario]="idUser"></app-materia-disponible>
         </ion-card-content>
+        
       </ion-card>
     </ion-content>
   </div>

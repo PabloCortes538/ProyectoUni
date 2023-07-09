@@ -39,8 +39,8 @@ export const newEstudiante = async (req, res) => {
       .input("idMalla", sql.Int, idMalla)
       .input("idUsuario", sql.Int, idUsuario)
       .query(queries.newEstudiante);
-     const idEstudiante = result.recordset[0].idEstudiante;
-    res.json({ nombre, apellido, CI, idMalla, idUsuario, idEstudiante});
+    const idEstudiante = result.recordset[0].idEstudiante;
+    res.json({ nombre, apellido, CI, idMalla, idUsuario, idEstudiante });
   } catch (error) {
     res.send(error.menssage);
   }
@@ -133,7 +133,7 @@ export const newNota = async (req, res) => {
     const result = await pool
       .request()
       .input("nota", sql.Int, nota)
-      .input("nombreNota",sql.VarChar,nombreNota)
+      .input("nombreNota", sql.VarChar, nombreNota)
       .query(queries.newNota);
 
     await pool
@@ -142,7 +142,7 @@ export const newNota = async (req, res) => {
       .input("idMateria", sql.Int, idMateria)
       .input("idEstudiante", sql.Int, idEstudiante)
       .query(queries.addAñadirNota);
-    res.json({nombreNota,nota,idMateria,idEstudiante});
+    res.json({ nombreNota, nota, idMateria, idEstudiante });
   } catch (error) {
     res.send(error);
   }
@@ -157,42 +157,129 @@ export const getNotas = async (req, res) => {
       .request()
       .input("idEstudiante", sql.Int, idEstudiante)
       .input("idMateria", sql.Int, idMateria)
-      .query(queries.getNotasMateriaById);      
-    for (let i = 0; result.recordset.length > i; i++) {      
+      .query(queries.getNotasMateriaById);
+    for (let i = 0; result.recordset.length > i; i++) {
       const notas = await pool
         .request()
         .input("idNota", sql.Int, result.recordset[i].idNota)
         .query(queries.getNota);
-        nota.push(notas.recordset)
+      nota.push(notas.recordset);
     }
-    res.json(nota)
-    
+    res.json(nota);
   } catch (error) {}
 };
-export const deleteNota= async(req,res)=>{
-  const{idNota}=req.params
+export const deleteNota = async (req, res) => {
+  const { idNota } = req.params;
   try {
     const pool = await getConnection();
-    await pool.request()
-    .input("idNota",sql.Int,idNota)
-    .query(queries.deleteNota);
-    res.sendStatus(204) 
+    await pool
+      .request()
+      .input("idNota", sql.Int, idNota)
+      .query(queries.deleteNota);
+    res.sendStatus(204);
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const updateStatus = async (req, res) => {
+  const { idMateria, idEstudiante, status } = req.body;
+  try {
+    const pool = await getConnection();
+    await pool
+      .request()
+      .input("idMateria", sql.Int, idMateria)
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .input("status", sql.VarChar, status)
+      .query(queries.updateStatus);
+
+    res.json(status);
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const Status = async (req, res) => {
+  const { idMateria, idEstudiante, status, promedio } = req.body;
+  try {
+    const pool = await getConnection();
+    await pool
+      .request()
+      .input("idMateria", sql.Int, idMateria)
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .input("promedio", sql.Float.promedio)
+      .query(queries.reprobado);
+
+    await pool
+      .request()
+      .input("idMateria", sql.Int, idMateria)
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .input("status", sql.VarChar, status)
+      .query(queries.updateStatus);
+
+    res.json({ idMateria, idEstudiante, status });
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const materiasReprobadas = async (req, res) => {
+  const { idMateria, idEstudiante } = req.body;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("idMateria", sql.Int, idMateria)
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .query(queries.materiasReprobadas);
+
+    res.json(result.recordset);
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const materiaAprobada = async (req, res) => {
+  const { idMateria, idEstudiante, promedio } = req.body;
+  try {
+    const pool = await getConnection();
+    await pool
+      .request()
+      .input("idMateria", sql.Int, idMateria)
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .input("promedio", sql.Float, promedio)
+      .query(queries.aprobados);
+
+    res.json({ idMateria, idEstudiante, promedio });
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const getMateriaAprobada = async (req, res) => {
+  const { idMateria, idEstudiante } = req.body;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("idMateria", sql.Int, idMateria)
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .query(queries.getMateriasAprobadas);
+
+    res.json(result.recordset);
   } catch (error) {
     res.send(error)
   }
-}
-export const updateStatus = async(req,res)=>{
-  const{idMateria,idEstudiante,status}=req.body
+};
+export const updateEstudiantePerfil = async (req,res)=>{
+  const {nombre,apellido,CI,idMalla,idEstudiante,idUsuario} =req.body
   try {
     const pool = await getConnection()
     await pool.request()
-    .input("idMateria",sql.Int,idMateria)
     .input("idEstudiante",sql.Int,idEstudiante)
-    .input("status",sql.VarChar,status)
-    .query(queries.updateStatus)
+    .input("nombre",sql.VarChar,nombre)
+    .input("apellido",sql.VarChar,apellido)
+    .input("CI",sql.Int,CI)
+    .query(queries.update)
 
-    res.json(status) 
+    res.json({nombre,apellido,CI,idMalla,idEstudiante,idUsuario})
   } catch (error) {
     res.send(error)
   }
 }
+

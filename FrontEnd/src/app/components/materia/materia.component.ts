@@ -96,8 +96,11 @@ export class MateriaComponent implements OnInit {
 
                   break;
                 default:
-                  this.mensaje = 'No cumples con los requisitos';
-                  this.alert(this.mensaje);
+                  if(item.requisito==e.codigo){
+                    this.mensaje = 'No cumples con los requisitos  '+e.nombreMateria;
+                    this.alert(this.mensaje);
+                  }
+                  
                   break;
               }
             }

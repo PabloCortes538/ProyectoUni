@@ -44,6 +44,7 @@ export class AsginarMateriaComponent implements OnInit {
       });
       this._estudianteService.enviado();
       this.modalCtrl.dismiss()
+      
     });
   }
   delete(index: number) {

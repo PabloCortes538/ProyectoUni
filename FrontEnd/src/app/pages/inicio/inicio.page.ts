@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { FormBuilder } from '@angular/forms';
 import { AsginarMateriaComponent } from 'src/app/components/asginar-materia/asginar-materia.component';
+import { PerfilComponent } from 'src/app/components/perfil/perfil.component';
 
 @Component({
   selector: 'app-inicio',
@@ -16,7 +17,7 @@ export class InicioPage implements OnInit, AfterViewInit {
   isOpen: boolean = false;
   idUser: number = 0;
   idDecano?: number;
-  idEstudiante?:number;
+  idEstudiante?: number;
   estu?: string;
   idMalla: number = 0;
   rol!: string;
@@ -38,11 +39,11 @@ export class InicioPage implements OnInit, AfterViewInit {
     });
   }
   ionViewWillEnter() {
-    const user = JSON.parse(localStorage.getItem('usuario')!)    
+    const user = JSON.parse(localStorage.getItem('usuario')!);
     this.idUser = this.rutaActiva.snapshot.params['idUsuario'];
     this.rol = this.rutaActiva.snapshot.params['rol'];
-    this.idUser = user.idUsuario
-    this.rol = user.rol
+    this.idUser = user.idUsuario;
+    this.rol = user.rol;
 
     if (this.rol == 'Admin') {
       this.admin = true;
@@ -51,15 +52,15 @@ export class InicioPage implements OnInit, AfterViewInit {
       this.getEstudiante(this.idUser);
     }
   }
-  getEstudiante(id: number) {    
-    this._estudianteService.getEstudianteById(id).subscribe((resp) => {            
+  getEstudiante(id: number) {
+    this._estudianteService.getEstudianteById(id).subscribe((resp) => {
       if (resp == null) {
         this.isOpen = true;
       } else {
         console.log(resp);
         this.estu = resp.nombre;
         this.idMalla = resp.idMalla;
-        this.idEstudiante = resp.idEstudiante
+        this.idEstudiante = resp.idEstudiante;
       }
     });
   }
@@ -90,5 +91,12 @@ export class InicioPage implements OnInit, AfterViewInit {
     });
 
     return await materia.present();
+  }
+  async perfil() {
+    const perfil = await this.modalController.create({
+      component: PerfilComponent,
+      cssClass: 'contenido'
+    });
+    return await perfil.present()
   }
 }

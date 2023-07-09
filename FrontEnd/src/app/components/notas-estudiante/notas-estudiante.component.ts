@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+
 import { IMateria } from 'src/app/interface/imateria';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
@@ -85,18 +86,23 @@ export class NotasEstudianteComponent implements OnInit {
       idMateria: this.idMateria,
       idEstudiante: this.idEstudiante,
       status: '',
+      promedio: 0,
     };
     if (this.promedio >= 50) {
+      status.promedio = this.promedio;
       status.status = 'aprobado';
       this._estudianteService.finalizarMateria(status).subscribe((resp) => {
-        this.getMaterias(this.idEstudiante!);
+        this._estudianteService.setMateriaAprobada(status).subscribe((resp) => {
+          this.getMaterias(this.idEstudiante!);
+        });
         this.modalCtrl.dismiss();
-        
       });
     } else {
       status.status = 'reprobado';
-      this._estudianteService.finalizarMateria(status).subscribe((resp) => {
+      status.promedio = this.promedio;
+      this._estudianteService.reprobadoMateria(status).subscribe((resp) => {
         this.modalCtrl.dismiss();
+        location.reload();
       });
     }
   }
@@ -108,14 +114,14 @@ export class NotasEstudianteComponent implements OnInit {
         this.materiasEstudiante = JSON.parse(listString);
         this.materiasEstudiante.forEach((e) => {
           this.materiasTE.forEach((re) => {
-            console.log(re.nombreMateria)
+            console.log(re.nombreMateria);
             if (re.requisito == e.codigo && this.idMateria == e.idMateria) {
               const asig = {
                 idMateria: re.idMateria,
                 idEstudiante: this.idEstudiante,
                 status: 'disponible',
               };
-              console.log(re.nombreMateria)
+              console.log(re.nombreMateria);
               this._estudianteService.addMateria(asig).subscribe((resp) => {
                 location.reload();
               });

@@ -1,6 +1,6 @@
   <ion-grid>
     <ion-col *ngFor="let materia of materias;let i=index" scrollable="true">
-      <ion-card>
+      <ion-card (click)="crearModal(materia)">
         <ion-card-header>
           <ion-card-title>{{materia.nombreMateria}}</ion-card-title>
         </ion-card-header>              

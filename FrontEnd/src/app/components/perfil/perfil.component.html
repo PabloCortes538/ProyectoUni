@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="toolbar-malla">
+    <ion-title> PERFIL </ion-title>
+    <ion-title slot="end" class="editar" (click)="editar()">EDITAR</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="formularioLogin">
+    <br />
+    <ion-input
+      label="Nombre"
+      label-placement="floating"
+      fill="outline"
+      formControlName="nombre"
+    ></ion-input>
+    <br />
+    <ion-input
+      label="Apellido"
+      label-placement="floating"
+      fill="outline"
+      formControlName="apellido"
+    ></ion-input>
+    <br />
+    <ion-input
+      label="CI"
+      label-placement="floating"
+      fill="outline"
+      formControlName="CI"
+    ></ion-input>
+    <br />
+    <ion-input
+      label="Carrera"
+      label-placement="floating"
+      fill="outline"
+      formControlName="carrera"
+    ></ion-input>
+    <br />
+    <ion-button *ngIf="banderaBoton" (click)="guardarCambios()"
+      >GUARDAR CAMBIOS</ion-button
+    >
+  </form>
+</ion-content>

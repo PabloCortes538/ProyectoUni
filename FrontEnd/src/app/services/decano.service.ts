@@ -28,8 +28,7 @@ export class DecanoService {
       carrera
     );
   }
-  get newCarreraG() {
-    this.cartCarrera=[];
+  get newCarreraG() {    
     return this._cartCarrera?.asObservable();
   }
   //crear un nuevo Semestre

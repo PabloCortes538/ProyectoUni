@@ -6,10 +6,21 @@ export const queries = {
     "INSERT INTO usuario(usuario,password,email,rol) VALUES (@usuario,@password,@email,@rol)",
   ///CONSULTAS ESTUDIANTE
   getEstudianteById: "SELECT * FROM estudiante WHERE idUsuario = @id",
+  update:
+    "UPDATE estudiante SET nombre=@nombre,apellido=@apellido,CI=@CI WHERE nombre=@nombre",
+
   newEstudiante:
     "INSERT INTO estudiante(nombre,apellido,CI,idMalla,idUsuario)OUTPUT INSERTED.idEstudiante VALUES (@nombre,@apellido,@CI,@idMalla,@idUsuario)",
   addMateria:
-  " IF EXISTS(select * from estudianteMateria E WHERE E.idEstudiante=@idEstudiante AND E.idMateria=@idMateria)update estudianteMateria set status=@status WHERE (idEstudiante=@idEstudiante And idMateria=@idMateria) else insert into estudianteMateria(idEstudiante,idMateria,status) Values (@idEstudiante,@idMateria,@status)", 
+    " IF EXISTS(select * from estudianteMateria E WHERE E.idEstudiante=@idEstudiante AND E.idMateria=@idMateria)update estudianteMateria set status=@status WHERE (idEstudiante=@idEstudiante And idMateria=@idMateria) else insert into estudianteMateria(idEstudiante,idMateria,status) Values (@idEstudiante,@idMateria,@status)",
+  reprobado:
+    "INSERT INTO estudianteReprobado(idEstudiante,idMateria,promedio) VALUES(@idEstudiante,@idMateria,@promedio)",
+  materiasReprobadas:
+    "SELECT * FROM estudianteReprobado WHERE idMateria=@idMateria AND idEstudiante=@idEstudiante",
+  aprobados:
+    "INSERT INTO materiaAprobada(idEstudiante,idMateria,promedio) VALUES(@idEstudiante,@idMateria,@promedio)",
+  getMateriasAprobadas:
+    "SELECT * FROM materiaAprobada WHERE idEstudiante=@idEstudiante and idMateria=@idMateria",
   getEstudianteMaterias:
     "SELECT idMateria,status FROM estudiante E,estudianteMateria EM WHERE EM.idEstudiante=@idEstudiante and E.idEstudiante=@idEstudiante",
   getMateriasEst:

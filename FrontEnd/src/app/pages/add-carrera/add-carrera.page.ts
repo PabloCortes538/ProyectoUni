@@ -33,8 +33,9 @@ export class AddCarreraPage implements OnInit {
     this._decanoServices.newCarreraG.subscribe((resp) => {      
       if (resp != null&&this.carreras!=null) {
         console.log(resp)
+        const dataArr = new Set(resp);
         resp.unshift(...this.carreras);        
-        this.carreras = resp;        
+        
       }
     });
   }

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="toolbar-malla">
+    <ion-title>{{ materia.nombreMateria }}</ion-title>
+    <ion-buttons slot="start" (click)="cerrar()">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <br />
+  <div *ngIf="idEstudianteReprobado.length != 0">
+    <ion-title>Reprobados</ion-title>
+    <ion-list lines="none" *ngFor="let reprobado of idEstudianteReprobado">
+      <ion-item color="danger">
+        <ion-label>
+          {{ materia.nombreMateria }}
+        </ion-label>
+        <ion-label slot="end">Promedio: {{ reprobado.promedio }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="materiasAprobadas.length != 0">
+    <ion-title>Aprobado</ion-title>
+    <ion-list lines="none" *ngFor="let aprobado of materiasAprobadas">
+      <ion-item>
+        <ion-label>
+          {{ materia.nombreMateria }}
+        </ion-label>
+        <ion-label slot="end">Promedio: {{ aprobado.promedio }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
