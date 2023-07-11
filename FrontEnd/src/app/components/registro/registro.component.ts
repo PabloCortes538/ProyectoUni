@@ -23,7 +23,7 @@ export class RegistroComponent implements OnInit {
     this.formularioLogin = this.fb.group({
       'usuario': new FormControl("", Validators.required),
       'password': new FormControl("", Validators.required),
-      'email': new FormControl("", Validators.required),
+      'email': new FormControl("", [Validators.email,Validators.required]),
       'codigoDecano': new FormControl("")
     })
   }
@@ -52,12 +52,12 @@ export class RegistroComponent implements OnInit {
       await loading.present();
       this._usuarioService.registro(user).subscribe(
         (resp) => {
-          this._usuarioService.autenticacion(user).subscribe((resp) => {
+          this._usuarioService.autenticacion(user).subscribe(async (resp) => {
             loading.dismiss();
             console.log("Registrado");
-            localStorage.setItem('usuario',JSON.stringify(resp))
+            localStorage.setItem('usuario', JSON.stringify(resp))
             localStorage.setItem('ingresado', 'true');            
-            this.router.navigate(['/inicio', resp])
+            await this.router.navigate(['/inicio', resp])
             event?.target.complete()
             this.modal?.dismiss();
           })

@@ -12,27 +12,38 @@ export class MateriaDisponibleComponent implements OnInit {
   @Input() idEstudiante?: number;
   @Input() idUsuario!: number;
   @Input() rol?: string;
+  estudiante?: IEstudiante;
   materiasDispnibles: IMateria[] = [];
   constructor(private _estudianteService: EstudianteService) {}
 
   ngOnInit() {
-    const user = JSON.parse(localStorage.getItem('usuario')!);
-    if (user.rol == 'usuario') {
-      this._estudianteService
+    this.obtener();
+  }
+  async obtener() {
+    let user = await JSON.parse(localStorage.getItem('usuario')!);
+    let estudiante = await JSON.parse(localStorage.getItem('estudiante')!);
+    console.log(estudiante);
+    if (user.rol == 'usuario' && estudiante != null) {
+      await this._estudianteService
         .getEstudianteById(user.idUsuario)
         .subscribe((resp) => {
-          this._estudianteService
-            .getEstudianteMaterias(resp.idEstudiante!)
-            .subscribe((resp) => {
-              const list = JSON.stringify(resp);
-              const listMateria: IMateria[] = JSON.parse(list);
-              listMateria.forEach((e) => {
-                if (e.status == 'disponible') {
-                  this.materiasDispnibles.push(e);
-                }
+          if (resp.idEstudiante != null) {
+            this._estudianteService
+              .getEstudianteMaterias(resp.idEstudiante!)
+              .subscribe((resp) => {
+                const list = JSON.stringify(resp);
+                const listMateria: IMateria[] = JSON.parse(list);
+                listMateria.forEach((e) => {
+                  if (e.status == 'disponible') {
+                    this.materiasDispnibles.push(e);
+                  }
+                });
               });
-            });
+          }
         });
+    }
+    if(estudiante!=null){
+      
     }
   }
 }

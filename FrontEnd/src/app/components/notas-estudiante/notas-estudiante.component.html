@@ -20,7 +20,7 @@
     <ion-card-content>
       <form [formGroup]="formularioNota">
         <ion-input label="Nombre de la Nota" placeholder="Examen 1" formControlName="nombreNota"></ion-input>
-        <ion-input label="Puntaje" placeholder="0"formControlName="nota"></ion-input>
+        <ion-input label="Puntaje" placeholder="0" type="number" formControlName="nota"></ion-input>
       </form>
       <ion-button (click)="guardarNota()">Guardar</ion-button>
       <ion-button (click)="final()">Finalizar</ion-button>

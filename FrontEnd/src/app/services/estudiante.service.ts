@@ -25,7 +25,7 @@ export class EstudianteService {
   getEstudianteById(id: number): Observable<IEstudiante> {
     this.http
       .get<IEstudiante>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
-      .subscribe((resp) => {
+      .subscribe((resp) => {        
         this._usuario = new BehaviorSubject<IEstudiante>(resp);
       });
     return this.http.get<IEstudiante>(`${this.myAppUrl}${this.myApiUrl}/${id}`);

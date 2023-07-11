@@ -1,21 +1,44 @@
 ion-badge {
   position: absolute;
   width: 25px;
-  margin-left: 19px;
+  margin-left: 10%;
   margin-bottom: 25px;
   z-index: 1;
   background-color: red;
   border-radius: 100%;
 }
-.icon {
+.icon-asignacion {
   position: absolute;
-  margin-right: 50%;
+  
+  margin-top: 10px;
+  cursor: pointer;
+}
+.contenedor-asignacion{
+  margin-left: 50%;
+  width: 200px;
+  position: relative;
+}
+.icon-perfil {
+  position: absolute;
+  margin-left: 70%;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.titulo{
+  margin-top: 10px;
+  position: absolute;
+}
+.icon-salida{
+  position: absolute;
+  margin-left: 85%;
   margin-top: 10px;
   cursor: pointer;
 }
 .contenedor {
-  margin-right: 20%;
+  position: relative;
+  
   height: 45px;
+  width: 100%;
 }
 ::-webkit-scrollbar,
 *::-webkit-scrollbar {

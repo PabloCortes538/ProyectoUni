@@ -13,23 +13,29 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>INICIO</ion-title>
-        <div slot="end" class="contenedor" *ngIf="cantidadAsignacion!=0">
-          <ion-icon
-            size="large"
-            name="book-outline"
-            (click)="abrirAsignacion()"
-            class="icon"
-          ></ion-icon>
-          <ion-badge>{{cantidadAsignacion}}</ion-badge>
-        </div>
-        <div slot="end" class="contenedor">
+        <div class="contenedor">
+          <ion-title class="titulo">INICIO</ion-title>
+          
+          <div class="contenedor-asignacion" *ngIf="cantidadAsignacion!=0">
+            <ion-icon
+              size="large"
+              name="book-outline"
+              (click)="abrirAsignacion()"
+              class="icon-asignacion"
+            ></ion-icon>
+            <ion-badge>{{cantidadAsignacion}}</ion-badge>
+          </div>
           <ion-icon
             name="person-circle-sharp"
-            class="icon"
+            class="icon-perfil"
             size="large"
             (click)="perfil()"
-            
+          ></ion-icon>
+          <ion-icon
+            name="log-in-outline"
+            class="icon-salida"
+            size="large"
+            (click)="sign_out()"
           ></ion-icon>
         </div>
       </ion-toolbar>
@@ -45,7 +51,6 @@
       scrollY="true"
       [fullscreen]="true"
       [scrollEvents]="true"
-      
     >
       <ion-card color="secondary" class="card">
         <ion-card-content>
@@ -73,8 +78,9 @@
               <ion-card-content>
                 <ion-card-title>MATERIAS DISPONIBLES</ion-card-title>
                 <app-materia-disponible
-                  [idUsuario]="idUser" 
+                  [idUsuario]="idUser"
                   [rol]="rol"
+                  [idEstudiante]="idEstudiante"
                 ></app-materia-disponible>
               </ion-card-content>
             </ion-card>

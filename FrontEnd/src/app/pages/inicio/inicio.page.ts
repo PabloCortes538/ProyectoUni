@@ -38,7 +38,7 @@ export class InicioPage implements OnInit, AfterViewInit {
       this.cantidadAsignacion = resp.length;
     });
   }
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     const user = JSON.parse(localStorage.getItem('usuario')!);
     this.idUser = this.rutaActiva.snapshot.params['idUsuario'];
     this.rol = this.rutaActiva.snapshot.params['rol'];
@@ -47,22 +47,22 @@ export class InicioPage implements OnInit, AfterViewInit {
 
     if (this.rol == 'Admin') {
       this.admin = true;
-      this.getDecano(this.idUser);
+     this.getDecano(this.idUser);
     } else {
-      this.getEstudiante(this.idUser);
+     await this.getEstudiante(this.idUser);
     }
   }
-  getEstudiante(id: number) {
-    this._estudianteService.getEstudianteById(id).subscribe((resp) => {
-      if (resp == null) {
-        this.isOpen = true;
-      } else {
-        console.log(resp);
-        this.estu = resp.nombre;
-        this.idMalla = resp.idMalla;
-        this.idEstudiante = resp.idEstudiante;
-      }
-    });
+ async getEstudiante(id: number) {
+    this._estudianteService.getEstudianteById(id).subscribe(async (resp) => {
+     if (resp == null) {
+       this.isOpen = true;
+     } else {
+       localStorage.setItem('estudiante', JSON.stringify(resp));
+       this.estu = resp.nombre;
+       this.idMalla = resp.idMalla;
+       this.idEstudiante = await resp.idEstudiante;
+     }
+   });
   }
   getDecano(id: number) {
     this._estudianteService.getDecanoById(id).subscribe((resp) => {
@@ -95,8 +95,13 @@ export class InicioPage implements OnInit, AfterViewInit {
   async perfil() {
     const perfil = await this.modalController.create({
       component: PerfilComponent,
-      cssClass: 'contenido'
+      cssClass: 'contenido',
     });
-    return await perfil.present()
+    return await perfil.present();
+  }
+  sign_out() {
+    localStorage.removeItem('ingresado');
+    localStorage.removeItem('estudiante');
+    location.reload();
   }
 }
