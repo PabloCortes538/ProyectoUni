@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
   @Input() idUsuario!: number;
   @Input() idDecano?: number;
   @Input() idEstudiante?:number;
+  @Input() habilitado:boolean;
 
   @Input() rol!: string;
   Admin: string = 'Admin';

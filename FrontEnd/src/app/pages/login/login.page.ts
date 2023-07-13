@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
           loading.dismiss();        
           localStorage.setItem('usuario',JSON.stringify(usuario))  
           localStorage.setItem('ingresado', 'true');          
-          await this.router.navigate(['/inicio', usuario])
+          this.router.navigate(['/inicio', usuario])
           event?.target.complete()
           this.modal?.dismiss();
           

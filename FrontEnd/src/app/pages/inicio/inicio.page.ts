@@ -23,6 +23,7 @@ export class InicioPage implements OnInit, AfterViewInit {
   rol!: string;
   admin: boolean = false;
   cantidadAsignacion?: number;
+  banderaListo:boolean=false;
 
   constructor(
     private fb: FormBuilder,
@@ -36,9 +37,11 @@ export class InicioPage implements OnInit, AfterViewInit {
   ngOnInit() {
     this._estudianteService.MateriasAsginadas.subscribe((resp) => {
       this.cantidadAsignacion = resp.length;
-    });
+    }); 
+    this.idUser = parseInt(this.rutaActiva.snapshot.params['idUsuario']);
+    this.rol = this.rutaActiva.snapshot.params['rol'];   
   }
-  async ionViewWillEnter() {
+ ionViewWillEnter() {
     const user = JSON.parse(localStorage.getItem('usuario')!);
     this.idUser = this.rutaActiva.snapshot.params['idUsuario'];
     this.rol = this.rutaActiva.snapshot.params['rol'];
@@ -49,18 +52,21 @@ export class InicioPage implements OnInit, AfterViewInit {
       this.admin = true;
      this.getDecano(this.idUser);
     } else {
-     await this.getEstudiante(this.idUser);
+     this.getEstudiante(this.idUser);
     }
   }
- async getEstudiante(id: number) {
-    this._estudianteService.getEstudianteById(id).subscribe(async (resp) => {
+  getEstudiante(id: number) {
+    this._estudianteService.getEstudianteById(id).subscribe((resp) => {
      if (resp == null) {
        this.isOpen = true;
+       
      } else {
        localStorage.setItem('estudiante', JSON.stringify(resp));
        this.estu = resp.nombre;
        this.idMalla = resp.idMalla;
-       this.idEstudiante = await resp.idEstudiante;
+       this.idEstudiante = resp.idEstudiante;
+       
+       this.banderaListo = true;
      }
    });
   }
@@ -68,11 +74,13 @@ export class InicioPage implements OnInit, AfterViewInit {
     this._estudianteService.getDecanoById(id).subscribe((resp) => {
       if (resp == null) {
         this.isOpen = true;
+        
       } else {
         console.log(resp);
         this.estu = resp.nombre;
         this.idMalla = 0;
         this.idDecano = resp.idDecano;
+        this.banderaListo = true;
       }
     });
   }

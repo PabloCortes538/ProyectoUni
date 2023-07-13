@@ -24,7 +24,7 @@ export class EstudianteComponent implements OnInit {
   canDismiss: boolean = false;
   @ViewChild(IonModal) modals?: IonModal;
   @Input() modal: boolean = false;
-  @Input() idUser?: number;
+  @Input() idUser: number;
   @Input() rol!: string;
   formularioLogin!: FormGroup;
   listCarreras?: ICarrera[];
@@ -97,21 +97,24 @@ export class EstudianteComponent implements OnInit {
       let listString = JSON.stringify(resp);
       const semestres: ISemestre[] = JSON.parse(listString);
       semestres.forEach((e, i) => {
+        console.log(e.idSemestre);
         this._semestresService
           .getMaterias(e.idSemestre, idMalla)
-          .forEach((s) => {
+          .subscribe((s) => {
             let listString = JSON.stringify(s);
             const materias: IMateria[] = JSON.parse(listString);
-            materias.forEach((e) => {
+            materias.forEach((e) => {              
               if (e.requisito == null || e.requisito == '') {
+
                 const asig = {
                   idMateria: e.idMateria,
                   idEstudiante: idEstudiante,
                   status: 'disponible',
                 };
-                this._estudianteService
-                  .addMateria(asig)
-                  .subscribe((resp) => {});
+                this._estudianteService.addMateria(asig).subscribe((resp) => {
+                  console.log(resp);
+                  location.reload();
+                });
                 this._estudianteService.enviado();
               }
             });

@@ -157,4 +157,19 @@ export class EstudianteService {
       estudiante
     );
   }
+  getAllMateriasReprobadas(id:number):Observable<any[]>{
+    return this.http.get<any[]>(
+      `${this.myAppUrl}${this.myApiUrl}/materia/reprobadas/${id}`
+    );
+  }
+  getAllMateriasAprobadas(id:number):Observable<any[]>{
+    return this.http.get<any[]>(
+      `${this.myAppUrl}${this.myApiUrl}/materia/aprobadas/${id}`
+    );
+  }
+  getMateriaById(id:number):Observable<IMateria>{
+    return this.http.get<IMateria>(
+      `${this.myAppUrl}${this.myApiUrl}/materias/${id}`
+    );
+  }
 }

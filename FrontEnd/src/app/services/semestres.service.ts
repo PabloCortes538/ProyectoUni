@@ -33,19 +33,23 @@ export class SemestresService {
   get semestre(){
     return this._semestres.asObservable();
   }
-  getMaterias(id: number, idMalla: number): Observable<IMateria> {
+  getMaterias(id: number, idMalla: number): Observable<IMateria[]> {
     this.http.post<IMateria[]>(
       `${this.myAppUrl}${this.myApiUrl}/materias`,
       { id, idMalla }).subscribe(resp=>{
         this.cartMaterias.push(...resp)
         this._materias.next(this.cartMaterias)
       })
-    return this.http.post<IMateria>(
+    return this.http.post<IMateria[]>(
       `${this.myAppUrl}${this.myApiUrl}/materias`,
       { id, idMalla }
     );
   }
   get materias(){
     return this._materias.asObservable();
+  }
+
+  getSemestreById(idSemestre:number):Observable<any>{
+    return this.http.get<any>(`${this.myAppUrl}${this.myApiUrl}/semestre/${idSemestre}`);
   }
 }

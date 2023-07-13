@@ -1,10 +1,12 @@
 <ion-app>
   <app-menu
+  [habilitado]="banderaListo"
     [idMalla]="idMalla"
     [idUsuario]="idUser"
     [rol]="rol"
     [idDecano]="idDecano"
     [idEstudiante]="idEstudiante"
+    
   ></app-menu>
 
   <div class="ion-page" id="main-content">
@@ -15,7 +17,7 @@
         </ion-buttons>
         <div class="contenedor">
           <ion-title class="titulo">INICIO</ion-title>
-          
+
           <div class="contenedor-asignacion" *ngIf="cantidadAsignacion!=0">
             <ion-icon
               size="large"
@@ -77,10 +79,11 @@
             <ion-card color="primary">
               <ion-card-content>
                 <ion-card-title>MATERIAS DISPONIBLES</ion-card-title>
-                <app-materia-disponible
+                <app-materia-disponible                
                   [idUsuario]="idUser"
                   [rol]="rol"
                   [idEstudiante]="idEstudiante"
+                  
                 ></app-materia-disponible>
               </ion-card-content>
             </ion-card>
@@ -89,7 +92,10 @@
             <ion-card color="cuerpo-malla">
               <ion-card-content>
                 <ion-card-title>MATERIAS CURSANDO</ion-card-title>
-                <app-materia-cursando [rol]="rol"></app-materia-cursando>
+                <app-materia-cursando                  
+                  [rol]="rol"
+                  [idUsuario]="idUser"
+                ></app-materia-cursando>
               </ion-card-content>
             </ion-card>
           </ion-col>

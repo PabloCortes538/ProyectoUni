@@ -26,6 +26,7 @@ const routes: Routes = [
     path: 'inicio/:idUsuario',
     loadChildren: () =>
       import('./pages/inicio/inicio.module').then((m) => m.InicioPageModule),
+      canActivate:[IngresadoGuard]
   },
   {
     path: 'malla/:idMalla',

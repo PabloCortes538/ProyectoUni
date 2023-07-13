@@ -18,6 +18,7 @@ import { HistorialComponent } from '../components/historial/historial.component'
 import { PerfilComponent } from '../components/perfil/perfil.component';
 import { MateriaDisponibleComponent } from '../components/materia-disponible/materia-disponible.component';
 import { MateriaCursandoComponent } from '../components/materia-cursando/materia-cursando.component';
+import { PdfComponent } from '../components/pdf/pdf.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { MateriaCursandoComponent } from '../components/materia-cursando/materia
     HistorialComponent,
     PerfilComponent,
     MateriaDisponibleComponent,
-    MateriaCursandoComponent
+    MateriaCursandoComponent,
+    PdfComponent
+    
   ],
   imports: [
     CommonModule,
@@ -64,7 +67,8 @@ import { MateriaCursandoComponent } from '../components/materia-cursando/materia
     HistorialComponent,
     PerfilComponent,
     MateriaDisponibleComponent,
-    MateriaCursandoComponent
+    MateriaCursandoComponent,
+    PdfComponent
   ],
 })
 export class SharedModule {}

@@ -13,37 +13,43 @@ export class MateriaCursandoComponent implements OnInit {
   materiasDispnibles: IMateria[] = [];
   estudiante?: IEstudiante;
   @Input() rol?: string;
+  @Input() idUsuario:number;
+  @Input() habilitado:boolean;
   constructor(private _estudianteService: EstudianteService) {}
 
   ngOnInit() {
-    this.obtener()
+    
+    
+      this.obtener()
+    
+    
     
   }
-  async obtener(){
-     const estudiante = await JSON.parse(localStorage.getItem('estudiante')!);
-    console.log(estudiante);
-
-    const user = await JSON.parse(localStorage.getItem('usuario')!);
-    if (user.rol == 'usuario' && estudiante != null) {
+  obtener() {
+    let user = JSON.parse(localStorage.getItem('usuario')!);
+    
+    if (user.rol == 'usuario') {
+      console.log(this.idUsuario)
       this._estudianteService
         .getEstudianteById(user.idUsuario)
         .subscribe((resp) => {
-          if (resp.idEstudiante != null) {
+          console.log(resp)
+          if (resp!=null) {
             this._estudianteService
               .getEstudianteMaterias(resp.idEstudiante!)
               .subscribe((resp) => {
                 const list = JSON.stringify(resp);
                 const listMateria: IMateria[] = JSON.parse(list);
+                //console.log(listMateria)
                 listMateria.forEach((e) => {
                   if (e.status == 'cursando') {
                     this.materiasDispnibles.push(e);
+                    console.log(this.materiasDispnibles)                    
                   }
                 });
-                
               });
           }
         });
     }
-   
-  }
-}
+    
+  }}
