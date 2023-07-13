@@ -7,6 +7,7 @@ import { ISemestre } from 'src/app/interface/isemestre';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
 
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({

@@ -7,6 +7,9 @@
       <ion-label>
         {{ materia.nombreMateria }}
       </ion-label>
+      <ion-label slot="end">
+       COSTO: {{materia.costo}}
+      </ion-label>
       <ion-icon
         class="delete"
         name="trash-outline"
@@ -15,5 +18,6 @@
       ></ion-icon>
     </ion-item>
   </ion-list>
+  <ion-label>TOTAL A CANCELAR {{total}}</ion-label>
   <ion-button (click)="asignar()"> Asignar</ion-button>
 </ion-content>
