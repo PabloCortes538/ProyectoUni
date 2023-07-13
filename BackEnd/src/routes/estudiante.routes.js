@@ -7,7 +7,10 @@ import {
   getDecanoById,
   getEstudianteById,
   getMateriaAprobada,
+  getMateriaById,
+  getMateriasAprobadas,
   getMateriasEstudiante,
+  getMateriasReprobadas,
   getNotas,
   materiaAprobada,
   materiasReprobadas,
@@ -44,8 +47,13 @@ router.get("/estudiantes/:id", getEstudianteById);
 router.get("/estudiantes/decano/:id", getDecanoById);
 //Ruta consulta materias de estudiante
 router.get("/estudiantes/materia/:idEstudiante", getMateriasEstudiante);
+
+router.get("/estudiantes/materia/aprobadas/:id", getMateriasAprobadas);
+router.get("/estudiantes/materia/reprobadas/:id", getMateriasReprobadas);
+router.get("/estudiantes/materias/:id",getMateriaById)
 // Ruta elimina una nota
 router.delete("/estudiantes/nota/:idNota", deleteNota);
+
 //Ruta para modificar el status de la materia (aprobado,reprobado)
 router.put("/estudiantes/nota", updateStatus);
 

@@ -36,6 +36,11 @@ export const queries = {
     "DELETE FROM materiaNota WHERE idNota=@idNota DELETE FROM nota WHERE idNota = @idNota",
   updateStatus:
     "UPDATE estudianteMateria SET status=@status WHERE idEstudiante=@idEstudiante AND idMateria=@idMateria",
+  getAllMateriasReprobadasById:
+    "SELECT * FROM estudianteReprobado WHERE idEstudiante=@id",
+  getAllMateriasAprobadasById:
+    "SELECT * FROM materiaAprobada WHERE idEstudiante=@id",
+    getMateria:"SELECT * FROM materia WHERE idMateria=@id",
   //CONSULTAS DECANO
   getDecanoById: "SELECT * FROM decano WHERE idUsuario = @id",
   newDecano:
@@ -54,6 +59,7 @@ export const queries = {
   //CONSULTAR SEMESTRE DE MALLA
   getSemestre: "SELECT * FROM semestre WHERE idMalla=@idMalla",
   ///CONSULTA DE MATERIA POR SEMESTRE
+  getSemestreById:"SELECT * FROM semestre WHERE idSemestre=@idSemestre",
   getMaterias:
     "SELECT idMateria,nombreMateria,codigo,horasTeoricas,horasPracticas,creditos,requisito,costo FROM materia M,semestre S WHERE M.idSemestre = @id and S.idMalla = @idMalla and S.idSemestre = @id",
 };

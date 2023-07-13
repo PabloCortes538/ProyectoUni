@@ -282,4 +282,40 @@ export const updateEstudiantePerfil = async (req,res)=>{
     res.send(error)
   }
 }
+export const getMateriasReprobadas = async (req,res)=>{
+  const{id} = req.params
+  try {
+    const pool = await getConnection()
+    const result = await pool.request()
+    .input("id",sql.Int,id)
+    .query(queries.getAllMateriasReprobadasById)
+    res.json(result.recordset);
+  } catch (error) {
+    res.send(error)
+  }
+}
+export const getMateriasAprobadas = async (req,res)=>{
+  const{id} = req.params
+  try {
+    const pool = await getConnection()
+    const result = await pool.request()
+    .input("id",sql.Int,id)
+    .query(queries.getAllMateriasAprobadasById)
+    res.json(result.recordset);
+  } catch (error) {
+    res.send(error)
+  }
+}
+export const getMateriaById = async (req,res)=>{
+  const{id} = req.params
+  try {
+    const pool = await getConnection()
+    const result = await pool.request()
+    .input("id",sql.Int,id)
+    .query(queries.getMateria)
+    res.json(result.recordset);
+  } catch (error) {
+    res.send(error)
+  }
+}
 

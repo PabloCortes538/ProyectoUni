@@ -26,3 +26,15 @@ export const getMaterias = async (req, res) => {
     }
 
 }
+export const getSemestreById = async (req,res)=>{
+    const { id } = req.params
+    try {
+        const pool = await getConnection()
+        const result = await pool.request()
+            .input("idSemestre", sql.Int, id)
+            .query(queries.getSemestreById)
+        res.json(result.recordset)
+    } catch (error) {
+        res.send(error.menssage)
+    }
+}
