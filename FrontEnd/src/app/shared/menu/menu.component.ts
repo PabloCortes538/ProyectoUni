@@ -12,8 +12,8 @@ export class MenuComponent implements OnInit {
   @Input() idMalla!: number;
   @Input() idUsuario!: number;
   @Input() idDecano?: number;
-  @Input() idEstudiante?:number;
-  @Input() habilitado:boolean;
+  @Input() idEstudiante?: number;
+  @Input() habilitado: boolean;
 
   @Input() rol!: string;
   Admin: string = 'Admin';
@@ -32,7 +32,10 @@ export class MenuComponent implements OnInit {
     this.menu.close();
   }
   mallaEstudiante() {
-    this.router.navigate(['/malla-estudiante', {idMalla:this.idMalla,idEstudiante:this.idEstudiante}]);
+    this.router.navigate([
+      '/malla-estudiante',
+      { idMalla: this.idMalla, idEstudiante: this.idEstudiante },
+    ]);
     this.menu.close();
   }
   inicio() {
@@ -45,6 +48,12 @@ export class MenuComponent implements OnInit {
 
   addCarrera() {
     this.router.navigate(['/add-carrera', this.idDecano]);
+    this.menu.close();
+  }
+  salir() {
+    localStorage.removeItem('ingresado');
+    localStorage.removeItem('estudiante');
+    location.reload();
     this.menu.close();
   }
 }

@@ -14,3 +14,26 @@ ion-content {
 ion-content::part(scroll) {
   padding-right: 0px;
 }
+.colorAprobado {
+  height: 10px;
+  --background: #39f362;
+}
+.colorReprobado {
+  height: 10px;
+  --background: #eb445a;
+}
+.colorDisponible {
+  height: 10px;
+  --background: #3880ff;
+}
+.colorRequisitos {
+  
+  height: 10px;
+  --background: white;
+}
+.colorCursando {
+  height: 10px;
+  --background: #ffeb3b;
+}
+
+

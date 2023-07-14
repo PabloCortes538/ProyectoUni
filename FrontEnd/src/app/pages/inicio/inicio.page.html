@@ -53,6 +53,7 @@
       scrollY="true"
       [fullscreen]="true"
       [scrollEvents]="true"
+      *ngIf="rol=='usuario'"
     >
       <ion-card color="secondary" class="card">
         <ion-card-content>
@@ -102,5 +103,6 @@
         </ion-row>
       </ion-segment>
     </ion-content>
+    
   </div>
 </ion-app>

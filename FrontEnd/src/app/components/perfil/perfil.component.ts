@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ModalController } from '@ionic/angular';
 import { forceUpdate } from 'ionicons/dist/types/stencil-public-runtime';
 import { ICarrera } from 'src/app/interface/icarrera';
 import { IEstudiante } from 'src/app/interface/iestudiante';
@@ -19,9 +20,11 @@ export class PerfilComponent implements OnInit {
   estudiante!: IEstudiante;
   formularioLogin!: FormGroup;
   banderaBoton: boolean = false;
+  isToastOpen = false;
   constructor(
     private _estudianteService: EstudianteService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private modalCtrl:ModalController
   ) {}
 
   ngOnInit() {
@@ -74,13 +77,18 @@ export class PerfilComponent implements OnInit {
       idUsuario: this.estudiante.idUsuario,
       idEstudiante: this.estudiante.idEstudiante,
     };
-
+    
     this._estudianteService
       .updateEstudiantePerfil(estudiante)
       .subscribe((resp) => {
         const rep = JSON.stringify(resp);
         const est: IEstudiante = JSON.parse(rep);
         this._estudianteService.setEstudiante = est;
+        this.isToastOpen=true
+        this.modalCtrl.dismiss();
       });
+  }
+  setOpen(isOpen: boolean) {
+    this.isToastOpen = isOpen;
   }
 }

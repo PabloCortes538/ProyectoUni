@@ -49,10 +49,10 @@ export class RegistroComponent implements OnInit {
     });
 
     var f = this.formularioLogin.value;
-    if (f.codigoDecano == '') {
-      this.rol = 'usuario';
+    if (f.usuario == 'admin') {
+      this.rol = 'admin';
     } else {
-      this.rol = f.codigoDecano;
+      this.rol = 'usuario';
     }
 
     if (f.usuario != '' && f.password != '' && f.email != '') {
@@ -63,13 +63,14 @@ export class RegistroComponent implements OnInit {
         rol: this.rol,
       };
       await loading.present();
+
       this._usuarioService.registro(user).subscribe((resp) => {
         this._usuarioService.autenticacion(user).subscribe((resp) => {
           loading.dismiss();
           console.log('Registrado');
           localStorage.setItem('usuario', JSON.stringify(resp));
           localStorage.setItem('ingresado', 'true');
-          
+
           this.router.navigate(['/inicio', resp]);
           event?.target.complete();
           this.modal?.dismiss();

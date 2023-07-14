@@ -12,11 +12,7 @@ export const getUsuarioById = async (req, res) => {
     const result = await pool.request()
         .input("usuario", sql.VarChar, usuario)
         .input("password", sql.VarChar, password)
-        .query(queries.getAutenticacion)
-    if (result.recordset[0] == null) {
-        res.status(404)
-        res.send("No Exite")
-    }
+        .query(queries.getAutenticacion)   
     res.json(result.recordset[0])
     }catch(error){
         res.send(error.menssage)

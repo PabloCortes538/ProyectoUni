@@ -12,3 +12,5 @@ Content-Type: application/json
     "id": 1,
     "idMalla": 1
 }
+###
+GET {{api}}/semestre/2

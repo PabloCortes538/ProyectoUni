@@ -36,6 +36,7 @@ export class MateriaComponent implements OnInit {
     });
   }
   asignar(item: IMateria) {
+    let ban:boolean=true;
     this.getEstudiante();
     if (item.requisito == null || item.requisito == '') {
       this._estudianteService
@@ -44,7 +45,7 @@ export class MateriaComponent implements OnInit {
           let listString = JSON.stringify(resp);
           this.materias = JSON.parse(listString);
           let banderaCursando: boolean = false;
-          let banderaAprobado:boolean = false;
+          let banderaAprobado: boolean = false;
           this.materias?.forEach((e) => {
             if (item.codigo == e.codigo) {
               if (e.status == 'cursando') {
@@ -52,16 +53,30 @@ export class MateriaComponent implements OnInit {
                 this.alert(this.mensaje);
                 banderaCursando = true;
               }
-              if (e.status == 'aprobado') {                
+              if (e.status == 'aprobado') {
                 banderaAprobado = true;
               }
             }
-            
           });
-          if (!banderaCursando&&!banderaAprobado) {
-            this._estudianteService.addNewMateria(item);
+          if (!banderaCursando && !banderaAprobado) {
+            this._estudianteService.MateriasAsginadas.subscribe(e=>{
+              e.find(e=>{
+                if(e.codigo===item.codigo)
+                {
+                  ban=false;                        
+                }
+              })
+              
+            })
+            if(ban){                      
+              this._estudianteService.addNewMateria(item);
+              this.alert("Subido Al carrito")
+              ban=false;
+            }else{
+              this.alert("Ya Existe en el carrito de asignacion")
+            }
           }
-          if(banderaAprobado){
+          if (banderaAprobado) {
             this.mensaje = 'Aprobaste esta materia';
             this.alert(this.mensaje);
           }
@@ -74,10 +89,26 @@ export class MateriaComponent implements OnInit {
           let listString = JSON.stringify(resp);
           this.materias = JSON.parse(listString);
           this.materias?.forEach((e) => {
+            
             if (item.requisito == e.codigo) {
               switch (e.status) {
-                case 'aprobado':                  
-                  this._estudianteService.addNewMateria(item);                  
+                case 'aprobado':
+                  this._estudianteService.MateriasAsginadas.subscribe(e=>{
+                    e.find(e=>{
+                      if(e.codigo===item.codigo)
+                      {
+                        ban=false;                        
+                      }
+                    })
+                    
+                  })
+                  if(ban){                      
+                    this._estudianteService.addNewMateria(item);
+                    this.alert("Subido Al carrito")
+                    ban=false;
+                  }else{
+                    this.alert("Ya Existe en el carrito de asignacion")
+                  }
                   break;
                 case 'reprobado':
                   this.mensaje =
@@ -96,17 +127,17 @@ export class MateriaComponent implements OnInit {
 
                   break;
                 default:
-                  if(item.requisito==e.codigo){
-                    this.mensaje = 'No cumples con los requisitos  '+e.nombreMateria;
+                  if (item.requisito == e.codigo) {
+                    this.mensaje =
+                      'No cumples con los requisitos  ' + e.nombreMateria;
                     this.alert(this.mensaje);
                   }
-                  
+
                   break;
               }
             }
-            if(item.nombreMateria==e.nombreMateria){
+            if (item.nombreMateria == e.nombreMateria) {
               switch (e.status) {
-                
                 case 'reprobado':
                   this.mensaje =
                     'No puedes tomar la materia porque no cumples los requisitos';
@@ -122,7 +153,7 @@ export class MateriaComponent implements OnInit {
                 case null:
                   this.alert('Error');
 
-                  break;                
+                  break;
               }
             }
           });
@@ -139,9 +170,7 @@ export class MateriaComponent implements OnInit {
   // si esta aprobada la materia con el requisito puede tomarla
   async alert(mensaje: string) {
     const alert = await this.alertCtrl.create({
-      header: 'Alert',
-      subHeader: 'Important message',
-      message: mensaje,
+      header: mensaje,      
       buttons: ['OK'],
     });
     await alert.present();

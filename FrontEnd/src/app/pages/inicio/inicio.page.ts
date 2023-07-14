@@ -48,7 +48,7 @@ export class InicioPage implements OnInit, AfterViewInit {
     this.idUser = user.idUsuario;
     this.rol = user.rol;
 
-    if (this.rol == 'Admin') {
+    if (this.rol == 'admin') {
       this.admin = true;
      this.getDecano(this.idUser);
     } else {

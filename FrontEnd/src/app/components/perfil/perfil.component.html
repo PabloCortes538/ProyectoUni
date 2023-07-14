@@ -39,4 +39,10 @@
       >GUARDAR CAMBIOS</ion-button
     >
   </form>
+  <ion-toast
+  [isOpen]="isToastOpen"
+  message="PERFIL MODIFICADO"
+  [duration]="2000"
+  (didDismiss)="setOpen(false)"
+></ion-toast>
 </ion-content>

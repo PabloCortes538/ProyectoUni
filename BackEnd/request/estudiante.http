@@ -74,3 +74,9 @@ Content-Type: application/json
     "idEstudiante":2,
     "status":"reprobado"
 }
+###Prueba
+GET {{api}}/materia/reprobadas/26
+###
+GET {{api}}/materia/aprobadas/26
+###
+GET {{api}}/materias/5

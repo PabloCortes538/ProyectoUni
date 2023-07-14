@@ -7,7 +7,7 @@ export const queries = {
   ///CONSULTAS ESTUDIANTE
   getEstudianteById: "SELECT * FROM estudiante WHERE idUsuario = @id",
   update:
-    "UPDATE estudiante SET nombre=@nombre,apellido=@apellido,CI=@CI WHERE nombre=@nombre",
+    "UPDATE estudiante SET nombre=@nombre,apellido=@apellido,CI=@CI WHERE idEstudiante=@idEstudiante",
 
   newEstudiante:
     "INSERT INTO estudiante(nombre,apellido,CI,idMalla,idUsuario)OUTPUT INSERTED.idEstudiante VALUES (@nombre,@apellido,@CI,@idMalla,@idUsuario)",

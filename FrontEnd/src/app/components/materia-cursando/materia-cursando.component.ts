@@ -13,28 +13,21 @@ export class MateriaCursandoComponent implements OnInit {
   materiasDispnibles: IMateria[] = [];
   estudiante?: IEstudiante;
   @Input() rol?: string;
-  @Input() idUsuario:number;
-  @Input() habilitado:boolean;
+  @Input() idUsuario: number;
+  @Input() habilitado: boolean;
   constructor(private _estudianteService: EstudianteService) {}
 
   ngOnInit() {
-    
-    
-      this.obtener()
-    
-    
-    
+    this.obtener();
   }
   obtener() {
     let user = JSON.parse(localStorage.getItem('usuario')!);
-    
+
     if (user.rol == 'usuario') {
-      console.log(this.idUsuario)
       this._estudianteService
         .getEstudianteById(user.idUsuario)
         .subscribe((resp) => {
-          console.log(resp)
-          if (resp!=null) {
+          if (resp != null) {
             this._estudianteService
               .getEstudianteMaterias(resp.idEstudiante!)
               .subscribe((resp) => {
@@ -44,12 +37,11 @@ export class MateriaCursandoComponent implements OnInit {
                 listMateria.forEach((e) => {
                   if (e.status == 'cursando') {
                     this.materiasDispnibles.push(e);
-                    console.log(this.materiasDispnibles)                    
                   }
                 });
               });
           }
         });
     }
-    
-  }}
+  }
+}

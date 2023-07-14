@@ -205,7 +205,7 @@ export const Status = async (req, res) => {
       .request()
       .input("idMateria", sql.Int, idMateria)
       .input("idEstudiante", sql.Int, idEstudiante)
-      .input("promedio", sql.Float.promedio)
+      .input("promedio", sql.Float,promedio)
       .query(queries.reprobado);
 
     await pool
@@ -215,7 +215,7 @@ export const Status = async (req, res) => {
       .input("status", sql.VarChar, status)
       .query(queries.updateStatus);
 
-    res.json({ idMateria, idEstudiante, status });
+    res.json({ idMateria, idEstudiante, status, promedio });
   } catch (error) {
     res.send(error);
   }

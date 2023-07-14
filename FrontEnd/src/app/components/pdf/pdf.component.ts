@@ -7,7 +7,6 @@ import { ISemestre } from 'src/app/interface/isemestre';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
 
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -32,7 +31,7 @@ export class PdfComponent implements OnInit {
   obtener() {
     this.MateriasAprobadas = [];
     this.MateriasReprobadas = [];
-    console.log(this.idUsuario);
+
     this._estudianteService
       .getEstudianteById(this.idUsuario)
       .subscribe((resp) => {
@@ -49,7 +48,7 @@ export class PdfComponent implements OnInit {
                       .subscribe((s) => {
                         const fin = {
                           nombreMateria: re[0].nombreMateria,
-                          nota: respt[0].promedio,
+                          nota: sol.promedio,
                           semestre: s[0].nombreSemestre,
                         };
 
@@ -70,7 +69,7 @@ export class PdfComponent implements OnInit {
                       .subscribe((s) => {
                         const fin = {
                           nombreMateria: re[0].nombreMateria,
-                          nota: respt[0].promedio,
+                          nota: sol.promedio,
                           semestre: s[0].nombreSemestre,
                         };
 
