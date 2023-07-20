@@ -1,13 +1,17 @@
 import { Router } from "express";
 import {
   deleteMateriaById,
+  getAllEstudiantes,
   newCarrera,
   newMateria,
   newSemestre,
   updateMateriaById,
+  updateStatusEstudiante,
 } from "../controllers/decano.controller";
 
 const router = Router();
+//get all estudiantes
+router.get("/decano/estudiantes",getAllEstudiantes)
 //ruta para crear una nueva carrera
 router.post("/decano/newCarrera", newCarrera);
 
@@ -22,5 +26,7 @@ router.delete("/decano/materia/:id", deleteMateriaById);
 
 //ruta para actulizar Materia
 router.put("/decano/materia/:id", updateMateriaById);
+
+router.put("/decano/estudianteStatus",updateStatusEstudiante);
 
 export default router;

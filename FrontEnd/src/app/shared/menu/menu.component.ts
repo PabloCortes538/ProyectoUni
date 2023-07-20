@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   @Input() habilitado: boolean;
 
   @Input() rol!: string;
-  Admin: string = 'Admin';
+  Admin: string = 'admin';
   usuario: string = 'usuario';
 
   constructor(private router: Router, private menu: MenuController) {}
@@ -54,6 +54,10 @@ export class MenuComponent implements OnInit {
     localStorage.removeItem('ingresado');
     localStorage.removeItem('estudiante');
     location.reload();
+    this.menu.close();
+  }
+  usuarios(){
+    this.router.navigate(['/administracion']);
     this.menu.close();
   }
 }

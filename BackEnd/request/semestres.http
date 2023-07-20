@@ -9,7 +9,7 @@ POST {{api}}/materias
 Content-Type: application/json
 
 {
-    "id": 1,
+    "id": 2,
     "idMalla": 1
 }
 ###

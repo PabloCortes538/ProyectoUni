@@ -1,12 +1,11 @@
 <ion-app>
   <app-menu
-  [habilitado]="banderaListo"
+    [habilitado]="banderaListo"
     [idMalla]="idMalla"
     [idUsuario]="idUser"
     [rol]="rol"
     [idDecano]="idDecano"
     [idEstudiante]="idEstudiante"
-    
   ></app-menu>
 
   <div class="ion-page" id="main-content">
@@ -49,12 +48,18 @@
     ></app-estudiante>
     <ion-content
       [fullscreen]="true"
+      class="ion-padding"
       scrollX="true"
       scrollY="true"
       [fullscreen]="true"
       [scrollEvents]="true"
       *ngIf="rol=='usuario'"
     >
+    <ion-alert
+  [isOpen]="isToastOpen"
+  header="Cuenta Desactivada Consultar Con Decano"
+  [buttons]="alertButtons"  
+></ion-alert>
       <ion-card color="secondary" class="card">
         <ion-card-content>
           <ion-card-subtitle
@@ -74,35 +79,74 @@
           ></ion-card-subtitle>
         </ion-card-content>
       </ion-card>
-      <ion-segment [scrollable]="true">
-        <ion-row>
-          <ion-col>
-            <ion-card color="primary">
-              <ion-card-content>
-                <ion-card-title>MATERIAS DISPONIBLES</ion-card-title>
-                <app-materia-disponible                
-                  [idUsuario]="idUser"
-                  [rol]="rol"
-                  [idEstudiante]="idEstudiante"
-                  
-                ></app-materia-disponible>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col>
-            <ion-card color="cuerpo-malla">
-              <ion-card-content>
-                <ion-card-title>MATERIAS CURSANDO</ion-card-title>
-                <app-materia-cursando                  
-                  [rol]="rol"
-                  [idUsuario]="idUser"
-                ></app-materia-cursando>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-segment>
+      <div class="conte">
+        <ion-grid [fixed]="true">
+          <ion-row>
+            <ion-segment [scrollable]="true" class="cod">
+              <ion-col size="auto">
+                <ion-card color="primary">
+                  <ion-card-content>
+                    <ion-card-title>MATERIAS DISPONIBLES</ion-card-title>
+                    <app-materia-disponible
+                      [idUsuario]="idUser"
+                      [rol]="rol"
+                      [idEstudiante]="idEstudiante"
+                    ></app-materia-disponible>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+
+              <ion-col  class="cursando">
+                <ion-card color="cuerpo-malla">
+                  <ion-card-title>MATERIAS CURSANDO</ion-card-title>
+                  <app-materia-cursando
+                    [rol]="rol"
+                    [idUsuario]="idUser"
+                  ></app-materia-cursando>
+                </ion-card>
+                <ion-card color="cuerpo-malla">
+                  <ion-card-title>PASOS PARA INSCRIPCION</ion-card-title>
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-card-subtitle
+                        >No estar Bloqueado por deudas ni
+                        documentos</ion-card-subtitle
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-card-subtitle
+                        >Asignar las materias correspondientes a su semestre(En
+                        la fecha que indica el siac)</ion-card-subtitle
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-card-subtitle
+                        >Cancelar en caja su reinscripcion y
+                        mensualidad</ion-card-subtitle
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                  <ion-card>
+                    <ion-card-content>
+                      <ion-card-subtitle
+                        >imprimir su reinscripcion para su seguimiento de
+                        materias</ion-card-subtitle
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                </ion-card>
+              </ion-col>
+            </ion-segment>
+          </ion-row>
+        </ion-grid>
+      </div>
     </ion-content>
-    
+    <ion-content class="ion-padding" *ngIf="rol=='Admin'" >
+
+    </ion-content>
   </div>
 </ion-app>

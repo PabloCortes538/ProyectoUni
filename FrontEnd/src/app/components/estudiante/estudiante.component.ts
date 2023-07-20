@@ -70,6 +70,7 @@ export class EstudianteComponent implements OnInit {
         CI: f.CI,
         idMalla: this.ca.idMalla,
         idUsuario: this.idUser,
+        statusEstudiante: 'activo',
       };
       this.newEstudiante(estudiante);
     }
@@ -82,8 +83,6 @@ export class EstudianteComponent implements OnInit {
     if (estudiante != null) {
       await loading.present();
       this._estudianteService.newEstudiante(estudiante).subscribe((resp) => {
-        console.log(resp.idEstudiante);
-        console.log(estudiante.idMalla);
         this.agregarMaterias(estudiante.idMalla, resp.idEstudiante!);
         loading.dismiss();
         this.canDismiss = true;
@@ -97,22 +96,19 @@ export class EstudianteComponent implements OnInit {
       let listString = JSON.stringify(resp);
       const semestres: ISemestre[] = JSON.parse(listString);
       semestres.forEach((e, i) => {
-        console.log(e.idSemestre);
         this._semestresService
           .getMaterias(e.idSemestre, idMalla)
           .subscribe((s) => {
             let listString = JSON.stringify(s);
             const materias: IMateria[] = JSON.parse(listString);
-            materias.forEach((e) => {              
+            materias.forEach((e) => {
               if (e.requisito == null || e.requisito == '') {
-
                 const asig = {
                   idMateria: e.idMateria,
                   idEstudiante: idEstudiante,
                   status: 'disponible',
                 };
                 this._estudianteService.addMateria(asig).subscribe((resp) => {
-                  console.log(resp);
                   location.reload();
                 });
                 this._estudianteService.enviado();

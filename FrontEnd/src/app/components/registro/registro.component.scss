@@ -1,12 +1,14 @@
 ion-modal {
-    --height: 70%;    
+    --height: 70%;
+    --width: 90%;   
     --border-radius: 10px;
-    --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --box-shadow: 0 25px 25px 3px black;
+    --border: 5px solid rgb(14 116 144);
 }
 
 ion-modal::part(backdrop) {
     background: rgba(209, 213, 219);
-    opacity: 1;
+    opacity: 10;
 }
 
 ion-modal ion-toolbar {
@@ -15,6 +17,29 @@ ion-modal ion-toolbar {
 }
 .btnIngresar{    
     display: block;    
-    width: 200px;    
-    margin: 0 auto;
+    width: 150px;    
+    height: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+ion-input{
+    border-radius: 5px;
+    border: 2px solid rgb(14 116 144);
+    color: black;
+
+}
+.contForm{
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    height: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border-radius: 15px;
+    border: 5px solid rgb(14 116 144);
+}
+p{
+    color: black;   
+    font-size: small;
 }

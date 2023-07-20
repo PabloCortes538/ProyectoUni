@@ -19,6 +19,7 @@ export class MateriaComponent implements OnInit {
   alertButtons = ['ok'];
   openAlert: boolean = false;
   mensaje: string = '';
+  listaAsginados: IMateria[] = [];
   constructor(
     private _estudianteService: EstudianteService,
     private modalCtrl: ModalController,
@@ -27,6 +28,9 @@ export class MateriaComponent implements OnInit {
 
   ngOnInit() {
     this.getEstudiante();
+    this._estudianteService.MateriasAsginadas.subscribe((e) => {
+      this.listaAsginados = e;
+    });
   }
   getEstudiante() {
     this._estudianteService.estudiante?.subscribe((resp) => {
@@ -36,9 +40,9 @@ export class MateriaComponent implements OnInit {
     });
   }
   asignar(item: IMateria) {
-    let ban:boolean=true;
     this.getEstudiante();
     if (item.requisito == null || item.requisito == '') {
+      let ban: boolean = true;
       this._estudianteService
         .getEstudianteMaterias(this.idEstudiante)
         .subscribe((resp) => {
@@ -59,21 +63,19 @@ export class MateriaComponent implements OnInit {
             }
           });
           if (!banderaCursando && !banderaAprobado) {
-            this._estudianteService.MateriasAsginadas.subscribe(e=>{
-              e.find(e=>{
-                if(e.codigo===item.codigo)
-                {
-                  ban=false;                        
+            this._estudianteService.MateriasAsginadas.subscribe((e) => {
+              e.find((e) => {
+                if (e.codigo === item.codigo) {
+                  ban = false;
                 }
-              })
-              
-            })
-            if(ban){                      
+              });
+            });
+            if (ban) {
+              ban = false;
               this._estudianteService.addNewMateria(item);
-              this.alert("Subido Al carrito")
-              ban=false;
-            }else{
-              this.alert("Ya Existe en el carrito de asignacion")
+              this.alert('Subido Al carrito de asignacion');
+            } else {
+              this.alert('Ya Existe en el carrito de asignacion');
             }
           }
           if (banderaAprobado) {
@@ -82,33 +84,35 @@ export class MateriaComponent implements OnInit {
           }
         });
     } else {
+      let ban: boolean = true;
       //se busca si a aprobado la materia
       this._estudianteService
         .getEstudianteMaterias(this.idEstudiante)
         .subscribe((resp) => {
           let listString = JSON.stringify(resp);
           this.materias = JSON.parse(listString);
-          this.materias?.forEach((e) => {
-            
-            if (item.requisito == e.codigo) {
-              switch (e.status) {
+          this.materias?.forEach((es) => {
+            if (item.requisito == es.codigo) {
+              switch (es.status) {
                 case 'aprobado':
-                  this._estudianteService.MateriasAsginadas.subscribe(e=>{
-                    e.find(e=>{
-                      if(e.codigo===item.codigo)
-                      {
-                        ban=false;                        
-                      }
-                    })
-                    
-                  })
-                  if(ban){                      
+                  console.log(es);
+                  console.log(this.listaAsginados)
+                  this.listaAsginados.forEach((e) => {
+                    if ((e.codigo == item.codigo)) {
+                      ban = false;
+                      console.log(e)
+                    }
+                  });
+                  if (ban) {
                     this._estudianteService.addNewMateria(item);
-                    this.alert("Subido Al carrito")
-                    ban=false;
-                  }else{
-                    this.alert("Ya Existe en el carrito de asignacion")
+                    this.alert('Subido Al carrito de asignacion');
+                    ban=true;
+                  } else {
+                    console.log(2);
+                    this.alert('Ya Existe en el carrito de asignacion');
+                    
                   }
+
                   break;
                 case 'reprobado':
                   this.mensaje =
@@ -118,7 +122,8 @@ export class MateriaComponent implements OnInit {
                   break;
                 case 'cursando':
                   this.mensaje =
-                    'No puedes tomar la materia por que estas cursando otra materia';
+                    'No puedes tomar la materia porque no aprobaste la siguiente materia: ' +
+                    es.nombreMateria;
                   this.alert(this.mensaje);
 
                   break;
@@ -127,17 +132,18 @@ export class MateriaComponent implements OnInit {
 
                   break;
                 default:
-                  if (item.requisito == e.codigo) {
+                  if (item.requisito == es.codigo) {
                     this.mensaje =
-                      'No cumples con los requisitos  ' + e.nombreMateria;
+                      'No puedes tomar la materia por qeue no aprobaste la siguiente materia: ' +
+                      es.nombreMateria;
                     this.alert(this.mensaje);
                   }
 
                   break;
               }
             }
-            if (item.nombreMateria == e.nombreMateria) {
-              switch (e.status) {
+            if (item.nombreMateria == es.nombreMateria) {
+              switch (es.status) {
                 case 'reprobado':
                   this.mensaje =
                     'No puedes tomar la materia porque no cumples los requisitos';
@@ -145,6 +151,7 @@ export class MateriaComponent implements OnInit {
 
                   break;
                 case 'cursando':
+                  console.log('Prueba');
                   this.mensaje =
                     'No puedes tomar la materia por que estas cursando otra materia ';
                   this.alert(this.mensaje);
@@ -165,12 +172,11 @@ export class MateriaComponent implements OnInit {
   cerrar() {
     this.modalCtrl.dismiss();
   }
-
-  //pregunta si una materia tiene requisitos busca en las materias aprobadas,
+  async dato() {} //pregunta si una materia tiene requisitos busca en las materias aprobadas,
   // si esta aprobada la materia con el requisito puede tomarla
   async alert(mensaje: string) {
     const alert = await this.alertCtrl.create({
-      header: mensaje,      
+      header: mensaje,
       buttons: ['OK'],
     });
     await alert.present();

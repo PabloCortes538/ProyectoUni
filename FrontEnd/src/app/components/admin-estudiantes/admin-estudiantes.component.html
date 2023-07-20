@@ -1,0 +1,50 @@
+<ion-content
+  [fullscreen]="true"
+  class="ion-padding"
+  scrollX="true"
+  scrollY="true"
+  [fullscreen]="true"
+  [scrollEvents]="true"
+>
+  <ion-card>
+    <ion-card-title>Nombre: {{ estudiante.nombre }} </ion-card-title>
+    <ion-card-title>Apellido: {{ estudiante.apellido }} </ion-card-title>
+    <ion-card-title>CI: {{ estudiante.CI }} </ion-card-title>
+    <ion-card-title>Carrera: {{ estudiante.carrera }} </ion-card-title>
+    <ion-button (click)="cambiarEstado()">{{estudiante.statusEstudiante}}</ion-button>
+  </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-title>APROBADOS</ion-card-title>
+          <ion-row *ngFor="let m of listMateriasAprobadas">
+            <ion-card>
+              <ion-card-content>{{ m.nombreMateria }}</ion-card-content>
+            </ion-card>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-card-title>REPROBADOS</ion-card-title>
+          <ion-row *ngFor="let m of listMateriasReprobadas">
+            <ion-card>
+              <ion-card-content>{{ m.nombreMateria }}</ion-card-content>
+            </ion-card>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <ion-col>
+        <ion-card>
+          <ion-card-title>CURSANDO</ion-card-title>
+          <ion-row *ngFor="let m of listMateriasCursando">
+            <ion-card>
+              <ion-card-content>{{ m.nombreMateria }}</ion-card-content>
+            </ion-card>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

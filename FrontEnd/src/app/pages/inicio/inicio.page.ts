@@ -15,6 +15,7 @@ import { PerfilComponent } from 'src/app/components/perfil/perfil.component';
 })
 export class InicioPage implements OnInit, AfterViewInit {
   isOpen: boolean = false;
+  isToastOpen: boolean = false;
   idUser: number = 0;
   idDecano?: number;
   idEstudiante?: number;
@@ -23,7 +24,8 @@ export class InicioPage implements OnInit, AfterViewInit {
   rol!: string;
   admin: boolean = false;
   cantidadAsignacion?: number;
-  banderaListo:boolean=false;
+  banderaListo: boolean = false;
+  statusEstudiante: string;
 
   constructor(
     private fb: FormBuilder,
@@ -37,11 +39,11 @@ export class InicioPage implements OnInit, AfterViewInit {
   ngOnInit() {
     this._estudianteService.MateriasAsginadas.subscribe((resp) => {
       this.cantidadAsignacion = resp.length;
-    }); 
+    });
     this.idUser = parseInt(this.rutaActiva.snapshot.params['idUsuario']);
-    this.rol = this.rutaActiva.snapshot.params['rol'];   
+    this.rol = this.rutaActiva.snapshot.params['rol'];
   }
- ionViewWillEnter() {
+  ionViewWillEnter() {
     const user = JSON.parse(localStorage.getItem('usuario')!);
     this.idUser = this.rutaActiva.snapshot.params['idUsuario'];
     this.rol = this.rutaActiva.snapshot.params['rol'];
@@ -50,31 +52,43 @@ export class InicioPage implements OnInit, AfterViewInit {
 
     if (this.rol == 'admin') {
       this.admin = true;
-     this.getDecano(this.idUser);
+      this.getDecano(this.idUser);
     } else {
-     this.getEstudiante(this.idUser);
+      this.getEstudiante(this.idUser);
     }
   }
   getEstudiante(id: number) {
     this._estudianteService.getEstudianteById(id).subscribe((resp) => {
-     if (resp == null) {
-       this.isOpen = true;
-       
-     } else {
-       localStorage.setItem('estudiante', JSON.stringify(resp));
-       this.estu = resp.nombre;
-       this.idMalla = resp.idMalla;
-       this.idEstudiante = resp.idEstudiante;
-       
-       this.banderaListo = true;
-     }
-   });
+      if (resp == null) {
+        this.isOpen = true;
+      } else {
+        localStorage.setItem('estudiante', JSON.stringify(resp));
+        this.estu = resp.nombre;
+        this.idMalla = resp.idMalla;
+        this.idEstudiante = resp.idEstudiante;
+        this.statusEstudiante = resp.statusEstudiante;
+        if (this.statusEstudiante == 'parado') {
+          this.isToastOpen = true;
+        }
+
+        this.banderaListo = true;
+      }
+    });
   }
+  public alertButtons = [
+    {
+      text: 'OK',
+      role: 'confirm',
+      handler: () => {
+        this.sign_out();
+      },
+    },
+  ];
+
   getDecano(id: number) {
     this._estudianteService.getDecanoById(id).subscribe((resp) => {
       if (resp == null) {
         this.isOpen = true;
-        
       } else {
         console.log(resp);
         this.estu = resp.nombre;

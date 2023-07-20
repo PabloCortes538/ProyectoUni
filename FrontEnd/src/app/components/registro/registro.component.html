@@ -1,31 +1,47 @@
 <ion-modal #modal trigger="open-modal-registro">
   <ng-template>
-    <ion-content>
-      <ion-toolbar color="toolbar-malla">
-        <ion-title >Registro</ion-title>
-      </ion-toolbar>
-      <form [formGroup]="formularioLogin">
-        <br>
-        <ion-item>
-          <ion-input label="Usuario" label-placement="floating" fill="outline" formControlName="usuario"></ion-input>
-        </ion-item>
-        <br>
-        <ion-item>
-          <ion-input label="Password" label-placement="floating" fill="outline" type="password"
-            formControlName="password"></ion-input>
-        </ion-item>
-        <br>
-        <ion-item>
-          <ion-input label="Email" label-placement="floating" fill="outline" type="email"
-            formControlName="email"></ion-input>
-        </ion-item>
-        <br>
+    <ion-toolbar color="primary">
+      <ion-title><p>Registro</p></ion-title>
+    </ion-toolbar>
+    <ion-content color="primary">
+      <form [formGroup]="formularioLogin" class="contForm">
+        
+        <p>Usuario</p>
+        <ion-input
+          mode="ios"
+          fill="outline"
+          formControlName="usuario"
+        ></ion-input>
+
+        <p>Contraseña</p>
+        <ion-input
+          mode="ios"
+          fill="outline"
+          type="password"
+          formControlName="password"
+        ></ion-input>
+        <p>Correo Electronico</p>
+
+        <ion-input
+          mode="ios"
+          type="email"
+          fill="outline"
+          formControlName="email"
+        ></ion-input>
+
         <!-- <ion-item>
           <ion-input label="Codigo" label-placement="floating" fill="outline"
             formControlName="codigoDecano"></ion-input>
         </ion-item> -->
         <br>
-        <ion-button class="btnIngresar" (click)="registrarse()" color="tertiary" [disabled]="formularioLogin.invalid">REGISTRAR</ion-button>
+        <ion-button
+        mode="md"
+          class="btnIngresar"
+          (click)="registrarse()"
+          color="primary"
+          [disabled]="formularioLogin.invalid"
+          >REGISTRARSE</ion-button
+        >
       </form>
     </ion-content>
   </ng-template>

@@ -95,7 +95,7 @@ export class NotasEstudianteComponent implements OnInit {
         this._estudianteService.setMateriaAprobada(status).subscribe((resp) => {
           this.getMaterias(this.idEstudiante!);
           this.modalCtrl.dismiss();
-          location.reload();
+          //location.reload();
         });
       });
     } else {

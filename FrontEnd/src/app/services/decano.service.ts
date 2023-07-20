@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { ICarrera } from '../interface/icarrera';
 import { ISemestre } from '../interface/isemestre';
 import { IMateria } from '../interface/imateria';
+import { IEstudiante } from '../interface/iestudiante';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +29,11 @@ export class DecanoService {
       carrera
     );
   }
-  get newCarreraG() {    
+  get newCarreraG() {
     return this._cartCarrera?.asObservable();
   }
   //crear un nuevo Semestre
-  newSemestre(semestre:Object): Observable<Object> {
+  newSemestre(semestre: Object): Observable<Object> {
     return this.http.post<Object>(
       `${this.myAppUrl}${this.myApiUrl}/newSemestre`,
       semestre
@@ -56,6 +57,20 @@ export class DecanoService {
     return this.http.put<IMateria>(
       `${this.myAppUrl}${this.myApiUrl}/materia/${materia.idMateria}`,
       materia
+    );
+  }
+  getAllEstudintes(): Observable<IEstudiante[]> {
+    return this.http.get<IEstudiante[]>(
+      `${this.myAppUrl}${this.myApiUrl}/estudiantes`
+    );
+  }
+  updateStatusEstudiante(
+    idEstudiante: number,
+    statusEstudiante: string
+  ): Observable<any> {
+    return this.http.put<any>(
+      `${this.myAppUrl}${this.myApiUrl}/estudianteStatus`,
+      { idEstudiante: idEstudiante, statusEstudiante: statusEstudiante }
     );
   }
 }

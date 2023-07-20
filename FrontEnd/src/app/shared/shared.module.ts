@@ -19,6 +19,7 @@ import { PerfilComponent } from '../components/perfil/perfil.component';
 import { MateriaDisponibleComponent } from '../components/materia-disponible/materia-disponible.component';
 import { MateriaCursandoComponent } from '../components/materia-cursando/materia-cursando.component';
 import { PdfComponent } from '../components/pdf/pdf.component';
+import { AdminEstudiantesComponent } from '../components/admin-estudiantes/admin-estudiantes.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PdfComponent } from '../components/pdf/pdf.component';
     PerfilComponent,
     MateriaDisponibleComponent,
     MateriaCursandoComponent,
-    PdfComponent
+    PdfComponent,
+    AdminEstudiantesComponent
     
   ],
   imports: [
@@ -68,7 +70,8 @@ import { PdfComponent } from '../components/pdf/pdf.component';
     PerfilComponent,
     MateriaDisponibleComponent,
     MateriaCursandoComponent,
-    PdfComponent
+    PdfComponent,
+    AdminEstudiantesComponent
   ],
 })
 export class SharedModule {}

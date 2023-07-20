@@ -10,7 +10,7 @@ export const queries = {
     "UPDATE estudiante SET nombre=@nombre,apellido=@apellido,CI=@CI WHERE idEstudiante=@idEstudiante",
 
   newEstudiante:
-    "INSERT INTO estudiante(nombre,apellido,CI,idMalla,idUsuario)OUTPUT INSERTED.idEstudiante VALUES (@nombre,@apellido,@CI,@idMalla,@idUsuario)",
+    "INSERT INTO estudiante(nombre,apellido,CI,idMalla,idUsuario,statusEstudiante)OUTPUT INSERTED.idEstudiante VALUES (@nombre,@apellido,@CI,@idMalla,@idUsuario,@statusEstudiante)",
   addMateria:
     " IF EXISTS(select * from estudianteMateria E WHERE E.idEstudiante=@idEstudiante AND E.idMateria=@idMateria)update estudianteMateria set status=@status WHERE (idEstudiante=@idEstudiante And idMateria=@idMateria) else insert into estudianteMateria(idEstudiante,idMateria,status) Values (@idEstudiante,@idMateria,@status)",
   reprobado:
@@ -40,7 +40,7 @@ export const queries = {
     "SELECT * FROM estudianteReprobado WHERE idEstudiante=@id",
   getAllMateriasAprobadasById:
     "SELECT * FROM materiaAprobada WHERE idEstudiante=@id",
-    getMateria:"SELECT * FROM materia WHERE idMateria=@id",
+  getMateria: "SELECT * FROM materia WHERE idMateria=@id",
   //CONSULTAS DECANO
   getDecanoById: "SELECT * FROM decano WHERE idUsuario = @id",
   newDecano:
@@ -54,12 +54,15 @@ export const queries = {
   deleteMateria: "DELETE FROM materia WHERE idMateria = @id",
   updateMateria:
     "UPDATE materia SET nombreMateria=@nombreMateria,codigo=@codigo,horasTeoricas=@horasTeoricas,horasPracticas=@horasPracticas,creditos=@creditos,requisito=@requisito,costo=@costo WHERE idMateria=@idMateria",
+  getAllEstudiantes: "SELECT * FROM estudiante",
+  updateStatusEstudiantes:
+    "UPDATE estudiante SET statusEstudiante=@statusEstudiante WHERE idEstudiante=@idEstudiante",
   ///CONSULTAR CARRERAS DISPONIBLES
   getCarreras: "SELECT * FROM malla",
   //CONSULTAR SEMESTRE DE MALLA
   getSemestre: "SELECT * FROM semestre WHERE idMalla=@idMalla",
   ///CONSULTA DE MATERIA POR SEMESTRE
-  getSemestreById:"SELECT * FROM semestre WHERE idSemestre=@idSemestre",
+  getSemestreById: "SELECT * FROM semestre WHERE idSemestre=@idSemestre",
   getMaterias:
     "SELECT idMateria,nombreMateria,codigo,horasTeoricas,horasPracticas,creditos,requisito,costo FROM materia M,semestre S WHERE M.idSemestre = @id and S.idMalla = @idMalla and S.idSemestre = @id",
 };

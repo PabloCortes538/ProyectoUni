@@ -19,7 +19,7 @@ export const getEstudianteById = async (req, res) => {
 };
 //Post Agregar un nuevo Estudiante
 export const newEstudiante = async (req, res) => {
-  const { nombre, apellido, CI, idMalla, idUsuario } = req.body;
+  const { nombre, apellido, CI, idMalla, idUsuario, statusEstudiante } = req.body;
   if (
     nombre == null ||
     apellido == null ||
@@ -38,9 +38,18 @@ export const newEstudiante = async (req, res) => {
       .input("CI", sql.Int, CI)
       .input("idMalla", sql.Int, idMalla)
       .input("idUsuario", sql.Int, idUsuario)
+      .input("statusEstudiante", sql.VarChar, statusEstudiante)
       .query(queries.newEstudiante);
     const idEstudiante = result.recordset[0].idEstudiante;
-    res.json({ nombre, apellido, CI, idMalla, idUsuario, idEstudiante });
+    res.json({
+      nombre,
+      apellido,
+      CI,
+      idMalla,
+      idUsuario,
+      idEstudiante,
+      statusEstudiante,
+    });
   } catch (error) {
     res.send(error.menssage);
   }
@@ -205,7 +214,7 @@ export const Status = async (req, res) => {
       .request()
       .input("idMateria", sql.Int, idMateria)
       .input("idEstudiante", sql.Int, idEstudiante)
-      .input("promedio", sql.Float,promedio)
+      .input("promedio", sql.Float, promedio)
       .query(queries.reprobado);
 
     await pool
@@ -263,59 +272,62 @@ export const getMateriaAprobada = async (req, res) => {
 
     res.json(result.recordset);
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
 };
-export const updateEstudiantePerfil = async (req,res)=>{
-  const {nombre,apellido,CI,idMalla,idEstudiante,idUsuario} =req.body
+export const updateEstudiantePerfil = async (req, res) => {
+  const { nombre, apellido, CI, idMalla, idEstudiante, idUsuario } = req.body;
   try {
-    const pool = await getConnection()
-    await pool.request()
-    .input("idEstudiante",sql.Int,idEstudiante)
-    .input("nombre",sql.VarChar,nombre)
-    .input("apellido",sql.VarChar,apellido)
-    .input("CI",sql.Int,CI)
-    .query(queries.update)
+    const pool = await getConnection();
+    await pool
+      .request()
+      .input("idEstudiante", sql.Int, idEstudiante)
+      .input("nombre", sql.VarChar, nombre)
+      .input("apellido", sql.VarChar, apellido)
+      .input("CI", sql.Int, CI)
+      .query(queries.update);
 
-    res.json({nombre,apellido,CI,idMalla,idEstudiante,idUsuario})
+    res.json({ nombre, apellido, CI, idMalla, idEstudiante, idUsuario });
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
-export const getMateriasReprobadas = async (req,res)=>{
-  const{id} = req.params
+};
+export const getMateriasReprobadas = async (req, res) => {
+  const { id } = req.params;
   try {
-    const pool = await getConnection()
-    const result = await pool.request()
-    .input("id",sql.Int,id)
-    .query(queries.getAllMateriasReprobadasById)
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("id", sql.Int, id)
+      .query(queries.getAllMateriasReprobadasById);
     res.json(result.recordset);
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
-export const getMateriasAprobadas = async (req,res)=>{
-  const{id} = req.params
+};
+export const getMateriasAprobadas = async (req, res) => {
+  const { id } = req.params;
   try {
-    const pool = await getConnection()
-    const result = await pool.request()
-    .input("id",sql.Int,id)
-    .query(queries.getAllMateriasAprobadasById)
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("id", sql.Int, id)
+      .query(queries.getAllMateriasAprobadasById);
     res.json(result.recordset);
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
-export const getMateriaById = async (req,res)=>{
-  const{id} = req.params
+};
+export const getMateriaById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const pool = await getConnection()
-    const result = await pool.request()
-    .input("id",sql.Int,id)
-    .query(queries.getMateria)
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("id", sql.Int, id)
+      .query(queries.getMateria);
     res.json(result.recordset);
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
-
+};

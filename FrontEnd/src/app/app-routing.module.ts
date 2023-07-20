@@ -65,7 +65,11 @@ const routes: Routes = [
   {
     path: 'malla-estudiante',
     loadChildren: () => import('./pages/malla-estudiante/malla-estudiante.module').then( m => m.MallaEstudiantePageModule)
+  },  {
+    path: 'administracion',
+    loadChildren: () => import('./pages/administracion/administracion.module').then( m => m.AdministracionPageModule)
   },
+
 
 ];
 

@@ -6,5 +6,7 @@ export interface IEstudiante {
     apellido:string,
     CI:number,
     idMalla:number,
-    idUsuario?:number
+    idUsuario?:number,
+    carrera?:string,
+    statusEstudiante?:string
 }

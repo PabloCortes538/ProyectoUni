@@ -1,49 +1,68 @@
-<ion-content [fullscreen]="true" color="toolbar-malla">
-  <div class="cajon">
-    <ion-button mode="md" class="BotonLogin" id="open-modal" expand="block"
+<ion-content [fullscreen]="true" color="cuerpologin">
+  <!-- <ion-button mode="md" class="BotonLogin" id="open-modal" expand="block"
       >Login</ion-button
     >
 
-    <ion-button mode="md" class="BotonRegistro" id="open-modal-registro" expand="block"
+    <ion-button
+      mode="md"
+      class="BotonRegistro"
+      id="open-modal-registro"
+      expand="block"
       >Registro</ion-button
-    >
-  </div>
-  <app-registro></app-registro>
+    > -->
 
-  <ion-modal #modal trigger="open-modal">
-    <ng-template>
-      <ion-content>
-        <ion-toolbar color="toolbar-malla">
-          <ion-title>LOGIN</ion-title>
-        </ion-toolbar>
-        <form [formGroup]="formularioLogin">
-          <br />
-          <ion-item>
-            <ion-input
-              label="Usuario"
-              label-placement="floating"
-              fill="outline"
-              formControlName="usuario"
-            ></ion-input>
-          </ion-item>
-          <br />
-          <ion-item>
-            <ion-input
-              label="Password"
-              label-placement="floating"
-              fill="outline"
-              type="password"
-              formControlName="password"
-            ></ion-input>
-          </ion-item>
-          <br />
-          <ion-button class="btnIngresar" (click)="ingresar()" color="tertiary"
-            >Ingresar</ion-button
-          >
-        </form>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  <app-registro></app-registro>
+  <ion-card class="cardlogin" color="colorlogincard">
+    <ion-img
+      class="img"
+      src="../../../assets/logoUnandesSinFondo.png"
+    ></ion-img>
+    <form [formGroup]="formularioLogin">
+      <div class="cont">
+        <br />
+        <ion-label color="dark">Nombre</ion-label>
+        <ion-input
+          class="prueba"
+          mode="ios"
+          formControlName="usuario"
+        ></ion-input>
+        
+        <ion-label color="dark">Contraseña</ion-label>
+        <ion-input
+          class="prueba"
+          mode="ios"
+          type="password"
+          formControlName="password"
+        ></ion-input>
+        <br />
+
+        <ion-button
+          color="toolbar-malla"
+          mode="md"
+          class="btnIngresar"
+          (click)="ingresar()"
+          
+          >Ingresar</ion-button
+        >
+        <br />
+
+        <ion-button
+          color="toolbar-malla"
+          mode="md"
+          class="BotonRegistro"
+          id="open-modal-registro"
+          expand="block"
+          
+          >Registrate</ion-button
+        >
+        <br>
+        <br>
+        <br>
+        
+        <p color="dark" class="txt">¿No tienes login?</p>
+      </div>
+    </form>
+  </ion-card>
 
   <!-- <ion-card>
     <ion-card-content>
