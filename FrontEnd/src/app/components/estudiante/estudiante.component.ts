@@ -54,7 +54,7 @@ export class EstudianteComponent implements OnInit {
   crear() {
     var f = this.formularioLogin.value;
 
-    if (this.rol == 'Admin') {
+    if (this.rol == 'admin') {
       const decano: IDecano = {
         nombre: f.nombre,
         apellido: f.apellido,
