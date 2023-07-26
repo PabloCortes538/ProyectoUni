@@ -18,7 +18,7 @@
           <ion-input label="CI" label-placement="floating" fill="outline" type="number" formControlName="CI"></ion-input>
         </ion-item>
         <br>
-        <ion-list *ngIf="rol!='Admin'">
+        <ion-list *ngIf="rol!='admin'">
           <ion-item>
             <ion-select interface="action-sheet" placeholder="Seleccione Carrera" (ionChange)="handleChange($event)">
               <ion-select-option *ngFor="let item of listCarreras"

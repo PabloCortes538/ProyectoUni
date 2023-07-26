@@ -7,9 +7,15 @@ ion-badge {
   background-color: red;
   border-radius: 100%;
 }
+
+.guia{
+  display: inline;
+  margin: 10px;
+  
+}
 .icon-asignacion {
   position: absolute;
-
+  
   margin-top: 10px;
   cursor: pointer;
 }
@@ -36,7 +42,7 @@ ion-badge {
 }
 .contenedor {
   position: relative;
-
+  
   height: 45px;
   width: 100%;
 }
@@ -52,6 +58,7 @@ ion-content {
 }
 ion-content {
   width: calc(100% + 15px);
+  //--background: #00761F;
 }
 ion-content::part(scroll) {
   padding-right: 0px;
@@ -87,14 +94,39 @@ ion-content::part(scroll) {
   width: auto;
 }
 
-.conte {
-  width: 500%;
+.card{
+  display: block;
+  width: auto;
 }
-@media (min-width: 480px) {
+.conte {
+  width: auto;
+  background-color: #AFEFFE;
+  border:10px solid #a5a5a5;
+  box-shadow: 0 10px 25px 2px black;
+}
+@media (max-width: 900px) {
   /* smartphones, Android phones, landscape iPhone */
   .conte{
-    width: 200%;
+    width: 150%;
   }
+  .card{
+    display: block;
+    width: auto
+  }
+}
+@media (max-width: 480px) {
+  /* smartphones, Android phones, landscape iPhone */
+  .conte{ 
+    width: 500%;
+  }
+  .card{
+    display: block;
+    width: 300%;
+  }
+}
+.prueba {
+  margin: 1px 1px 1px 1px;
+  border:5px solid #a5a5a5;
 }
 ion-grid {
   --ion-grid-width: auto;

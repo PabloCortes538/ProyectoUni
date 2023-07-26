@@ -1,3 +1,10 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="toolbar-malla">    
+    <ion-buttons slot="start">
+      <ion-back-button (click)="cerrar()" defaultHref=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content
   [fullscreen]="true"
   class="ion-padding"
@@ -5,12 +12,14 @@
   scrollY="true"
   [fullscreen]="true"
   [scrollEvents]="true"
+  
 >
   <ion-card>
     <ion-card-title>Nombre: {{ estudiante.nombre }} </ion-card-title>
     <ion-card-title>Apellido: {{ estudiante.apellido }} </ion-card-title>
     <ion-card-title>CI: {{ estudiante.CI }} </ion-card-title>
     <ion-card-title>Carrera: {{ estudiante.carrera }} </ion-card-title>
+    <ion-label>Estado: </ion-label>
     <ion-button (click)="cambiarEstado()">{{estudiante.statusEstudiante}}</ion-button>
   </ion-card>
   <ion-grid>

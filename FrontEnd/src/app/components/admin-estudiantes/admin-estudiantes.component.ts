@@ -4,6 +4,7 @@ import { EstudianteComponent } from '../estudiante/estudiante.component';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { IMateria } from 'src/app/interface/imateria';
 import { DecanoService } from 'src/app/services/decano.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-admin-estudiantes',
@@ -18,7 +19,8 @@ export class AdminEstudiantesComponent implements OnInit {
 
   constructor(
     private _estudianteService: EstudianteService,
-    private _decanoService: DecanoService
+    private _decanoService: DecanoService,
+    private modalCtrl:ModalController
   ) {}
 
   ngOnInit() {
@@ -58,5 +60,8 @@ export class AdminEstudiantesComponent implements OnInit {
           this.estudiante.statusEstudiante="activo"
         });
     }
+  }
+  cerrar(){
+    this.modalCtrl.dismiss();
   }
 }

@@ -60,27 +60,27 @@
   header="Cuenta Desactivada Consultar Con Decano"
   [buttons]="alertButtons"  
 ></ion-alert>
-      <ion-card color="secondary" class="card">
-        <ion-card-content>
+      <ion-card color="secondary"class="card" >
+        <ion-card-content >
           <ion-card-subtitle
-            >APROBADO <ion-chip class="colorAprobado"></ion-chip
+            class="guia">APROBADO <ion-chip class="colorAprobado"></ion-chip
           ></ion-card-subtitle>
           <ion-card-subtitle
-            >REPROBADO<ion-chip class="colorReprobado"></ion-chip
+          class="guia">REPROBADO<ion-chip class="colorReprobado"></ion-chip
           ></ion-card-subtitle>
           <ion-card-subtitle
-            >DISPONIBLE<ion-chip class="colorDisponible"></ion-chip
+          class="guia">DISPONIBLE<ion-chip class="colorDisponible"></ion-chip
           ></ion-card-subtitle>
           <ion-card-subtitle
-            >CURSANDO<ion-chip class="colorCursando"></ion-chip
+          class="guia">CURSANDO<ion-chip class="colorCursando"></ion-chip
           ></ion-card-subtitle>
           <ion-card-subtitle
-            >REQUISITOS<ion-chip class="colorRequisitos"></ion-chip
+          class="guia">REQUISITOS<ion-chip class="colorRequisitos"></ion-chip
           ></ion-card-subtitle>
         </ion-card-content>
       </ion-card>
       <div class="conte">
-        <ion-grid [fixed]="true">
+        <ion-grid [fixed]="true" class="prueba">
           <ion-row>
             <ion-segment [scrollable]="true" class="cod">
               <ion-col size="auto">
@@ -145,8 +145,9 @@
         </ion-grid>
       </div>
     </ion-content>
-    <ion-content class="ion-padding" *ngIf="rol=='Admin'" >
-
+    <ion-content class="ion-padding" *ngIf="rol=='admin'" >
+      
     </ion-content>
+
   </div>
 </ion-app>
