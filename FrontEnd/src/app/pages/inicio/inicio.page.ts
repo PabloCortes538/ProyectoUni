@@ -7,6 +7,8 @@ import { LoadingController, ModalController } from '@ionic/angular';
 import { FormBuilder } from '@angular/forms';
 import { AsginarMateriaComponent } from 'src/app/components/asginar-materia/asginar-materia.component';
 import { PerfilComponent } from 'src/app/components/perfil/perfil.component';
+import { DecanoService } from 'src/app/services/decano.service';
+import { IEstudiante } from 'src/app/interface/iestudiante';
 
 @Component({
   selector: 'app-inicio',
@@ -30,6 +32,7 @@ export class InicioPage implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private _estudianteService: EstudianteService,
+    private _decanoService: DecanoService,
     private rutaActiva: ActivatedRoute,
     private loadingCtrl: LoadingController,
     private modalController: ModalController
@@ -95,6 +98,7 @@ export class InicioPage implements OnInit, AfterViewInit {
         this.idMalla = 0;
         this.idDecano = resp.idDecano;
         this.banderaListo = true;
+        this.getEstudiantes();
       }
     });
   }
@@ -125,5 +129,25 @@ export class InicioPage implements OnInit, AfterViewInit {
     localStorage.removeItem('ingresado');
     localStorage.removeItem('estudiante');
     location.reload();
+  }
+  getEstudiantes() {
+    let estudiante: IEstudiante[] = [];
+    let a = []
+    let carreras = [];
+    this._estudianteService.getCarreras().subscribe((resp) => {
+      let listString = JSON.stringify(resp);
+      carreras = JSON.parse(listString);
+      this._decanoService.getAllEstudintes().subscribe((resp) => {
+        resp.forEach((e) => {
+          const p = carreras.find((s) => s.idMalla == e.idMalla);
+          e.carrera = p.nombreMalla;
+          a.push(p.nombreMalla)
+          console.log(a)
+        });
+        estudiante = resp;
+        console.log(estudiante)
+        
+      });
+    });
   }
 }

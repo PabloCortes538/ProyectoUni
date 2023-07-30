@@ -20,6 +20,8 @@ import { MateriaDisponibleComponent } from '../components/materia-disponible/mat
 import { MateriaCursandoComponent } from '../components/materia-cursando/materia-cursando.component';
 import { PdfComponent } from '../components/pdf/pdf.component';
 import { AdminEstudiantesComponent } from '../components/admin-estudiantes/admin-estudiantes.component';
+import { PdfAprobadosComponent } from '../components/pdf-aprobados/pdf-aprobados.component';
+import { PdfReprobadosComponent } from '../components/pdf-reprobados/pdf-reprobados.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { AdminEstudiantesComponent } from '../components/admin-estudiantes/admin
     MateriaDisponibleComponent,
     MateriaCursandoComponent,
     PdfComponent,
-    AdminEstudiantesComponent
+    AdminEstudiantesComponent,
+    PdfAprobadosComponent,
+    PdfReprobadosComponent
     
   ],
   imports: [
@@ -71,7 +75,9 @@ import { AdminEstudiantesComponent } from '../components/admin-estudiantes/admin
     MateriaDisponibleComponent,
     MateriaCursandoComponent,
     PdfComponent,
-    AdminEstudiantesComponent
+    AdminEstudiantesComponent,
+    PdfAprobadosComponent,
+    PdfReprobadosComponent
   ],
 })
 export class SharedModule {}

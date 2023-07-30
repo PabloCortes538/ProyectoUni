@@ -1,4 +1,4 @@
-import { query } from "mssql";
+
 import { getConnection, queries, sql } from "../database";
 //Consulta estudiante por id
 export const getEstudianteById = async (req, res) => {

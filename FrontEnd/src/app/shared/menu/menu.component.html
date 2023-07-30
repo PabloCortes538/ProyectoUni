@@ -36,6 +36,13 @@
       <app-pdf [idUsuario]="idUsuario" [habilitado]="habilitado"></app-pdf>
     </ion-item>
 
+    <ion-item class="menu_boton">      
+      <app-pdf-aprobados [idUsuario]="idUsuario"></app-pdf-aprobados>
+    </ion-item>
+    <ion-item class="menu_boton">      
+      <app-pdf-reprobados [idUsuario]="idUsuario"></app-pdf-reprobados>
+    </ion-item>
+
     <ion-item class="menu_boton" (click)="salir()">
 
       <ion-icon class="icono_libre" slot="end" size="medium" name="library-outline"></ion-icon>

@@ -28,7 +28,7 @@
         <ion-card>
           <ion-card-title>APROBADOS</ion-card-title>
           <ion-row *ngFor="let m of listMateriasAprobadas">
-            <ion-card>
+            <ion-card color="disponible">
               <ion-card-content>{{ m.nombreMateria }}</ion-card-content>
             </ion-card>
           </ion-row>
@@ -38,17 +38,17 @@
         <ion-card>
           <ion-card-title>REPROBADOS</ion-card-title>
           <ion-row *ngFor="let m of listMateriasReprobadas">
-            <ion-card>
+            <ion-card color="danger">
               <ion-card-content>{{ m.nombreMateria }}</ion-card-content>
             </ion-card>
           </ion-row>
         </ion-card>
       </ion-col>
       <ion-col>
-        <ion-card>
+        <ion-card >
           <ion-card-title>CURSANDO</ion-card-title>
           <ion-row *ngFor="let m of listMateriasCursando">
-            <ion-card>
+            <ion-card color="cursando">
               <ion-card-content>{{ m.nombreMateria }}</ion-card-content>
             </ion-card>
           </ion-row>
