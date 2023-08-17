@@ -2,7 +2,9 @@ import { Router } from "express";
 import {
   AddMateria,
   Status,
+  deleteMateriaNota,
   deleteNota,
+  deleteNotaById,
   getCarreras,
   getDecanoById,
   getEstudianteById,
@@ -18,6 +20,7 @@ import {
   newEstudiante,
   newNota,
   updateEstudiantePerfil,
+  updateNota,
   updateStatus,
 } from "../controllers/estudiante.controller";
 const router = Router();
@@ -53,10 +56,12 @@ router.get("/estudiantes/materia/reprobadas/:id", getMateriasReprobadas);
 router.get("/estudiantes/materias/:id",getMateriaById)
 // Ruta elimina una nota
 router.delete("/estudiantes/nota/:idNota", deleteNota);
+router.delete("/estudiantes/nota/:idMateria",deleteMateriaNota);
+router.delete("/estudiantes/notas/:idNota",deleteNotaById)
 
 //Ruta para modificar el status de la materia (aprobado,reprobado)
 router.put("/estudiantes/nota", updateStatus);
-
+router.put("/estudiantes/notaUpdate",updateNota)
 router.put("/estudiantes/updateEstudiante", updateEstudiantePerfil);
 
 export default router;

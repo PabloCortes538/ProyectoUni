@@ -49,7 +49,7 @@ export class MateriaEstudianteComponent implements OnInit {
             }
           });
         });
-        console.log(this.materias);
+        //console.log(this.materias);
       });
   }
   materiaConsulta(materia: IMateria): string {

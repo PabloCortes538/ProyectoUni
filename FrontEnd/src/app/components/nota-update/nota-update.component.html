@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="toolbar-malla">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="cerrar()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nota</ion-title>
+  </ion-toolbar>  
+</ion-header>
+<ion-content>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>EDTIAR</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="formularioNota">
+      <ion-input label="Nombre de la Nota" placeholder="Examen 1" formControlName="nombreNota"></ion-input>
+      <ion-input label="Puntaje" placeholder="0" type="number" formControlName="nota"></ion-input>
+    </form>   
+    
+  </ion-card-content>
+</ion-card>
+<ion-button (click)="editar()">EDITAR</ion-button>
+</ion-content>

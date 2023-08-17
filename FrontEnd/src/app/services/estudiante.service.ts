@@ -172,4 +172,20 @@ export class EstudianteService {
       `${this.myAppUrl}${this.myApiUrl}/materias/${id}`
     );
   }
+  deleteMateriaNota(idMateria:number):Observable<any>{
+    return this.http.delete<any>(
+      `${this.myAppUrl}${this.myApiUrl}/nota/${idMateria}`
+    );
+  }
+  deleteNotas(idNota:number):Observable<any>{
+    return this.http.delete<any>(
+      `${this.myAppUrl}${this.myApiUrl}/notas/${idNota}`
+    );
+  }
+  updateNota(nota:any): Observable<any> {
+    return this.http.put<any>(
+      `${this.myAppUrl}${this.myApiUrl}/notaUpdate`,
+      nota
+    );
+  }
 }

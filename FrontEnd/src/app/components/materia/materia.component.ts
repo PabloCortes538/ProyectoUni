@@ -132,15 +132,17 @@ export class MateriaComponent implements OnInit {
 
                   break;
                 default:
+
                   if (item.requisito == es.codigo) {
                     this.mensaje =
-                      'No puedes tomar la materia por qeue no aprobaste la siguiente materia: ' +
+                      'No puedes tomar la materia por que no aprobaste la siguiente materia: ' +
                       es.nombreMateria;
                     this.alert(this.mensaje);
                   }
 
                   break;
               }
+              
             }
             if (item.nombreMateria == es.nombreMateria) {
               switch (es.status) {
@@ -161,6 +163,7 @@ export class MateriaComponent implements OnInit {
                   this.alert('Error');
 
                   break;
+                   
               }
             }
           });

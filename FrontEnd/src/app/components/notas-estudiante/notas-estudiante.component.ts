@@ -10,6 +10,7 @@ import { ModalController } from '@ionic/angular';
 import { IMateria } from 'src/app/interface/imateria';
 import { EstudianteService } from 'src/app/services/estudiante.service';
 import { SemestresService } from 'src/app/services/semestres.service';
+import { NotaUpdateComponent } from '../nota-update/nota-update.component';
 
 @Component({
   selector: 'app-notas-estudiante',
@@ -94,14 +95,30 @@ export class NotasEstudianteComponent implements OnInit {
       this._estudianteService.finalizarMateria(status).subscribe((resp) => {
         this._estudianteService.setMateriaAprobada(status).subscribe((resp) => {
           this.getMaterias(this.idEstudiante!);
+          this._estudianteService
+            .deleteMateriaNota(status.idMateria)
+            .subscribe((resp) => {
+              console.log(resp);
+              this.notas.forEach((e) => {
+                this._estudianteService.deleteNotas(e.idNota);
+              });
+            });
           this.modalCtrl.dismiss();
-          //location.reload();
+          location.reload();
         });
       });
     } else {
       status.status = 'reprobado';
       status.promedio = this.promedio;
       this._estudianteService.reprobadoMateria(status).subscribe((resp) => {
+        this._estudianteService
+          .deleteMateriaNota(status.idMateria)
+          .subscribe((resp) => {
+            console.log(resp);
+            this.notas.forEach((e) => {
+              this._estudianteService.deleteNotas(e.idNota);
+            });
+          });
         this.modalCtrl.dismiss();
         location.reload();
       });
@@ -130,5 +147,16 @@ export class NotasEstudianteComponent implements OnInit {
           });
         });
       });
+  }
+  async updateNota(nota: number) {
+    const modal = await this.modalCtrl.create({
+      component: NotaUpdateComponent,
+      cssClass: 'contenido',
+      componentProps: {
+        nota: nota
+                
+      },
+    });
+    await modal.present();
   }
 }

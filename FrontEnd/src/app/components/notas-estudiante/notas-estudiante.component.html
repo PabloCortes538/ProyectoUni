@@ -10,7 +10,7 @@
     <ion-item
       ><ion-label> {{ nota.nombreNota }}: {{ nota.nota }} </ion-label>
       <ion-icon class="delete" name="trash-outline" size="large" (click)="borrar(nota.idNota)"></ion-icon>
-      <ion-icon class="edit" name="create-outline" size="large"></ion-icon>
+      <ion-icon class="edit" name="create-outline" size="large"(click)="updateNota(nota)"></ion-icon>
     </ion-item>
   </ion-list>
   <ion-card>

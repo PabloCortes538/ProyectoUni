@@ -22,6 +22,7 @@ import { PdfComponent } from '../components/pdf/pdf.component';
 import { AdminEstudiantesComponent } from '../components/admin-estudiantes/admin-estudiantes.component';
 import { PdfAprobadosComponent } from '../components/pdf-aprobados/pdf-aprobados.component';
 import { PdfReprobadosComponent } from '../components/pdf-reprobados/pdf-reprobados.component';
+import { NotaUpdateComponent } from '../components/nota-update/nota-update.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PdfReprobadosComponent } from '../components/pdf-reprobados/pdf-reproba
     PdfComponent,
     AdminEstudiantesComponent,
     PdfAprobadosComponent,
-    PdfReprobadosComponent
+    PdfReprobadosComponent,
+    NotaUpdateComponent
     
   ],
   imports: [
@@ -77,7 +79,8 @@ import { PdfReprobadosComponent } from '../components/pdf-reprobados/pdf-reproba
     PdfComponent,
     AdminEstudiantesComponent,
     PdfAprobadosComponent,
-    PdfReprobadosComponent
+    PdfReprobadosComponent,
+    NotaUpdateComponent
   ],
 })
 export class SharedModule {}

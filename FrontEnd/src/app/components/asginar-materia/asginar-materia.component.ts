@@ -14,7 +14,7 @@ export class AsginarMateriaComponent implements OnInit {
   materia!: IMateria;
   estudiante!: IEstudiante;
   posicion?: number;
-  total: number;
+  total: number=0;
   constructor(
     private _estudianteService: EstudianteService,
     private modalCtrl: ModalController
@@ -28,11 +28,12 @@ export class AsginarMateriaComponent implements OnInit {
   }
   getMaterias() {
     let totalAPagar: number = 0;
+    this.total=0
     this._estudianteService.MateriasAsginadas.subscribe((resp) => {
       this.listMaterias = resp;
       
       this.listMaterias.forEach((e) => {
-        console.log(e.costo);
+        
         totalAPagar = totalAPagar + e.costo;
 
         this.total = totalAPagar;
@@ -57,7 +58,9 @@ export class AsginarMateriaComponent implements OnInit {
       location.reload();
     });
   }
-  delete(index: number) {
+  del(index: number,costo:number) {    
     this._estudianteService.deleteMateria(index);
+    this.getMaterias();
+    
   }
 }

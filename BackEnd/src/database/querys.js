@@ -34,6 +34,9 @@ export const queries = {
   getNota: "SELECT * FROM nota WHERE idNota=@idNota",
   deleteNota:
     "DELETE FROM materiaNota WHERE idNota=@idNota DELETE FROM nota WHERE idNota = @idNota",
+  deleteNotaMateria:"DELETE FROM materiaNota WHERE idMateria=@idMateria",
+  deleteNotaById:"FROM nota WHERE idNota = @idNota", 
+  updateNota:"UPDATE nota SET nota=@nota,nombreNota=@nombreNota WHERE idNota=@idNota",
   updateStatus:
     "UPDATE estudianteMateria SET status=@status WHERE idEstudiante=@idEstudiante AND idMateria=@idMateria",
   getAllMateriasReprobadasById:

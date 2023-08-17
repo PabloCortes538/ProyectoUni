@@ -1,4 +1,3 @@
-
 import { getConnection, queries, sql } from "../database";
 //Consulta estudiante por id
 export const getEstudianteById = async (req, res) => {
@@ -19,7 +18,8 @@ export const getEstudianteById = async (req, res) => {
 };
 //Post Agregar un nuevo Estudiante
 export const newEstudiante = async (req, res) => {
-  const { nombre, apellido, CI, idMalla, idUsuario, statusEstudiante } = req.body;
+  const { nombre, apellido, CI, idMalla, idUsuario, statusEstudiante } =
+    req.body;
   if (
     nombre == null ||
     apellido == null ||
@@ -327,6 +327,47 @@ export const getMateriaById = async (req, res) => {
       .input("id", sql.Int, id)
       .query(queries.getMateria);
     res.json(result.recordset);
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const deleteMateriaNota = async (req, res) => {
+  const { idMateria } = req.params;
+  try {
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("idMateria", sql.Int, idMateria)
+      .query(queries.deleteNotaMateria);
+    res.json(result.recordset);
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const deleteNotaById = async (req, res) => {
+  const { idNota } = req.params;
+  try {
+    const pool = await getConnection();
+    await pool
+      .request()
+      .input("idNota", sql.Int, idNota)
+      .query(queries.deleteNotaById);
+    res.json(result.request);
+  } catch (error) {
+    res.send(error);
+  }
+};
+export const updateNota = async (req, res) => {
+  const { idNota, nota, nombreNota } = req.body;
+  try {
+    const pool = await getConnection();
+    await pool
+      .request()
+      .input("idNota", sql.Int, idNota)
+      .input("nota", sql.Float, nota)
+      .input("nombreNota", sql.VarChar, nombreNota)
+      .query(queries.updateNota);
+    res.json({idNota,nota,nombreNota});
   } catch (error) {
     res.send(error);
   }
